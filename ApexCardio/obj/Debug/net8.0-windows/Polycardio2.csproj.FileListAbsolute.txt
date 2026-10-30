@@ -25,10 +25,6 @@ D:\VS\ApexCardio\ApexCardio\bin\Debug\net8.0-windows\runtimes\osx-x64\native\lib
 D:\VS\ApexCardio\ApexCardio\bin\Debug\net8.0-windows\runtimes\unix\lib\net8.0\System.IO.Ports.dll
 D:\VS\ApexCardio\ApexCardio\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.IO.Ports.dll
 D:\VS\ApexCardio\ApexCardio\obj\Debug\net8.0-windows\Polycardio2.csproj.AssemblyReference.cache
-D:\VS\ApexCardio\ApexCardio\obj\Debug\net8.0-windows\ApexCardio.Form1.resources
-D:\VS\ApexCardio\ApexCardio\obj\Debug\net8.0-windows\ApexCardio.FormConfig.resources
-D:\VS\ApexCardio\ApexCardio\obj\Debug\net8.0-windows\ApexCardio.FormRecordInfo.resources
-D:\VS\ApexCardio\ApexCardio\obj\Debug\net8.0-windows\ApexCardio.FormResult.resources
 D:\VS\ApexCardio\ApexCardio\obj\Debug\net8.0-windows\Polycardio2.Properties.Resources.resources
 D:\VS\ApexCardio\ApexCardio\obj\Debug\net8.0-windows\Polycardio2.csproj.GenerateResource.cache
 D:\VS\ApexCardio\ApexCardio\obj\Debug\net8.0-windows\Polycardio2.GeneratedMSBuildEditorConfig.editorconfig
@@ -40,3 +36,7 @@ D:\VS\ApexCardio\ApexCardio\obj\Debug\net8.0-windows\refint\Polycardio2.dll
 D:\VS\ApexCardio\ApexCardio\obj\Debug\net8.0-windows\Polycardio2.pdb
 D:\VS\ApexCardio\ApexCardio\obj\Debug\net8.0-windows\Polycardio2.genruntimeconfig.cache
 D:\VS\ApexCardio\ApexCardio\obj\Debug\net8.0-windows\ref\Polycardio2.dll
+D:\VS\ApexCardio\ApexCardio\obj\Debug\net8.0-windows\Polycardio2.Form1.resources
+D:\VS\ApexCardio\ApexCardio\obj\Debug\net8.0-windows\Polycardio2.FormConfig.resources
+D:\VS\ApexCardio\ApexCardio\obj\Debug\net8.0-windows\Polycardio2.FormRecordInfo.resources
+D:\VS\ApexCardio\ApexCardio\obj\Debug\net8.0-windows\Polycardio2.FormResult.resources

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ApexCardio
+namespace Polycardio2
 {
     public class BufferedPanel : Panel
     {

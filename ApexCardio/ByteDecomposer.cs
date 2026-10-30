@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace ApexCardio
+namespace Polycardio2
 {
     public class DataArrays
     {
@@ -107,7 +107,7 @@ namespace ApexCardio
         public bool Calibrate;
         public event EventHandler DecomposeLineEvent;
         public event EventHandler ConnectionBreakdown;
-        public event EventHandler<BPEventArgs> BPcompleted;
+        public event EventHandler BPcompleted;
 
         public const int SamplingFrequency = 125;
 
@@ -156,14 +156,6 @@ namespace ApexCardio
         private int prevSphigmo4;
         private int prevApex;
 
-        public int PrSYS1;
-        public int PrDIA1;
-        public int PrSYS2;
-        public int PrDIA2;
-        public int PrSYS3;
-        public int PrDIA3;
-        public int PrSYS4;
-        public int PrDIA4;
         public DeviceStatusFlags Status;
 
         public uint MainIndex = 0;
@@ -231,10 +223,10 @@ namespace ApexCardio
                 ConnectionBreakdown(this, null);
         }
 
-        protected virtual void OnBPcompleted(BPEventArgs arg)
+        protected virtual void OnBPcompleted(EventArgs e)
         {
             if (BPcompleted != null)
-                BPcompleted(this, arg);
+                BPcompleted(this, e);
         }
 
         public int Decompos(USBserialPort usbport)
@@ -439,15 +431,13 @@ namespace ApexCardio
 
         private void ProcessDeviceStatus()
         {
-            // Извлекаем код состояния из младшего байта
-            byte statusCode = (byte)(Data.DeviceStatus & 0xFF);
-            DeviceStatusId currentStatus = (DeviceStatusId)statusCode;
 
             // --- Интеграция с вашей старой логикой компрессоров (по битовым маскам) ---
             BP1measStarted = Status.HasFlag(DeviceStatusFlags.dsBP1_InProgress);
             BP2measStarted = Status.HasFlag(DeviceStatusFlags.dsBP2_InProgress);
             BP3measStarted = Status.HasFlag(DeviceStatusFlags.dsBP3_InProgress);
             BP4measStarted = Status.HasFlag(DeviceStatusFlags.dsBP4_InProgress);
+            OnBPcompleted(EventArgs.Empty);
 /*
             // Модуль давления 1 (Левая рука)
             if (Pump1Started && (Data.DeviceStatus & pump1progress) != 0) Pump1RealyStarted = true;
@@ -475,64 +465,7 @@ namespace ApexCardio
                 }
             }
 */
-            // --- Новая логика обработки состояний прибора на основе таблицы ---
-            switch (currentStatus)
-            {
-                case DeviceStatusId.BP1_Hold:
-                    // Удержание давления на левой руке — здесь идет активный съем сфигмограммы 1
-                    // Если нужно, можно выставить специальный флаг для UI
-                    break;
 
-                case DeviceStatusId.BP2_Hold:
-                    // Удержание давления на левой ноге (съем сфигмограммы 2)
-                    break;
-
-                case DeviceStatusId.BP3_Hold:
-                    // Удержание давления на правой руке (съем сфигмограммы 3)
-                    break;
-
-                case DeviceStatusId.BP4_Hold:
-                    // Удержание давления на правой ноге (съем сфигмограммы 4)
-                    break;
-
-                case DeviceStatusId.PPG_Error:
-                    // Ошибка фотоплетизмограммы (нет пациента). 
-                    // Зануляем отображение PPG, чтобы на графике не было шумов
-                    Data.ApexViewArray[MainIndex] = 0;
-                    // Здесь можно взвести флаг "Датчик PPG отключен" для вывода предупреждения пользователю
-                    break;
-
-                case DeviceStatusId.BP1_Error:
-                case DeviceStatusId.BP2_Error:
-                case DeviceStatusId.BP3_Error:
-                case DeviceStatusId.BP4_Error:
-                    // Обработка ошибок измерения АД на модулях 1-4
-                    break;
-
-                case DeviceStatusId.BP1_OK:
-                    PrSYS1 = Data.NIBP1_Syst;
-                    PrDIA1 = Data.NIBP1_Diast;
-                    break;
-                case DeviceStatusId.BP2_OK:
-                    PrSYS2 = Data.NIBP2_Syst;
-                    PrDIA2 = Data.NIBP2_Diast;
-                    break;
-                case DeviceStatusId.BP3_OK:
-                    PrSYS3 = Data.NIBP3_Syst;
-                    PrDIA3 = Data.NIBP3_Diast;
-                    break;
-                case DeviceStatusId.BP4_OK:
-                    PrSYS4 = Data.NIBP4_Syst;
-                    PrDIA4 = Data.NIBP4_Diast;
-                    break;
-            }
-
-            // --- Вызов старого события для совместимости интерфейса ---
-            var args = new BPEventArgs { status = statusCode };
-            if (Calibrate || statusCode > 0)
-            {
-                OnBPcompleted(args);
-            }
         }
 
 

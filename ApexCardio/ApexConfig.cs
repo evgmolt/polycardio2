@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace ApexCardio
+namespace Polycardio2
 {
     public class ApexConfig
     {

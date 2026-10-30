@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApexCardio
+namespace Polycardio2
 {
     public static class ApexStrings
     {

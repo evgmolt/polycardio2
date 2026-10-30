@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ApexCardio
+namespace Polycardio2
 {
     static class ApexConstants
     {
@@ -46,7 +46,7 @@ namespace ApexCardio
         //        public static double ScaleECG_Y = 1;
 //        public static double ScalePPG_Y = 1;
 
-        public const string ConfigFileName = "ApexConf.cfg";
+        public const string ConfigFileName = "PCConf.cfg";
 
         public const int ReoMaxVal = 7000000;
 

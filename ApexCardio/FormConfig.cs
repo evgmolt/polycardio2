@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ApexCardio
+namespace Polycardio2
 {
     public partial class FormConfig : Form
     {

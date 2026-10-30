@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ApexCardio
+namespace Polycardio2
 {
     struct GraphicsInfo
     {
@@ -179,7 +179,7 @@ namespace ApexCardio
         }
 
 
-        private void BPcomplete(object sender, BPEventArgs arg)
+        private void BPcomplete(object sender, EventArgs arg)
         {
             string mess;
             this.Invoke(new Action(() =>
@@ -187,13 +187,13 @@ namespace ApexCardio
 
                 if (decomposer.Status.HasFlag(DeviceStatusFlags.dsBP1_OK))
                 {
-                    mess = "BP 1 " + decomposer.PrSYS1.ToString() + "/" +
-                                     decomposer.PrDIA1.ToString();
-                    labBP1.Text = decomposer.PrSYS1.ToString() + " / " + decomposer.PrDIA1.ToString();
+                    mess = "BP 1 " + decomposer.Data.NIBP1_Syst.ToString() + "/" +
+                                     decomposer.Data.NIBP1_Diast.ToString();
+                    labBP1.Text = decomposer.Data.NIBP1_Syst.ToString() + " / " + decomposer.Data.NIBP1_Diast.ToString();
                     if (CurrentRecordInfo != null)
                     {
-                        CurrentRecordInfo.Data.ABP[0] = decomposer.PrSYS1;
-                        CurrentRecordInfo.Data.ABP[1] = decomposer.PrDIA1;
+                        CurrentRecordInfo.Data.ABP[0] = decomposer.Data.NIBP1_Syst;
+                        CurrentRecordInfo.Data.ABP[1] = decomposer.Data.NIBP1_Diast;
                         CurrentRecordInfo.Save(Cfg, null, null);
                         UpdateRecInfoBox(CurrentRecordInfo);
                     }
@@ -203,15 +203,16 @@ namespace ApexCardio
                     mess = "BP 1 error";
                     labBP1.Text = "Error";
                 }
+
                 if (decomposer.Status.HasFlag(DeviceStatusFlags.dsBP2_OK))
                 {
-                    mess = "BP 2 " + decomposer.PrSYS2.ToString() + "/" +
-                                     decomposer.PrDIA2.ToString();
-                    labBP2.Text = decomposer.PrSYS2.ToString() + " / " + decomposer.PrDIA2.ToString();
+                    mess = "BP 2 " + decomposer.Data.NIBP2_Syst.ToString() + "/" +
+                                     decomposer.Data.NIBP2_Diast.ToString();
+                    labBP2.Text = decomposer.Data.NIBP2_Syst.ToString() + " / " + decomposer.Data.NIBP2_Diast.ToString();
                     if (CurrentRecordInfo != null)
                     {
-                        CurrentRecordInfo.Data.ABP[0] = decomposer.PrSYS2;
-                        CurrentRecordInfo.Data.ABP[1] = decomposer.PrDIA2;
+                        CurrentRecordInfo.Data.ABP[0] = decomposer.Data.NIBP2_Syst;
+                        CurrentRecordInfo.Data.ABP[1] = decomposer.Data.NIBP2_Diast;
                         CurrentRecordInfo.Save(Cfg, null, null);
                         UpdateRecInfoBox(CurrentRecordInfo);
                     }
@@ -224,13 +225,13 @@ namespace ApexCardio
 
                 if (decomposer.Status.HasFlag(DeviceStatusFlags.dsBP3_OK))
                 {
-                    mess = "BP 2 " + decomposer.PrSYS3.ToString() + "/" +
-                                     decomposer.PrDIA3.ToString();
-                    labBP2.Text = decomposer.PrSYS3.ToString() + " / " + decomposer.PrDIA3.ToString();
+                    mess = "BP 2 " + decomposer.Data.NIBP3_Syst.ToString() + "/" +
+                                     decomposer.Data.NIBP3_Diast.ToString();
+                    labBP2.Text = decomposer.Data.NIBP3_Syst.ToString() + " / " + decomposer.Data.NIBP3_Diast.ToString();
                     if (CurrentRecordInfo != null)
                     {
-                        CurrentRecordInfo.Data.ABP[0] = decomposer.PrSYS3;
-                        CurrentRecordInfo.Data.ABP[1] = decomposer.PrDIA3;
+                        CurrentRecordInfo.Data.ABP[0] = decomposer.Data.NIBP3_Syst;
+                        CurrentRecordInfo.Data.ABP[1] = decomposer.Data.NIBP3_Diast;
                         CurrentRecordInfo.Save(Cfg, null, null);
                         UpdateRecInfoBox(CurrentRecordInfo);
                     }
@@ -243,13 +244,13 @@ namespace ApexCardio
 
                 if (decomposer.Status.HasFlag(DeviceStatusFlags.dsBP4_OK))
                 {
-                    mess = "BP 2 " + decomposer.PrSYS4.ToString() + "/" +
-                                     decomposer.PrDIA4.ToString();
-                    labBP2.Text = decomposer.PrSYS4.ToString() + " / " + decomposer.PrDIA4.ToString();
+                    mess = "BP 2 " + decomposer.Data.NIBP4_Syst.ToString() + "/" +
+                                     decomposer.Data.NIBP3_Diast.ToString();
+                    labBP2.Text = decomposer.Data.NIBP4_Syst.ToString() + " / " + decomposer.Data.NIBP3_Diast.ToString();
                     if (CurrentRecordInfo != null)
                     {
-                        CurrentRecordInfo.Data.ABP[0] = decomposer.PrSYS4;
-                        CurrentRecordInfo.Data.ABP[1] = decomposer.PrDIA4;
+                        CurrentRecordInfo.Data.ABP[0] = decomposer.Data.NIBP4_Syst;
+                        CurrentRecordInfo.Data.ABP[1] = decomposer.Data.NIBP3_Diast;
                         CurrentRecordInfo.Save(Cfg, null, null);
                         UpdateRecInfoBox(CurrentRecordInfo);
                     }

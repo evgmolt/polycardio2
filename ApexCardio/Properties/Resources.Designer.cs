@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ApexCardio.Properties {
+namespace Polycardio2.Properties {
     using System;
     
     
