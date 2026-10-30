@@ -56,5 +56,6 @@ Data/*.txt
 
 BPM.*
 BPM.*.*
-
+*.bin
+*.obj
 .vs/
