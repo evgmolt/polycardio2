@@ -74,6 +74,7 @@ namespace Polycardio2
         public Form1()
         {
             InitializeComponent();
+            Cfg = ApexConfig.GetConfig();
             GInfoArr = new GraphicsInfo[ApexConstants.NumOfChannels];
             AmpBarArr = new TrackBar[ApexConstants.NumOfAmpBars];
             AmpBarVals = new int[ApexConstants.NumOfAmpBars];
@@ -89,7 +90,6 @@ namespace Polycardio2
 
             USBPort.Connect();
 
-            Cfg = ApexConfig.GetConfig();
 
             numUDplevel1.Value = Cfg.PressLevel1;
             numUDplevel2.Value = Cfg.PressLevel2;
@@ -155,6 +155,7 @@ namespace Polycardio2
 
         void LineReceived(object sender, EventArgs arg)
         {
+            label1.Text = "Счетчик пакетов" + decomposer.MainIndex.ToString();
             /*
             labP1.Text = (DataA.Reo1Array[decomposer.MainIndex]).ToString();
             labP2.Text = (DataA.Reo2Array[decomposer.MainIndex]).ToString();
@@ -912,48 +913,72 @@ namespace Polycardio2
 
         private void trackBarECG_ValueChanged(object sender, EventArgs e)
         {
-            AmpBarVals[0] = AmpBarArr[0].Value;
-            double a = AmpBarArr[0].Value;
-            ChannelsScaleY[0] = Math.Pow(2, a / 2);
-            if (ViewMode)
+            try
             {
-                if (GInfoArr[(int)ChNames.chECG1].Visible) GInfoArr[(int)ChNames.chECG1].BufPanel.Refresh();
-                if (GInfoArr[(int)ChNames.chECG2].Visible) GInfoArr[(int)ChNames.chECG2].BufPanel.Refresh();
+                AmpBarVals[0] = AmpBarArr[0].Value;
+                double a = AmpBarArr[0].Value;
+                ChannelsScaleY[0] = Math.Pow(2, a / 2);
+                if (ViewMode)
+                {
+                    if (GInfoArr[(int)ChNames.chECG1].Visible) GInfoArr[(int)ChNames.chECG1].BufPanel.Refresh();
+                    if (GInfoArr[(int)ChNames.chECG2].Visible) GInfoArr[(int)ChNames.chECG2].BufPanel.Refresh();
+                }
+            }
+            catch (Exception)
+            {
             }
         }
 
         private void trackBarReo_ValueChanged(object sender, EventArgs e)
         {
-            AmpBarVals[1] = AmpBarArr[1].Value;
-            double a = AmpBarArr[1].Value;
-            ChannelsScaleY[1] = Math.Pow(2, a / 2);
-            if (ViewMode)
+            try
             {
-                if (GInfoArr[(int)ChNames.chReo1].Visible) GInfoArr[(int)ChNames.chReo1].BufPanel.Refresh();
-                if (GInfoArr[(int)ChNames.chReo2].Visible) GInfoArr[(int)ChNames.chReo2].BufPanel.Refresh();
+                AmpBarVals[1] = AmpBarArr[1].Value;
+                double a = AmpBarArr[1].Value;
+                ChannelsScaleY[1] = Math.Pow(2, a / 2);
+                if (ViewMode)
+                {
+                    if (GInfoArr[(int)ChNames.chReo1].Visible) GInfoArr[(int)ChNames.chReo1].BufPanel.Refresh();
+                    if (GInfoArr[(int)ChNames.chReo2].Visible) GInfoArr[(int)ChNames.chReo2].BufPanel.Refresh();
+                }
+            }
+            catch (Exception)
+            {
             }
         }
 
         private void trackBarSphigmo_ValueChanged(object sender, EventArgs e)
         {
-            AmpBarVals[2] = AmpBarArr[2].Value;
-            double a = AmpBarArr[2].Value;
-            ChannelsScaleY[2] = Math.Pow(2, a / 2);
-            if (ViewMode)
+            try
             {
-                if (GInfoArr[(int)ChNames.chSphigmo1].Visible) GInfoArr[(int)ChNames.chSphigmo1].BufPanel.Refresh();
-                if (GInfoArr[(int)ChNames.chSphigmo2].Visible) GInfoArr[(int)ChNames.chSphigmo2].BufPanel.Refresh();
+                AmpBarVals[2] = AmpBarArr[2].Value;
+                double a = AmpBarArr[2].Value;
+                ChannelsScaleY[2] = Math.Pow(2, a / 2);
+                if (ViewMode)
+                {
+                    if (GInfoArr[(int)ChNames.chSphigmo1].Visible) GInfoArr[(int)ChNames.chSphigmo1].BufPanel.Refresh();
+                    if (GInfoArr[(int)ChNames.chSphigmo2].Visible) GInfoArr[(int)ChNames.chSphigmo2].BufPanel.Refresh();
+                }
+            }
+            catch (Exception)
+            {
             }
         }
 
         private void trackBarApex_ValueChanged(object sender, EventArgs e)
         {
-            AmpBarVals[3] = AmpBarArr[3].Value;
-            double a = AmpBarArr[3].Value;
-            ChannelsScaleY[3] = Math.Pow(2, a / 2);
-            if (ViewMode)
+            try
             {
-                if (GInfoArr[(int)ChNames.chApex].Visible) GInfoArr[(int)ChNames.chApex].BufPanel.Refresh();
+                AmpBarVals[3] = AmpBarArr[3].Value;
+                double a = AmpBarArr[3].Value;
+                ChannelsScaleY[3] = Math.Pow(2, a / 2);
+                if (ViewMode)
+                {
+                    if (GInfoArr[(int)ChNames.chApex].Visible) GInfoArr[(int)ChNames.chApex].BufPanel.Refresh();
+                }
+            }
+            catch (Exception)
+            {
             }
         }
 

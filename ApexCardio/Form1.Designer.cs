@@ -33,6 +33,11 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             panelGraph = new Panel();
             panelButtons = new Panel();
+            label1 = new Label();
+            labPressure4 = new Label();
+            labPressure3 = new Label();
+            labPressure2 = new Label();
+            labPressure1 = new Label();
             butStartFlow = new Button();
             butPumps34Stop = new Button();
             butPumps34Start = new Button();
@@ -89,10 +94,6 @@
             openFileDialog1 = new OpenFileDialog();
             saveFileDialog1 = new SaveFileDialog();
             timerDelay = new System.Windows.Forms.Timer(components);
-            labPressure1 = new Label();
-            labPressure2 = new Label();
-            labPressure3 = new Label();
-            labPressure4 = new Label();
             tableLayoutPanel1.SuspendLayout();
             panelButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numUDplevel4).BeginInit();
@@ -141,6 +142,7 @@
             // 
             // panelButtons
             // 
+            panelButtons.Controls.Add(label1);
             panelButtons.Controls.Add(labPressure4);
             panelButtons.Controls.Add(labPressure3);
             panelButtons.Controls.Add(labPressure2);
@@ -198,6 +200,51 @@
             panelButtons.Name = "panelButtons";
             panelButtons.Size = new Size(392, 693);
             panelButtons.TabIndex = 1;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(13, 349);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 54;
+            label1.Text = "label1";
+            // 
+            // labPressure4
+            // 
+            labPressure4.AutoSize = true;
+            labPressure4.Location = new Point(338, 316);
+            labPressure4.Name = "labPressure4";
+            labPressure4.Size = new Size(13, 15);
+            labPressure4.TabIndex = 53;
+            labPressure4.Text = "0";
+            // 
+            // labPressure3
+            // 
+            labPressure3.AutoSize = true;
+            labPressure3.Location = new Point(338, 283);
+            labPressure3.Name = "labPressure3";
+            labPressure3.Size = new Size(13, 15);
+            labPressure3.TabIndex = 52;
+            labPressure3.Text = "0";
+            // 
+            // labPressure2
+            // 
+            labPressure2.AutoSize = true;
+            labPressure2.Location = new Point(338, 250);
+            labPressure2.Name = "labPressure2";
+            labPressure2.Size = new Size(13, 15);
+            labPressure2.TabIndex = 51;
+            labPressure2.Text = "0";
+            // 
+            // labPressure1
+            // 
+            labPressure1.AutoSize = true;
+            labPressure1.Location = new Point(338, 216);
+            labPressure1.Name = "labPressure1";
+            labPressure1.Size = new Size(13, 15);
+            labPressure1.TabIndex = 50;
+            labPressure1.Text = "0";
             // 
             // butStartFlow
             // 
@@ -761,42 +808,6 @@
             timerDelay.Interval = 1000;
             timerDelay.Tick += timerDelay_Tick;
             // 
-            // labPressure1
-            // 
-            labPressure1.AutoSize = true;
-            labPressure1.Location = new Point(338, 216);
-            labPressure1.Name = "labPressure1";
-            labPressure1.Size = new Size(13, 15);
-            labPressure1.TabIndex = 50;
-            labPressure1.Text = "0";
-            // 
-            // labPressure2
-            // 
-            labPressure2.AutoSize = true;
-            labPressure2.Location = new Point(338, 250);
-            labPressure2.Name = "labPressure2";
-            labPressure2.Size = new Size(13, 15);
-            labPressure2.TabIndex = 51;
-            labPressure2.Text = "0";
-            // 
-            // labPressure3
-            // 
-            labPressure3.AutoSize = true;
-            labPressure3.Location = new Point(338, 283);
-            labPressure3.Name = "labPressure3";
-            labPressure3.Size = new Size(13, 15);
-            labPressure3.TabIndex = 52;
-            labPressure3.Text = "0";
-            // 
-            // labPressure4
-            // 
-            labPressure4.AutoSize = true;
-            labPressure4.Location = new Point(338, 316);
-            labPressure4.Name = "labPressure4";
-            labPressure4.Size = new Size(13, 15);
-            labPressure4.TabIndex = 53;
-            labPressure4.Text = "0";
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -886,6 +897,7 @@
         private Label labPressure3;
         private Label labPressure2;
         private Label labPressure1;
+        private Label label1;
     }
 }
 

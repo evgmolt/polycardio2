@@ -99,7 +99,7 @@ namespace Polycardio2
 
     public class BPEventArgs : EventArgs
     {
-        public byte status { get; set; }
+        public int status { get; set; }
     }
 
     class ByteDecomposer
@@ -125,6 +125,8 @@ namespace Polycardio2
         private int Sphigmo3tmp;
         private int Sphigmo4tmp;
         private int Apextmp;
+        private int Ppgtmp;
+        private short mphTmp;
 
         private int nextECG1;
         private int nextECG2;
@@ -155,6 +157,7 @@ namespace Polycardio2
         private int prevSphigmo3;
         private int prevSphigmo4;
         private int prevApex;
+        private int currentPacketSize;
 
         public DeviceStatusFlags Status;
 
@@ -229,10 +232,6 @@ namespace Polycardio2
                 BPcompleted(this, e);
         }
 
-        public int Decompos(USBserialPort usbport)
-        {
-            return Decompos(usbport, null, null, null);
-        }
 
         private double FilterRecursDetrend(double filterK, double next, double detrend, double prev)
         {
@@ -272,201 +271,6 @@ namespace Polycardio2
             ProcessData(Data.ApexArray, Data.ApexViewArray, size, f, Filter.coeff14);
         }
 
-        private void ApplyDSPFilters(ApexConfig cfg)
-        {
-            bool filterOn = cfg != null && cfg.FilterOn;
-
-            // --- ЭКГ 1 (L-R) ---
-            nextECG1 = Data.ECG1Array[MainIndex];
-            if (filterOn)
-            {
-                nextECG1 = Filter.filter(Filter.coeff50, Data.ECG1Array, MainIndex);
-            }
-            detrendECG1 = FilterRecursDetrend(filterCoeff, nextECG1, detrendECG1, prevECG1);
-            Data.ECG1ViewArray[MainIndex] = (int)Math.Round(detrendECG1);
-            prevECG1 = nextECG1;
-
-            // --- ЭКГ 2 (F-R) ---
-            nextECG2 = Data.ECG2Array[MainIndex];
-            if (filterOn)
-            {
-                nextECG2 = Filter.filter(Filter.coeff50, Data.ECG2Array, MainIndex);
-            }
-            detrendECG2 = FilterRecursDetrend(filterCoeff, nextECG2, detrendECG2, prevECG2);
-            Data.ECG2ViewArray[MainIndex] = (int)Math.Round(detrendECG2);
-            prevECG2 = nextECG2;
-
-            // --- Реограмма 1 ---
-            // Для фильтра передаем модуль значения (как в исходной логике)
-            nextReo1 = Math.Abs(Data.Reo1Array[MainIndex]);
-            if (filterOn)
-            {
-                nextReo1 = Filter.filter(Filter.coeff14, Data.Reo1Array, MainIndex);
-            }
-            detrendReo1 = FilterRecursDetrend(filterCoeffReo, nextReo1, detrendReo1, prevReo1);
-            Data.Reo1ViewArray[MainIndex] = (int)Math.Round(detrendReo1);
-            prevReo1 = nextReo1;
-
-            // --- Реограмма 2 ---
-            nextReo2 = Math.Abs(Data.Reo2Array[MainIndex]);
-            if (filterOn)
-            {
-                nextReo2 = Filter.filter(Filter.coeff14, Data.Reo2Array, MainIndex);
-            }
-            detrendReo2 = FilterRecursDetrend(filterCoeffReo, nextReo2, detrendReo2, prevReo2);
-            // Пишется со знаком минус на отображение
-            Data.Reo2ViewArray[MainIndex] = -(int)Math.Round(detrendReo2);
-            prevReo2 = nextReo2;
-
-            // --- Сфигмограмма 1 (Левая Рука) ---
-            nextSphigmo1 = Data.SphigmoLeftHandArray[MainIndex];
-            if (filterOn)
-            {
-                nextSphigmo1 = Filter.filter(Filter.coeff14, Data.SphigmoLeftHandArray, MainIndex);
-            }
-            detrendSphigmo1 = FilterRecursDetrend(filterCoeff, nextSphigmo1, detrendSphigmo1, prevSphigmo1);
-            Data.SphigmoLeftHandViewArray[MainIndex] = (int)Math.Round(detrendSphigmo1);
-            prevSphigmo1 = nextSphigmo1;
-
-            // --- Сфигмограмма 2 (Левая Нога) ---
-            nextSphigmo2 = Data.SphigmoLeftLegArray[MainIndex];
-            if (filterOn)
-            {
-                nextSphigmo2 = Filter.filter(Filter.coeff14, Data.SphigmoLeftLegArray, MainIndex);
-            }
-            detrendSphigmo2 = FilterRecursDetrend(filterCoeff, nextSphigmo2, detrendSphigmo2, prevSphigmo2);
-            Data.SphigmoLeftLegViewArray[MainIndex] = (int)Math.Round(detrendSphigmo2);
-            prevSphigmo2 = nextSphigmo2;
-
-            // --- Сфигмограмма 3 (Правая Рука) ---
-            // Используем новые переменные делей-фильтра (убедитесь, что они объявлены в полях класса)
-            nextSphigmo3 = Data.SphigmoRightHandArray[MainIndex];
-            if (filterOn)
-            {
-                nextSphigmo3 = Filter.filter(Filter.coeff14, Data.SphigmoRightHandArray, MainIndex);
-            }
-            detrendSphigmo3 = FilterRecursDetrend(filterCoeff, nextSphigmo3, detrendSphigmo3, prevSphigmo3);
-            Data.SphigmoRightHandViewArray[MainIndex] = (int)Math.Round(detrendSphigmo3);
-            prevSphigmo3 = nextSphigmo3;
-
-            // --- Сфигмограмма 4 (Правая Нога) ---
-            nextSphigmo4 = Data.SphigmoRightLegArray[MainIndex];
-            if (filterOn)
-            {
-                nextSphigmo4 = Filter.filter(Filter.coeff14, Data.SphigmoRightLegArray, MainIndex);
-            }
-            detrendSphigmo4 = FilterRecursDetrend(filterCoeff, nextSphigmo4, detrendSphigmo4, prevSphigmo4);
-            Data.SphigmoRightLegViewArray[MainIndex] = (int)Math.Round(detrendSphigmo4);
-            prevSphigmo4 = nextSphigmo4;
-
-            // --- Апекскардиограмма ---
-            nextApex = Data.ApexArray[MainIndex];
-            if (filterOn)
-            {
-                nextApex = Filter.filter(Filter.coeff14, Data.ApexArray, MainIndex);
-            }
-            detrendApex = FilterRecursDetrend(filterCoeff, nextApex, detrendApex, prevApex);
-            Data.ApexViewArray[MainIndex] = (int)Math.Round(detrendApex);
-            prevApex = nextApex;
-
-            // --- Фотоплетизмограмма (PPG) ---
-            // Записываем отфильтрованное или сырое значение в отображаемый массив ApexPPGArray
-            Data.ApexViewArray[MainIndex] = Data.PPGArray[MainIndex];
-        }
-
-        private void ParseFullPacket(ReadOnlySpan<byte> packet, ApexConfig cfg)
-        {
-            // 1. Чтение 24-битных знаковых данных (ЭКГ, Рео, Сфигмо, Апекс, PPG)
-            Data.ECG1Array[MainIndex] = ReadInt24LE(packet.Slice(2, 3));
-            Data.ECG2Array[MainIndex] = ReadInt24LE(packet.Slice(5, 3));
-
-            // Реограммы (с ограничением и инверсией)
-            int reo1 = ReadInt24LE(packet.Slice(8, 3));
-            Data.Reo1Array[MainIndex] = -(reo1 > ApexConstants.ReoMaxVal ? ApexConstants.ReoMaxVal : reo1);
-
-            int reo2 = ReadInt24LE(packet.Slice(11, 3));
-            Data.Reo2Array[MainIndex] = -(reo2 > ApexConstants.ReoMaxVal ? ApexConstants.ReoMaxVal : reo2);
-
-            // Сфигмограммы и Апекс
-            Data.SphigmoLeftHandArray[MainIndex] = ReadInt24LE(packet.Slice(14, 3));
-            Data.SphigmoLeftLegArray[MainIndex] = ReadInt24LE(packet.Slice(17, 3));
-            Data.SphigmoRightHandArray[MainIndex] = ReadInt24LE(packet.Slice(20, 3));
-            Data.SphigmoRightLegArray[MainIndex] = ReadInt24LE(packet.Slice(23, 3));
-            Data.ApexArray[MainIndex] = ReadInt24LE(packet.Slice(26, 3));
-            Data.PPGArray[MainIndex] = ReadInt24LE(packet.Slice(29, 3));
-
-            // Накатываем фильтры и детрендинг для отображения (View)
-            ApplyDSPFilters(cfg);
-
-            // 2. Чтение 16-битных данных звука микрофона (8 отсчетов по 2 байта)
-            uint soundIdx = MainIndex << 3;
-            int soundOffset = 32;
-            for (int j = 0; j < 8; j++)
-            {
-                Data.SoundArray[soundIdx + j] = System.Buffers.Binary.BinaryPrimitives.ReadInt16LittleEndian(packet.Slice(soundOffset, 2));
-                soundOffset += 2;
-            }
-
-            // 3. Чтение блоков давления и статуса (только если пакет длинный — 67 байт)
-            if (packet.Length == 67)
-            {
-                Data.NIBP1_Syst = packet[48]; Data.NIBP1_Diast = packet[49];
-                Data.NIBP1_Press = System.Buffers.Binary.BinaryPrimitives.ReadUInt16LittleEndian(packet.Slice(50, 2));
-
-                Data.NIBP2_Syst = packet[52]; Data.NIBP2_Diast = packet[53];
-                Data.NIBP2_Press = System.Buffers.Binary.BinaryPrimitives.ReadUInt16LittleEndian(packet.Slice(54, 2));
-
-                Data.NIBP3_Syst = packet[56]; Data.NIBP3_Diast = packet[57];
-                Data.NIBP3_Press = System.Buffers.Binary.BinaryPrimitives.ReadUInt16LittleEndian(packet.Slice(58, 2));
-
-                Data.NIBP4_Syst = packet[60]; Data.NIBP4_Diast = packet[61];
-                Data.NIBP4_Press = System.Buffers.Binary.BinaryPrimitives.ReadUInt16LittleEndian(packet.Slice(62, 2));
-
-                // 3-байтовый статус
-                Data.DeviceStatus = packet[64] | (packet[65] << 8) | (packet[66] << 16);
-                Status = (DeviceStatusFlags) Data.DeviceStatus;
-                ProcessDeviceStatus(); // Выносим логику насосов и OnBPcompleted сюда
-            }
-        }
-
-        private void ProcessDeviceStatus()
-        {
-
-            // --- Интеграция с вашей старой логикой компрессоров (по битовым маскам) ---
-            BP1measStarted = Status.HasFlag(DeviceStatusFlags.dsBP1_InProgress);
-            BP2measStarted = Status.HasFlag(DeviceStatusFlags.dsBP2_InProgress);
-            BP3measStarted = Status.HasFlag(DeviceStatusFlags.dsBP3_InProgress);
-            BP4measStarted = Status.HasFlag(DeviceStatusFlags.dsBP4_InProgress);
-            OnBPcompleted(EventArgs.Empty);
-/*
-            // Модуль давления 1 (Левая рука)
-            if (Pump1Started && (Data.DeviceStatus & pump1progress) != 0) Pump1RealyStarted = true;
-            if (Pump1RealyStarted) Data.SphigmoLeftHandViewArray[MainIndex] = 0;
-            if (Pump1RealyStarted && (Data.DeviceStatus & pump1progress) == 0)
-            {
-                if (++DelayCounter1 > MaxDelayCounter)
-                {
-                    Pump1Started = false; Pump1RealyStarted = false; detrendSphigmo1 = 0; DelayCounter1 = 0;
-                }
-            }
-
-            // Модуль давления 2 (Левая нога)
-            if (Pump2Started && (Data.DeviceStatus & pump2progress) != 0) Pump2RealyStarted = true;
-            if (Pump2RealyStarted)
-            {
-                detrendSphigmo2 = 0;
-                Data.SphigmoLeftLegViewArray[MainIndex] = (int)Math.Round(detrendSphigmo2);
-            }
-            if (Pump2RealyStarted && (Data.DeviceStatus & pump2progress) == 0)
-            {
-                if (++DelayCounter2 > MaxDelayCounter)
-                {
-                    Pump2Started = false; Pump2RealyStarted = false; detrendSphigmo2 = 0; DelayCounter2 = 0;
-                }
-            }
-*/
-
-        }
 
 
         // Удобный хелпер для чтения 3-байтовых знаковых чисел (Int24 Little Endian)
@@ -476,10 +280,6 @@ namespace Polycardio2
             return (val & 0x800000) != 0 ? val - 0x1000000 : val;
         }
 
-        public int Decompos(USBserialPort usbport, Stream saveFileStream)
-        {
-            return Decompos(usbport, saveFileStream, null, null);
-        }
         private readonly byte[] _packetBuffer = new byte[67]; // Буфер под максимальный размер пакета
         private int _packetIdx = 0;                          // Текущая позиция заполнения буфера
         private int _currentPacketSize = 48;                 // Ожидаемый размер (динамически меняется)
@@ -490,10 +290,10 @@ namespace Polycardio2
             int bytes = usbport.BytesRead;
             if (bytes == 0)
             {
-                if (++DTOCounter > MaxDTOCounter) DeviceTurnedOn = false;
+                DTOCounter++;
+                if (DTOCounter > MaxDTOCounter) DeviceTurnedOn = false;
                 return 0;
             }
-
             DeviceTurnedOn = true;
 
             if (saveFileStream != null && RecordStarted)
@@ -501,50 +301,259 @@ namespace Polycardio2
                 try
                 {
                     saveFileStream.Write(usbport.PortBuf, 0, bytes);
-                    TotalBytes += bytes;
+                    TotalBytes = TotalBytes + bytes;
                 }
-                catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
             }
 
             for (int i = 0; i < bytes; i++)
             {
                 byte currentByte = usbport.PortBuf[i];
 
-                // ШАГ 1: Поиск маркера начала посылки (Offset 0)
-                if (_packetIdx == 0)
+                switch (byteNum)
                 {
-                    if (currentByte != 0x19) continue; // Пропускаем байты до маркера
-                    _packetBuffer[_packetIdx++] = currentByte;
-                    continue;
-                }
+                    case 0: // cStreamMark (Offset 0)
+                        if (currentByte == 0x19) byteNum = 1;
+                        break;
 
-                // ШАГ 2: Чтение размера пакета (Offset 1)
-                if (_packetIdx == 1)
-                {
-                    if (currentByte == 48 || currentByte == 67)
-                    {
-                        _currentPacketSize = currentByte;
-                        _packetBuffer[_packetIdx++] = currentByte;
-                    }
-                    else
-                    {
-                        _packetIdx = 0; // Сброс: пришел некорректный размер пакета
-                    }
-                    continue;
-                }
+                    case 1: // DataSize (Offset 1)
+                        if (currentByte == 48 || currentByte == 67)
+                        {
+                            currentPacketSize = currentByte; // Переменная класса для размера
+                            byteNum = 2;
+                        }
+                        else
+                        {
+                            byteNum = 0;
+                        }
+                        break;
 
-                // ШАГ 3: Накопление тела пакета
-                _packetBuffer[_packetIdx++] = currentByte;
+                    // --- ECG1_Sample (Offsets 2, 3, 4) ---
+                    case 2: ECG1tmp = currentByte; byteNum = 3; break;
+                    case 3: ECG1tmp |= currentByte << 8; byteNum = 4; break;
+                    case 4:
+                        ECG1tmp |= currentByte << 16;
+                        if ((ECG1tmp & 0x800000) != 0) ECG1tmp -= 0x1000000;
+                        Data.ECG1Array[MainIndex] = ECG1tmp;
+                        nextECG1 = ECG1tmp;
+                        if (cfg?.FilterOn == true) nextECG1 = Filter.filter(Filter.coeff50, Data.ECG1Array, MainIndex);
+                        detrendECG1 = FilterRecursDetrend(filterCoeff, nextECG1, detrendECG1, prevECG1);
+                        Data.ECG1ViewArray[MainIndex] = (int)Math.Round(detrendECG1);
+                        prevECG1 = nextECG1;
+                        byteNum = 5;
+                        break;
 
-                // ШАГ 4: Пакет собран полностью — запускаем парсинг и финализацию
-                if (_packetIdx >= _currentPacketSize)
-                {
-                    ParseFullPacket(_packetBuffer.AsSpan(0, _currentPacketSize), cfg);
+                    // --- ECG2_Sample (Offsets 5, 6, 7) ---
+                    case 5: ECG2tmp = currentByte; byteNum = 6; break;
+                    case 6: ECG2tmp |= currentByte << 8; byteNum = 7; break;
+                    case 7:
+                        ECG2tmp |= currentByte << 16;
+                        if ((ECG2tmp & 0x800000) != 0) ECG2tmp -= 0x1000000;
+                        Data.ECG2Array[MainIndex] = ECG2tmp;
+                        nextECG2 = ECG2tmp;
+                        if (cfg?.FilterOn == true) nextECG2 = Filter.filter(Filter.coeff50, Data.ECG2Array, MainIndex);
+                        detrendECG2 = FilterRecursDetrend(filterCoeff, nextECG2, detrendECG2, prevECG2);
+                        Data.ECG2ViewArray[MainIndex] = (int)Math.Round(detrendECG2);
+                        prevECG2 = nextECG2;
+                        byteNum = 8;
+                        break;
 
-                    // Запись в файл, вызов событий и сдвиг кольцевого MainIndex
-                    FinalizePacket(txtFileStream);
+                    // --- Reo1_Sample (Offsets 8, 9, 10) ---
+                    case 8: Reo1tmp = currentByte; byteNum = 9; break;
+                    case 9: Reo1tmp |= currentByte << 8; byteNum = 10; break;
+                    case 10:
+                        Reo1tmp |= currentByte << 16;
+                        if ((Reo1tmp & 0x800000) != 0) Reo1tmp -= 0x1000000;
+                        if (Reo1tmp > ApexConstants.ReoMaxVal) Reo1tmp = ApexConstants.ReoMaxVal;
+                        Data.Reo1Array[MainIndex] = -Reo1tmp;
+                        nextReo1 = Reo1tmp;
+                        if (cfg?.FilterOn == true) nextReo1 = Filter.filter(Filter.coeff14, Data.Reo1Array, MainIndex);
+                        detrendReo1 = FilterRecursDetrend(filterCoeffReo, nextReo1, detrendReo1, prevReo1);
+                        Data.Reo1ViewArray[MainIndex] = (int)Math.Round(detrendReo1);
+                        prevReo1 = nextReo1;
+                        byteNum = 11;
+                        break;
 
-                    _packetIdx = 0; // Сброс буфера для следующего пакета
+                    // --- Reo2_Sample (Offsets 11, 12, 13) ---
+                    case 11: Reo2tmp = currentByte; byteNum = 12; break;
+                    case 12: Reo2tmp |= currentByte << 8; byteNum = 13; break;
+                    case 13:
+                        Reo2tmp |= currentByte << 16;
+                        if ((Reo2tmp & 0x800000) != 0) Reo2tmp -= 0x1000000;
+                        if (Reo2tmp > ApexConstants.ReoMaxVal) Reo2tmp = ApexConstants.ReoMaxVal;
+                        Data.Reo2Array[MainIndex] = -Reo2tmp;
+                        nextReo2 = Reo2tmp;
+                        if (cfg?.FilterOn == true) nextReo2 = Filter.filter(Filter.coeff14, Data.Reo2Array, MainIndex);
+                        detrendReo2 = FilterRecursDetrend(filterCoeffReo, nextReo2, detrendReo2, prevReo2);
+                        Data.Reo2ViewArray[MainIndex] = -(int)Math.Round(detrendReo2);
+                        prevReo2 = nextReo2;
+                        byteNum = 14;
+                        break;
+
+                    // --- Sfig1_Sample (SphigmoLeftHand, Offsets 14, 15, 16) ---
+                    case 14: Sphigmo1tmp = currentByte; byteNum = 15; break;
+                    case 15: Sphigmo1tmp |= currentByte << 8; byteNum = 16; break;
+                    case 16:
+                        Sphigmo1tmp |= currentByte << 16;
+                        if ((Sphigmo1tmp & 0x800000) != 0) Sphigmo1tmp -= 0x1000000;
+                        Data.SphigmoLeftHandArray[MainIndex] = Sphigmo1tmp;
+                        nextSphigmo1 = Sphigmo1tmp;
+                        if (cfg?.FilterOn == true) nextSphigmo1 = Filter.filter(Filter.coeff14, Data.SphigmoLeftHandArray, MainIndex);
+                        detrendSphigmo1 = FilterRecursDetrend(filterCoeff, nextSphigmo1, detrendSphigmo1, prevSphigmo1);
+                        Data.SphigmoLeftHandViewArray[MainIndex] = (int)Math.Round(detrendSphigmo1);
+                        prevSphigmo1 = nextSphigmo1;
+                        byteNum = 17;
+                        break;
+
+                    // --- Sfig2_Sample (SphigmoLeftLeg, Offsets 17, 18, 19) ---
+                    case 17: Sphigmo2tmp = currentByte; byteNum = 18; break;
+                    case 18: Sphigmo2tmp |= currentByte << 8; byteNum = 19; break;
+                    case 19:
+                        Sphigmo2tmp |= currentByte << 16;
+                        if ((Sphigmo2tmp & 0x800000) != 0) Sphigmo2tmp -= 0x1000000;
+                        Data.SphigmoLeftLegArray[MainIndex] = Sphigmo2tmp;
+                        nextSphigmo2 = Sphigmo2tmp;
+                        if (cfg?.FilterOn == true) nextSphigmo2 = Filter.filter(Filter.coeff14, Data.SphigmoLeftLegArray, MainIndex);
+                        detrendSphigmo2 = FilterRecursDetrend(filterCoeff, nextSphigmo2, detrendSphigmo2, prevSphigmo2);
+                        Data.SphigmoLeftLegViewArray[MainIndex] = (int)Math.Round(detrendSphigmo2);
+                        prevSphigmo2 = nextSphigmo2;
+                        byteNum = 20;
+                        break;
+
+                    // --- Sfig3_Sample (SphigmoRightHand, Offsets 20, 21, 22) ---
+                    case 20: Sphigmo3tmp = currentByte; byteNum = 21; break;
+                    case 21: Sphigmo3tmp |= currentByte << 8; byteNum = 22; break;
+                    case 22:
+                        Sphigmo3tmp |= currentByte << 16;
+                        if ((Sphigmo3tmp & 0x800000) != 0) Sphigmo3tmp -= 0x1000000;
+                        Data.SphigmoRightHandArray[MainIndex] = Sphigmo3tmp;
+                        nextSphigmo3 = Sphigmo3tmp;
+                        if (cfg?.FilterOn == true) nextSphigmo3 = Filter.filter(Filter.coeff14, Data.SphigmoRightHandArray, MainIndex);
+                        detrendSphigmo3 = FilterRecursDetrend(filterCoeff, nextSphigmo3, detrendSphigmo3, prevSphigmo3);
+                        Data.SphigmoRightHandViewArray[MainIndex] = (int)Math.Round(detrendSphigmo3);
+                        prevSphigmo3 = nextSphigmo3;
+                        byteNum = 23;
+                        break;
+
+                    // --- Sfig4_Sample (SphigmoRightLeg, Offsets 23, 24, 25) ---
+                    case 23: Sphigmo4tmp = currentByte; byteNum = 24; break;
+                    case 24: Sphigmo4tmp |= currentByte << 8; byteNum = 25; break;
+                    case 25:
+                        Sphigmo4tmp |= currentByte << 16;
+                        if ((Sphigmo4tmp & 0x800000) != 0) Sphigmo4tmp -= 0x1000000;
+                        Data.SphigmoRightLegArray[MainIndex] = Sphigmo4tmp;
+                        nextSphigmo4 = Sphigmo4tmp;
+                        if (cfg?.FilterOn == true) nextSphigmo4 = Filter.filter(Filter.coeff14, Data.SphigmoRightLegArray, MainIndex);
+                        detrendSphigmo4 = FilterRecursDetrend(filterCoeff, nextSphigmo4, detrendSphigmo4, prevSphigmo4);
+                        Data.SphigmoRightLegViewArray[MainIndex] = (int)Math.Round(detrendSphigmo4);
+                        prevSphigmo4 = nextSphigmo4;
+                        byteNum = 26;
+                        break;
+
+                    // --- Apex_Sample (Offsets 26, 27, 28) ---
+                    case 26: Apextmp = currentByte; byteNum = 27; break;
+                    case 27: Apextmp |= currentByte << 8; byteNum = 28; break;
+                    case 28:
+                        Apextmp |= currentByte << 16;
+                        if ((Apextmp & 0x800000) != 0) Apextmp -= 0x1000000;
+                        Data.ApexArray[MainIndex] = Apextmp;
+                        nextApex = Apextmp;
+                        if (cfg?.FilterOn == true) nextApex = Filter.filter(Filter.coeff14, Data.ApexArray, MainIndex);
+                        detrendApex = FilterRecursDetrend(filterCoeff, nextApex, detrendApex, prevApex);
+                        Data.ApexViewArray[MainIndex] = (int)Math.Round(detrendApex);
+                        prevApex = nextApex;
+                        byteNum = 29;
+                        break;
+
+                    // --- PPG_Sample (Offsets 29, 30, 31) ---
+                    case 29: Ppgtmp = currentByte; byteNum = 30; break;
+                    case 30: Ppgtmp |= currentByte << 8; byteNum = 31; break;
+                    case 31:
+                        Ppgtmp |= currentByte << 16;
+                        if ((Ppgtmp & 0x800000) != 0) Ppgtmp -= 0x1000000;
+                        Data.PPGArray[MainIndex] = Ppgtmp;
+                        Data.PPGViewArray[MainIndex] = Ppgtmp; // Базовое копирование во View
+                        byteNum = 32;
+                        break;
+
+                    // --- MPh_Sample0..7 (Микрофон / SoundArray, Offsets 32–47) ---
+                    case int n when (n >= 32 && n <= 47):
+                        int sampleIndex = (byteNum - 32) / 2;
+                        if (byteNum % 2 == 0)
+                        {
+                            mphTmp = currentByte;
+                            byteNum++;
+                        }
+                        else
+                        {
+                            mphTmp |= (short)(currentByte << 8);
+                            int soundIdx = (int)(MainIndex * 8 + sampleIndex);
+                            Data.SoundArray[soundIdx] = (short)mphTmp;
+                            Data.SoundViewArray[soundIdx] = mphTmp; // Базовое копирование во View
+                            byteNum++;
+                        }
+
+                        if (byteNum == 48 && currentPacketSize == 48)
+                        {
+                            FinalizePacket(txtFileStream); // Конец короткого пакета (48 байт)
+                        }
+                        break;
+                    // --- Данные с модулей давления (NIBP1..4, Offsets 48–63) ---
+                    case 48: Data.NIBP1_Syst = currentByte; byteNum = 49; break;
+                    case 49: Data.NIBP1_Diast = currentByte; byteNum = 50; break;
+                    case 50: Data.NIBP1_Press = currentByte; byteNum = 51; break;
+                    case 51: Data.NIBP1_Press |= (ushort)(currentByte << 8); byteNum = 52; break;
+
+                    case 52: Data.NIBP2_Syst = currentByte; byteNum = 53; break;
+                    case 53: Data.NIBP2_Diast = currentByte; byteNum = 54; break;
+                    case 54: Data.NIBP2_Press = currentByte; byteNum = 55; break;
+                    case 55: Data.NIBP2_Press |= (ushort)(currentByte << 8); byteNum = 56; break;
+
+                    case 56: Data.NIBP3_Syst = currentByte; byteNum = 57; break;
+                    case 57: Data.NIBP3_Diast = currentByte; byteNum = 58; break;
+                    case 58: Data.NIBP3_Press = currentByte; byteNum = 59; break;
+                    case 59: Data.NIBP3_Press |= (ushort)(currentByte << 8); byteNum = 60; break;
+
+                    case 60: Data.NIBP4_Syst = currentByte; byteNum = 61; break;
+                    case 61: Data.NIBP4_Diast = currentByte; byteNum = 62; break;
+                    case 62: Data.NIBP4_Press = currentByte; byteNum = 63; break;
+                    case 63: Data.NIBP4_Press |= (ushort)(currentByte << 8); byteNum = 64; break;
+
+                    // --- DeviceStatus (Offsets 64–66, 3 байта, мл. байт вперед) ---
+                    case 64: Data.DeviceStatus = currentByte; byteNum = 65; break;
+                    case 65: Data.DeviceStatus |= currentByte << 8; byteNum = 66; break;
+                    case 66:
+                        Data.DeviceStatus |= currentByte << 16;
+
+                        uint currentStatus = (uint)Data.DeviceStatus;
+
+                        // Проверка флагов работы модулей давления (Идет измерение АД)
+                        BP1measStarted = (currentStatus & (uint)DeviceStatusFlags.dsBP1_InProgress) != 0;
+                        BP2measStarted = (currentStatus & (uint)DeviceStatusFlags.dsBP2_InProgress) != 0;
+                        BP3measStarted = (currentStatus & (uint)DeviceStatusFlags.dsBP3_InProgress) != 0;
+                        BP4measStarted = (currentStatus & (uint)DeviceStatusFlags.dsBP4_InProgress) != 0;
+
+                        // Если насос качает воздух на конечности, зануляем отображение сфигмограммы (шумоподавление)
+                        if (BP1measStarted) Data.SphigmoLeftHandViewArray[MainIndex] = 0;
+                        if (BP2measStarted) Data.SphigmoLeftLegViewArray[MainIndex] = 0;
+                        if (BP3measStarted) Data.SphigmoRightHandViewArray[MainIndex] = 0;
+                        if (BP4measStarted) Data.SphigmoRightLegViewArray[MainIndex] = 0;
+
+                        // Управление задержками помп (если необходимо перенести логику DelayCounter для 4 каналов)
+                        // [При необходимости добавьте сюда вашу логику для Pump1Started..Pump4Started]
+
+                        // Проверка на завершение измерения или ошибку по любому из каналов
+                        if (Calibrate || Data.DeviceStatus > 0)
+                        {
+                            var args = new BPEventArgs { status = Data.DeviceStatus };
+                            OnBPcompleted(args);
+                        }
+
+                        FinalizePacket(txtFileStream); // Конец полной посылки (67 байт)
+                        break;
                 }
             }
 
