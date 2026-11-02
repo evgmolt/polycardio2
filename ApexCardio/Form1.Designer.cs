@@ -630,7 +630,6 @@
             labP3.Size = new Size(20, 15);
             labP3.TabIndex = 12;
             labP3.Text = "P3";
-            labP3.Visible = false;
             // 
             // labP2
             // 
@@ -641,7 +640,6 @@
             labP2.Size = new Size(20, 15);
             labP2.TabIndex = 11;
             labP2.Text = "P2";
-            labP2.Visible = false;
             // 
             // labP1
             // 
@@ -652,7 +650,6 @@
             labP1.Size = new Size(20, 15);
             labP1.TabIndex = 10;
             labP1.Text = "P1";
-            labP1.Visible = false;
             // 
             // butEditRecInfo
             // 
@@ -695,7 +692,7 @@
             textBoxRecInfo.Multiline = true;
             textBoxRecInfo.Name = "textBoxRecInfo";
             textBoxRecInfo.ReadOnly = true;
-            textBoxRecInfo.Size = new Size(310, 195);
+            textBoxRecInfo.Size = new Size(310, 59);
             textBoxRecInfo.TabIndex = 7;
             // 
             // labRecordSize
