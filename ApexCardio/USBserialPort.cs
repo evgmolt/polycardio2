@@ -47,7 +47,7 @@ namespace Polycardio2
             BaudRate = baudrate;
             messageHandler.WindowsMessage += onMessage;
             ReadEnabled = false;
-            PortBuf = new byte[10000];
+            PortBuf = new byte[100000];
             ReadTimer = new System.Threading.Timer(ReadPort, null, 0, Timeout.Infinite);
         }
 

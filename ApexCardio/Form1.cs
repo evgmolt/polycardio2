@@ -155,12 +155,12 @@ namespace Polycardio2
 
         void LineReceived(object sender, EventArgs arg)
         {
-            label1.Text = "Счетчик пакетов" + decomposer.MainIndex.ToString();
-            /*
-            labP1.Text = (DataA.Reo1Array[decomposer.MainIndex]).ToString();
-            labP2.Text = (DataA.Reo2Array[decomposer.MainIndex]).ToString();
-            labP3.Text = (DataA.ECG1Array[decomposer.MainIndex]).ToString();
-            */
+            label1.Text = "Счетчик пакетов " + decomposer.MainIndex.ToString();
+            
+            labP1.Text = (DataA.ECG1Array[decomposer.MainIndex]).ToString();
+            labP2.Text = (DataA.Reo1Array[decomposer.MainIndex]).ToString();
+            labP3.Text = (DataA.ECG2Array[decomposer.MainIndex]).ToString();
+            
 
         }
 

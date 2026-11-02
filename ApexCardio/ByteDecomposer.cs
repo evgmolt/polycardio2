@@ -579,6 +579,7 @@ namespace Polycardio2
             // Сдвигаем кольцевой индекс и сбрасываем по маске степени двойки
             MainIndex++;
             MainIndex &= (uint)(DataArrSize - 1);
+            byteNum = 0;
         }
 
         private string GetDataString(uint index)
