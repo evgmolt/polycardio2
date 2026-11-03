@@ -998,8 +998,8 @@ namespace Polycardio2
                 ChannelsScaleY[3] = Math.Pow(2, a / 2);
                 if (ViewMode)
                 {
-                    if (GInfoArr[(int)ChNames.chSphigmo1].Visible) GInfoArr[(int)ChNames.chSphigmo1].BufPanel.Refresh();
-                    if (GInfoArr[(int)ChNames.chSphigmo2].Visible) GInfoArr[(int)ChNames.chSphigmo2].BufPanel.Refresh();
+                    if (GInfoArr[(int)ChNames.chSphigmo3].Visible) GInfoArr[(int)ChNames.chSphigmo3].BufPanel.Refresh();
+                    if (GInfoArr[(int)ChNames.chSphigmo4].Visible) GInfoArr[(int)ChNames.chSphigmo4].BufPanel.Refresh();
                 }
             }
             catch (Exception)
