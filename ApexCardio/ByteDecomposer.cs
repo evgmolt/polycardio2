@@ -395,9 +395,9 @@ namespace Polycardio2
 
                     // --- Sfig1_Sample (SphigmoLeftHand, Offsets 14, 15, 16) ---
                     case 14: Sphigmo1tmp = currentByte; byteNum = 15; break;
-                    case 15: Sphigmo1tmp |= currentByte << 8; byteNum = 16; break;
+                    case 15: Sphigmo1tmp |= (int)(currentByte << 8); byteNum = 16; break;
                     case 16:
-                        Sphigmo1tmp |= currentByte << 16;
+                        Sphigmo1tmp |= (int)(currentByte << 16);
                         if ((Sphigmo1tmp & 0x800000) != 0) Sphigmo1tmp -= 0x1000000;
                         Data.SphigmoLeftHandArray[MainIndex] = Sphigmo1tmp;
                         nextSphigmo1 = Sphigmo1tmp;
@@ -410,9 +410,9 @@ namespace Polycardio2
 
                     // --- Sfig2_Sample (SphigmoLeftLeg, Offsets 17, 18, 19) ---
                     case 17: Sphigmo2tmp = currentByte; byteNum = 18; break;
-                    case 18: Sphigmo2tmp |= currentByte << 8; byteNum = 19; break;
+                    case 18: Sphigmo2tmp |= (int)(currentByte << 8); byteNum = 19; break;
                     case 19:
-                        Sphigmo2tmp |= currentByte << 16;
+                        Sphigmo2tmp |= (int)(currentByte << 16);
                         if ((Sphigmo2tmp & 0x800000) != 0) Sphigmo2tmp -= 0x1000000;
                         Data.SphigmoLeftLegArray[MainIndex] = Sphigmo2tmp;
                         nextSphigmo2 = Sphigmo2tmp;
@@ -425,9 +425,9 @@ namespace Polycardio2
 
                     // --- Sfig3_Sample (SphigmoRightHand, Offsets 20, 21, 22) ---
                     case 20: Sphigmo3tmp = currentByte; byteNum = 21; break;
-                    case 21: Sphigmo3tmp |= currentByte << 8; byteNum = 22; break;
+                    case 21: Sphigmo3tmp |= (int)(currentByte << 8); byteNum = 22; break;
                     case 22:
-                        Sphigmo3tmp |= currentByte << 16;
+                        Sphigmo3tmp |= (int)(currentByte << 16);
                         if ((Sphigmo3tmp & 0x800000) != 0) Sphigmo3tmp -= 0x1000000;
                         Data.SphigmoRightHandArray[MainIndex] = Sphigmo3tmp;
                         nextSphigmo3 = Sphigmo3tmp;
@@ -440,9 +440,9 @@ namespace Polycardio2
 
                     // --- Sfig4_Sample (SphigmoRightLeg, Offsets 23, 24, 25) ---
                     case 23: Sphigmo4tmp = currentByte; byteNum = 24; break;
-                    case 24: Sphigmo4tmp |= currentByte << 8; byteNum = 25; break;
+                    case 24: Sphigmo4tmp |= (int)(currentByte << 8); byteNum = 25; break;
                     case 25:
-                        Sphigmo4tmp |= currentByte << 16;
+                        Sphigmo4tmp |= (int)(currentByte << 16);
                         if ((Sphigmo4tmp & 0x800000) != 0) Sphigmo4tmp -= 0x1000000;
                         Data.SphigmoRightLegArray[MainIndex] = Sphigmo4tmp;
                         nextSphigmo4 = Sphigmo4tmp;

@@ -45,7 +45,7 @@ namespace Polycardio2
             {
                 VisibleGraphs[i] = true;
             }
-            ChannelsMaxSize = [60000, 60000, 5000, 5000, 40000, 40000, 40000, 40000, 4000, 5000, 5000 ];
+            ChannelsMaxSize = [60000, 60000, 5000, 5000, 60000, 60000, 60000, 60000, 4000, 5000, 5000 ];
 
         }
 

@@ -58,7 +58,7 @@ namespace Polycardio2
         private char ABPseparator = '/';
         public RecordInfoData Data;
         public string FileName;
-        private string[] ColumnNames = { "Date/time", "ECG1", "ECG2", "Reo 1", "Reo 2", "Sphigmo 1", "Sphigmo 2", "Apex" };
+        private string[] ColumnNames = { "Date/time", "ECG1", "ECG2", "Reo 1", "Reo 2", "Sphigmo 1", "Sphigmo 2", "Sphigmo 3", "Sphigmo 4", "PPG", "Apex", "Sound" };
 
 
         public RecordInfo(ApexConfig cfg, string fNameArg, string[] lines)
