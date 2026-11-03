@@ -376,12 +376,12 @@ namespace Polycardio2
             if (GInfoArr[(int)ChNames.chSphigmo1].Visible | GInfoArr[(int)ChNames.chSphigmo2].Visible)
             {
                 AmpBarArr[2] = new TrackBar();
-                AmpBarArr[2].ValueChanged += trackBarSphigmo_ValueChanged;
+                AmpBarArr[2].ValueChanged += trackBarSphigmo12_ValueChanged;
             }
             if (GInfoArr[(int)ChNames.chSphigmo3].Visible | GInfoArr[(int)ChNames.chSphigmo4].Visible)
             {
                 AmpBarArr[3] = new TrackBar();
-                AmpBarArr[3].ValueChanged += trackBarSphigmo_ValueChanged;
+                AmpBarArr[3].ValueChanged += trackBarSphigmo34_ValueChanged;
             }
             if (GInfoArr[(int)ChNames.chApex].Visible)
             {
@@ -391,12 +391,12 @@ namespace Polycardio2
             if (GInfoArr[(int)ChNames.chPPG].Visible)
             {
                 AmpBarArr[5] = new TrackBar();
-                AmpBarArr[5].ValueChanged += trackBarApex_ValueChanged;
+                AmpBarArr[5].ValueChanged += trackBarPPG_ValueChanged;
             }
             if (GInfoArr[(int)ChNames.chSound].Visible)
             {
                 AmpBarArr[6] = new TrackBar();
-                AmpBarArr[6].ValueChanged += trackBarApex_ValueChanged;
+                AmpBarArr[6].ValueChanged += trackBarSound_ValueChanged;
             }
 
             for (int i = 0; i < ApexConstants.NumOfAmpBars; i++)
@@ -972,7 +972,7 @@ namespace Polycardio2
             }
         }
 
-        private void trackBarSphigmo_ValueChanged(object sender, EventArgs e)
+        private void trackBarSphigmo12_ValueChanged(object sender, EventArgs e)
         {
             try
             {
@@ -989,14 +989,31 @@ namespace Polycardio2
             {
             }
         }
-
-        private void trackBarApex_ValueChanged(object sender, EventArgs e)
+        private void trackBarSphigmo34_ValueChanged(object sender, EventArgs e)
         {
             try
             {
                 AmpBarVals[3] = AmpBarArr[3].Value;
                 double a = AmpBarArr[3].Value;
                 ChannelsScaleY[3] = Math.Pow(2, a / 2);
+                if (ViewMode)
+                {
+                    if (GInfoArr[(int)ChNames.chSphigmo1].Visible) GInfoArr[(int)ChNames.chSphigmo1].BufPanel.Refresh();
+                    if (GInfoArr[(int)ChNames.chSphigmo2].Visible) GInfoArr[(int)ChNames.chSphigmo2].BufPanel.Refresh();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void trackBarApex_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                AmpBarVals[4] = AmpBarArr[4].Value;
+                double a = AmpBarArr[4].Value;
+                ChannelsScaleY[4] = Math.Pow(2, a / 2);
                 if (ViewMode)
                 {
                     if (GInfoArr[(int)ChNames.chApex].Visible) GInfoArr[(int)ChNames.chApex].BufPanel.Refresh();
@@ -1006,6 +1023,40 @@ namespace Polycardio2
             {
             }
         }
+
+        private void trackBarPPG_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                AmpBarVals[5] = AmpBarArr[5].Value;
+                double a = AmpBarArr[5].Value;
+                ChannelsScaleY[5] = Math.Pow(2, a / 2);
+                if (ViewMode)
+                {
+                    if (GInfoArr[(int)ChNames.chPPG].Visible) GInfoArr[(int)ChNames.chPPG].BufPanel.Refresh();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+        private void trackBarSound_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                AmpBarVals[6] = AmpBarArr[6].Value;
+                double a = AmpBarArr[6].Value;
+                ChannelsScaleY[6] = Math.Pow(2, a / 2);
+                if (ViewMode)
+                {
+                    if (GInfoArr[(int)ChNames.chSound].Visible) GInfoArr[(int)ChNames.chSound].BufPanel.Refresh();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
 
         private ByteDecomposer ParseData(string[] lines, DataArrays a, int skip)
         {
