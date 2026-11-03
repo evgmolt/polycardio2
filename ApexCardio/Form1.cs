@@ -155,13 +155,38 @@ namespace Polycardio2
 
         void LineReceived(object sender, EventArgs arg)
         {
-            label1.Text = "Счетчик пакетов " + decomposer.MainIndex.ToString();
-            
-            labP1.Text = (DataA.ECG1Array[decomposer.MainIndex]).ToString();
-            labP2.Text = (DataA.Reo1Array[decomposer.MainIndex]).ToString();
-            labP3.Text = (DataA.ECG2Array[decomposer.MainIndex]).ToString();
-            
+            this.Invoke(new Action(() =>
+            {
+                label1.Text = "Счетчик пакетов " + decomposer.MainIndex.ToString();
 
+                labP1.Text = (DataA.ECG1Array[decomposer.MainIndex]).ToString();
+                labP2.Text = (DataA.Reo1Array[decomposer.MainIndex]).ToString();
+                labP3.Text = (DataA.ECG2Array[decomposer.MainIndex]).ToString();
+
+                uint status = DataA.DeviceStatus;
+                cb1_InProgress.Checked = (status & (uint)DeviceStatusFlags.dsBP1_InProgress) != 0;
+                cb1_OK.Checked = (status & (uint)DeviceStatusFlags.dsBP1_OK) != 0;
+                cb1_Error.Checked = (status & (uint)DeviceStatusFlags.dsBP1_Error) != 0;
+                cb1_Hold.Checked = (status & (uint)DeviceStatusFlags.dsBP1_Hold) != 0;
+                cb2_InProgress.Checked = (status & (uint)DeviceStatusFlags.dsBP2_InProgress) != 0;
+                cb2_OK.Checked = (status & (uint)DeviceStatusFlags.dsBP2_OK) != 0;
+                cb2_Error.Checked = (status & (uint)DeviceStatusFlags.dsBP2_Error) != 0;
+                cb2_Hold.Checked = (status & (uint)DeviceStatusFlags.dsBP2_Hold) != 0;
+                cb3_InProgress.Checked = (status & (uint)DeviceStatusFlags.dsBP3_InProgress) != 0;
+                cb3_OK.Checked = (status & (uint)DeviceStatusFlags.dsBP3_OK) != 0;
+                cb3_Error.Checked = (status & (uint)DeviceStatusFlags.dsBP3_Error) != 0;
+                cb3_Hold.Checked = (status & (uint)DeviceStatusFlags.dsBP3_Hold) != 0;
+                cb4_InProgress.Checked = (status & (uint)DeviceStatusFlags.dsBP4_InProgress) != 0;
+                cb4_OK.Checked = (status & (uint)DeviceStatusFlags.dsBP4_OK) != 0;
+                cb4_Error.Checked = (status & (uint)DeviceStatusFlags.dsBP4_Error) != 0;
+                cb4_Hold.Checked = (status & (uint)DeviceStatusFlags.dsBP4_Hold) != 0;
+                cbPPG_Error.Checked = (status & (uint)DeviceStatusFlags.dsPPG_Error) != 0;
+
+                labNIBP1_Press.Text = "Текущее давление : " + DataA.NIBP1_Press.ToString();
+                labNIBP2_Press.Text = "Текущее давление : " + DataA.NIBP2_Press.ToString();
+                labNIBP3_Press.Text = "Текущее давление : " + DataA.NIBP3_Press.ToString();
+                labNIBP4_Press.Text = "Текущее давление : " + DataA.NIBP4_Press.ToString();
+            }));
         }
 
         void NewLineReceived(object sender, EventArgs agr)

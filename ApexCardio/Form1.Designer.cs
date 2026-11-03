@@ -89,6 +89,28 @@
             labConnected = new Label();
             panelAmp = new Panel();
             panel1 = new Panel();
+            panel2 = new Panel();
+            labNIBP4_Press = new Label();
+            labNIBP3_Press = new Label();
+            labNIBP2_Press = new Label();
+            labNIBP1_Press = new Label();
+            cbPPG_Error = new CheckBox();
+            cb4_Hold = new CheckBox();
+            cb4_Error = new CheckBox();
+            cb4_OK = new CheckBox();
+            cb4_InProgress = new CheckBox();
+            cb3_Hold = new CheckBox();
+            cb3_Error = new CheckBox();
+            cb3_OK = new CheckBox();
+            cb3_InProgress = new CheckBox();
+            cb2_Hold = new CheckBox();
+            cb2_Error = new CheckBox();
+            cb2_OK = new CheckBox();
+            cb2_InProgress = new CheckBox();
+            cb1_Hold = new CheckBox();
+            cb1_Error = new CheckBox();
+            cb1_OK = new CheckBox();
+            cb1_InProgress = new CheckBox();
             timerPaint = new System.Windows.Forms.Timer(components);
             timerStatus = new System.Windows.Forms.Timer(components);
             openFileDialog1 = new OpenFileDialog();
@@ -100,6 +122,7 @@
             ((System.ComponentModel.ISupportInitialize)numUDplevel3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numUDplevel2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numUDplevel1).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // timerRead
@@ -109,16 +132,18 @@
             // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnCount = 4;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 400F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 45F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 268F));
             tableLayoutPanel1.Controls.Add(panelGraph, 2, 0);
             tableLayoutPanel1.Controls.Add(panelButtons, 0, 0);
             tableLayoutPanel1.Controls.Add(hScrollBar1, 2, 1);
             tableLayoutPanel1.Controls.Add(labConnected, 0, 1);
             tableLayoutPanel1.Controls.Add(panelAmp, 1, 0);
             tableLayoutPanel1.Controls.Add(panel1, 2, 2);
+            tableLayoutPanel1.Controls.Add(panel2, 3, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(4, 3, 4, 3);
@@ -136,7 +161,7 @@
             panelGraph.Location = new Point(449, 3);
             panelGraph.Margin = new Padding(4, 3, 4, 3);
             panelGraph.Name = "panelGraph";
-            panelGraph.Size = new Size(532, 693);
+            panelGraph.Size = new Size(264, 693);
             panelGraph.TabIndex = 0;
             panelGraph.Resize += panelGraph_Resize;
             // 
@@ -744,7 +769,7 @@
             hScrollBar1.Dock = DockStyle.Bottom;
             hScrollBar1.Location = new Point(445, 708);
             hScrollBar1.Name = "hScrollBar1";
-            hScrollBar1.Size = new Size(540, 20);
+            hScrollBar1.Size = new Size(272, 20);
             hScrollBar1.TabIndex = 2;
             hScrollBar1.Visible = false;
             hScrollBar1.ValueChanged += hScrollBar1_ValueChanged;
@@ -775,8 +800,260 @@
             panel1.Location = new Point(449, 731);
             panel1.Margin = new Padding(4, 3, 4, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(532, 40);
+            panel1.Size = new Size(264, 40);
             panel1.TabIndex = 5;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(labNIBP4_Press);
+            panel2.Controls.Add(labNIBP3_Press);
+            panel2.Controls.Add(labNIBP2_Press);
+            panel2.Controls.Add(labNIBP1_Press);
+            panel2.Controls.Add(cbPPG_Error);
+            panel2.Controls.Add(cb4_Hold);
+            panel2.Controls.Add(cb4_Error);
+            panel2.Controls.Add(cb4_OK);
+            panel2.Controls.Add(cb4_InProgress);
+            panel2.Controls.Add(cb3_Hold);
+            panel2.Controls.Add(cb3_Error);
+            panel2.Controls.Add(cb3_OK);
+            panel2.Controls.Add(cb3_InProgress);
+            panel2.Controls.Add(cb2_Hold);
+            panel2.Controls.Add(cb2_Error);
+            panel2.Controls.Add(cb2_OK);
+            panel2.Controls.Add(cb2_InProgress);
+            panel2.Controls.Add(cb1_Hold);
+            panel2.Controls.Add(cb1_Error);
+            panel2.Controls.Add(cb1_OK);
+            panel2.Controls.Add(cb1_InProgress);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(720, 3);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(262, 693);
+            panel2.TabIndex = 6;
+            // 
+            // labNIBP4_Press
+            // 
+            labNIBP4_Press.AutoSize = true;
+            labNIBP4_Press.Location = new Point(8, 571);
+            labNIBP4_Press.Name = "labNIBP4_Press";
+            labNIBP4_Press.Size = new Size(117, 15);
+            labNIBP4_Press.TabIndex = 20;
+            labNIBP4_Press.Text = "Текущее давление : ";
+            // 
+            // labNIBP3_Press
+            // 
+            labNIBP3_Press.AutoSize = true;
+            labNIBP3_Press.Location = new Point(8, 431);
+            labNIBP3_Press.Name = "labNIBP3_Press";
+            labNIBP3_Press.Size = new Size(117, 15);
+            labNIBP3_Press.TabIndex = 19;
+            labNIBP3_Press.Text = "Текущее давление : ";
+            // 
+            // labNIBP2_Press
+            // 
+            labNIBP2_Press.AutoSize = true;
+            labNIBP2_Press.Location = new Point(8, 283);
+            labNIBP2_Press.Name = "labNIBP2_Press";
+            labNIBP2_Press.Size = new Size(117, 15);
+            labNIBP2_Press.TabIndex = 18;
+            labNIBP2_Press.Text = "Текущее давление : ";
+            // 
+            // labNIBP1_Press
+            // 
+            labNIBP1_Press.AutoSize = true;
+            labNIBP1_Press.Location = new Point(8, 129);
+            labNIBP1_Press.Name = "labNIBP1_Press";
+            labNIBP1_Press.Size = new Size(117, 15);
+            labNIBP1_Press.TabIndex = 17;
+            labNIBP1_Press.Text = "Текущее давление : ";
+            // 
+            // cbPPG_Error
+            // 
+            cbPPG_Error.AutoSize = true;
+            cbPPG_Error.Enabled = false;
+            cbPPG_Error.Location = new Point(8, 639);
+            cbPPG_Error.Name = "cbPPG_Error";
+            cbPPG_Error.Size = new Size(180, 19);
+            cbPPG_Error.TabIndex = 16;
+            cbPPG_Error.Text = "Ошибка PPG (нет пациента)";
+            cbPPG_Error.UseVisualStyleBackColor = true;
+            // 
+            // cb4_Hold
+            // 
+            cb4_Hold.AutoCheck = false;
+            cb4_Hold.AutoSize = true;
+            cb4_Hold.Location = new Point(8, 549);
+            cb4_Hold.Name = "cb4_Hold";
+            cb4_Hold.Size = new Size(234, 19);
+            cb4_Hold.TabIndex = 15;
+            cb4_Hold.Text = "Cъем сфигмограммы на правой ноге";
+            cb4_Hold.UseVisualStyleBackColor = true;
+            // 
+            // cb4_Error
+            // 
+            cb4_Error.AutoCheck = false;
+            cb4_Error.AutoSize = true;
+            cb4_Error.Location = new Point(8, 524);
+            cb4_Error.Name = "cb4_Error";
+            cb4_Error.Size = new Size(241, 19);
+            cb4_Error.TabIndex = 14;
+            cb4_Error.Text = "Ошибка измерения АД на правой ноге";
+            cb4_Error.UseVisualStyleBackColor = true;
+            // 
+            // cb4_OK
+            // 
+            cb4_OK.AutoCheck = false;
+            cb4_OK.AutoSize = true;
+            cb4_OK.Location = new Point(8, 499);
+            cb4_OK.Name = "cb4_OK";
+            cb4_OK.Size = new Size(258, 19);
+            cb4_OK.TabIndex = 13;
+            cb4_OK.Text = "Измерение АД на правой ноге завершено";
+            cb4_OK.UseVisualStyleBackColor = true;
+            // 
+            // cb4_InProgress
+            // 
+            cb4_InProgress.AutoCheck = false;
+            cb4_InProgress.AutoSize = true;
+            cb4_InProgress.Location = new Point(8, 474);
+            cb4_InProgress.Name = "cb4_InProgress";
+            cb4_InProgress.Size = new Size(221, 19);
+            cb4_InProgress.TabIndex = 12;
+            cb4_InProgress.Text = "Идет измерение АД на правой ноге";
+            cb4_InProgress.UseVisualStyleBackColor = true;
+            // 
+            // cb3_Hold
+            // 
+            cb3_Hold.AutoCheck = false;
+            cb3_Hold.AutoSize = true;
+            cb3_Hold.Location = new Point(8, 409);
+            cb3_Hold.Name = "cb3_Hold";
+            cb3_Hold.Size = new Size(234, 19);
+            cb3_Hold.TabIndex = 11;
+            cb3_Hold.Text = "Cъем сфигмограммы на правой руке";
+            cb3_Hold.UseVisualStyleBackColor = true;
+            // 
+            // cb3_Error
+            // 
+            cb3_Error.AutoCheck = false;
+            cb3_Error.AutoSize = true;
+            cb3_Error.Location = new Point(8, 384);
+            cb3_Error.Name = "cb3_Error";
+            cb3_Error.Size = new Size(241, 19);
+            cb3_Error.TabIndex = 10;
+            cb3_Error.Text = "Ошибка измерения АД на правой руке";
+            cb3_Error.UseVisualStyleBackColor = true;
+            // 
+            // cb3_OK
+            // 
+            cb3_OK.AutoCheck = false;
+            cb3_OK.AutoSize = true;
+            cb3_OK.Location = new Point(8, 359);
+            cb3_OK.Name = "cb3_OK";
+            cb3_OK.Size = new Size(258, 19);
+            cb3_OK.TabIndex = 9;
+            cb3_OK.Text = "Измерение АД на правой руке завершено";
+            cb3_OK.UseVisualStyleBackColor = true;
+            // 
+            // cb3_InProgress
+            // 
+            cb3_InProgress.AutoCheck = false;
+            cb3_InProgress.AutoSize = true;
+            cb3_InProgress.Location = new Point(8, 334);
+            cb3_InProgress.Name = "cb3_InProgress";
+            cb3_InProgress.Size = new Size(221, 19);
+            cb3_InProgress.TabIndex = 8;
+            cb3_InProgress.Text = "Идет измерение АД на правой руке";
+            cb3_InProgress.UseVisualStyleBackColor = true;
+            // 
+            // cb2_Hold
+            // 
+            cb2_Hold.AutoCheck = false;
+            cb2_Hold.AutoSize = true;
+            cb2_Hold.Location = new Point(8, 261);
+            cb2_Hold.Name = "cb2_Hold";
+            cb2_Hold.Size = new Size(227, 19);
+            cb2_Hold.TabIndex = 7;
+            cb2_Hold.Text = "Cъем сфигмограммы на левой ноге";
+            cb2_Hold.UseVisualStyleBackColor = true;
+            // 
+            // cb2_Error
+            // 
+            cb2_Error.AutoCheck = false;
+            cb2_Error.AutoSize = true;
+            cb2_Error.Location = new Point(8, 236);
+            cb2_Error.Name = "cb2_Error";
+            cb2_Error.Size = new Size(234, 19);
+            cb2_Error.TabIndex = 6;
+            cb2_Error.Text = "Ошибка измерения АД на левой ноге";
+            cb2_Error.UseVisualStyleBackColor = true;
+            // 
+            // cb2_OK
+            // 
+            cb2_OK.AutoCheck = false;
+            cb2_OK.AutoSize = true;
+            cb2_OK.Location = new Point(8, 211);
+            cb2_OK.Name = "cb2_OK";
+            cb2_OK.Size = new Size(251, 19);
+            cb2_OK.TabIndex = 5;
+            cb2_OK.Text = "Измерение АД на левой ноге завершено";
+            cb2_OK.UseVisualStyleBackColor = true;
+            // 
+            // cb2_InProgress
+            // 
+            cb2_InProgress.AutoCheck = false;
+            cb2_InProgress.AutoSize = true;
+            cb2_InProgress.Location = new Point(8, 186);
+            cb2_InProgress.Name = "cb2_InProgress";
+            cb2_InProgress.Size = new Size(214, 19);
+            cb2_InProgress.TabIndex = 4;
+            cb2_InProgress.Text = "Идет измерение АД на левой ноге";
+            cb2_InProgress.UseVisualStyleBackColor = true;
+            // 
+            // cb1_Hold
+            // 
+            cb1_Hold.AutoCheck = false;
+            cb1_Hold.AutoSize = true;
+            cb1_Hold.Location = new Point(8, 107);
+            cb1_Hold.Name = "cb1_Hold";
+            cb1_Hold.Size = new Size(227, 19);
+            cb1_Hold.TabIndex = 3;
+            cb1_Hold.Text = "Cъем сфигмограммы на левой руке";
+            cb1_Hold.UseVisualStyleBackColor = true;
+            // 
+            // cb1_Error
+            // 
+            cb1_Error.AutoCheck = false;
+            cb1_Error.AutoSize = true;
+            cb1_Error.Location = new Point(8, 82);
+            cb1_Error.Name = "cb1_Error";
+            cb1_Error.Size = new Size(234, 19);
+            cb1_Error.TabIndex = 2;
+            cb1_Error.Text = "Ошибка измерения АД на левой руке";
+            cb1_Error.UseVisualStyleBackColor = true;
+            // 
+            // cb1_OK
+            // 
+            cb1_OK.AutoCheck = false;
+            cb1_OK.AutoSize = true;
+            cb1_OK.Location = new Point(8, 57);
+            cb1_OK.Name = "cb1_OK";
+            cb1_OK.Size = new Size(251, 19);
+            cb1_OK.TabIndex = 1;
+            cb1_OK.Text = "Измерение АД на левой руке завершено";
+            cb1_OK.UseVisualStyleBackColor = true;
+            // 
+            // cb1_InProgress
+            // 
+            cb1_InProgress.AutoCheck = false;
+            cb1_InProgress.AutoSize = true;
+            cb1_InProgress.Location = new Point(8, 32);
+            cb1_InProgress.Name = "cb1_InProgress";
+            cb1_InProgress.Size = new Size(214, 19);
+            cb1_InProgress.TabIndex = 0;
+            cb1_InProgress.Text = "Идет измерение АД на левой руке";
+            cb1_InProgress.UseVisualStyleBackColor = true;
             // 
             // timerPaint
             // 
@@ -824,6 +1101,8 @@
             ((System.ComponentModel.ISupportInitialize)numUDplevel3).EndInit();
             ((System.ComponentModel.ISupportInitialize)numUDplevel2).EndInit();
             ((System.ComponentModel.ISupportInitialize)numUDplevel1).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
 
         }
@@ -895,6 +1174,28 @@
         private Label labPressure2;
         private Label labPressure1;
         private Label label1;
+        private Panel panel2;
+        private CheckBox cb1_InProgress;
+        private CheckBox cb2_Hold;
+        private CheckBox cb2_Error;
+        private CheckBox cb2_OK;
+        private CheckBox cb2_InProgress;
+        private CheckBox cb1_Hold;
+        private CheckBox cb1_Error;
+        private CheckBox cb1_OK;
+        private CheckBox cb4_Hold;
+        private CheckBox cb4_Error;
+        private CheckBox cb4_OK;
+        private CheckBox cb4_InProgress;
+        private CheckBox cb3_Hold;
+        private CheckBox cb3_Error;
+        private CheckBox cb3_OK;
+        private CheckBox cb3_InProgress;
+        private CheckBox cbPPG_Error;
+        private Label labNIBP4_Press;
+        private Label labNIBP3_Press;
+        private Label labNIBP2_Press;
+        private Label labNIBP1_Press;
     }
 }
 

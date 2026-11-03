@@ -51,7 +51,7 @@ namespace Polycardio2
         public byte NIBP4_Syst;
         public byte NIBP4_Diast;
         public ushort NIBP4_Press;
-        public int DeviceStatus;
+        public uint DeviceStatus;
     public DataArrays(int size)
         {
             ECG1Array = new int[size];
@@ -99,7 +99,7 @@ namespace Polycardio2
 
     public class BPEventArgs : EventArgs
     {
-        public int status { get; set; }
+        public uint status { get; set; }
     }
 
     class ByteDecomposer
@@ -524,9 +524,9 @@ namespace Polycardio2
 
                     // --- DeviceStatus (Offsets 64–66, 3 байта, мл. байт вперед) ---
                     case 64: Data.DeviceStatus = currentByte; byteNum = 65; break;
-                    case 65: Data.DeviceStatus |= currentByte << 8; byteNum = 66; break;
+                    case 65: Data.DeviceStatus |= (uint)(currentByte << 8); byteNum = 66; break;
                     case 66:
-                        Data.DeviceStatus |= currentByte << 16;
+                        Data.DeviceStatus |= (uint)(currentByte << 16);
 
                         uint currentStatus = (uint)Data.DeviceStatus;
 
