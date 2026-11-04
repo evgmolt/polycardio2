@@ -152,7 +152,7 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 29F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 46F));
-            tableLayoutPanel1.Size = new Size(985, 774);
+            tableLayoutPanel1.Size = new Size(1145, 774);
             tableLayoutPanel1.TabIndex = 1;
             // 
             // panelGraph
@@ -161,7 +161,7 @@
             panelGraph.Location = new Point(449, 3);
             panelGraph.Margin = new Padding(4, 3, 4, 3);
             panelGraph.Name = "panelGraph";
-            panelGraph.Size = new Size(264, 693);
+            panelGraph.Size = new Size(424, 693);
             panelGraph.TabIndex = 0;
             panelGraph.Resize += panelGraph_Resize;
             // 
@@ -769,7 +769,7 @@
             hScrollBar1.Dock = DockStyle.Bottom;
             hScrollBar1.Location = new Point(445, 708);
             hScrollBar1.Name = "hScrollBar1";
-            hScrollBar1.Size = new Size(272, 20);
+            hScrollBar1.Size = new Size(432, 20);
             hScrollBar1.TabIndex = 2;
             hScrollBar1.Visible = false;
             hScrollBar1.ValueChanged += hScrollBar1_ValueChanged;
@@ -800,7 +800,7 @@
             panel1.Location = new Point(449, 731);
             panel1.Margin = new Padding(4, 3, 4, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(264, 40);
+            panel1.Size = new Size(424, 40);
             panel1.TabIndex = 5;
             // 
             // panel2
@@ -827,7 +827,7 @@
             panel2.Controls.Add(cb1_OK);
             panel2.Controls.Add(cb1_InProgress);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(720, 3);
+            panel2.Location = new Point(880, 3);
             panel2.Name = "panel2";
             panel2.Size = new Size(262, 693);
             panel2.TabIndex = 6;
@@ -870,8 +870,8 @@
             // 
             // cbPPG_Error
             // 
+            cbPPG_Error.AutoCheck = false;
             cbPPG_Error.AutoSize = true;
-            cbPPG_Error.Enabled = false;
             cbPPG_Error.Location = new Point(8, 639);
             cbPPG_Error.Name = "cbPPG_Error";
             cbPPG_Error.Size = new Size(180, 19);
@@ -1086,7 +1086,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(985, 774);
+            ClientSize = new Size(1145, 774);
             Controls.Add(tableLayoutPanel1);
             Margin = new Padding(4, 3, 4, 3);
             MinimumSize = new Size(1001, 617);
