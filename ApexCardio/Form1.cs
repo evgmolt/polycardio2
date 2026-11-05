@@ -29,6 +29,16 @@ namespace Polycardio2
         GraphicsInfo[] GInfoArr;
         TrackBar[] AmpBarArr;
         int[] AmpBarVals;
+        private enum _ampBarNames
+        {
+            a_ecg,
+            a_reo,
+            a_sphig12,
+            a_sphig34,
+            a_apex,
+            a_ppg,
+            a_sound
+        }
         private string[] ChannelsNames = {
             "ECG 1",
             "ECG 2",
@@ -377,38 +387,38 @@ namespace Polycardio2
             }
             if (GInfoArr[(int)ChNames.chECG1].Visible | GInfoArr[(int)ChNames.chECG2].Visible)
             {
-                AmpBarArr[0] = new TrackBar();
-                AmpBarArr[0].ValueChanged += trackBarECG_ValueChanged;
+                AmpBarArr[(int)_ampBarNames.a_ecg] = new TrackBar();
+                AmpBarArr[(int)_ampBarNames.a_ecg].ValueChanged += trackBarECG_ValueChanged;
             }
             if (GInfoArr[(int)ChNames.chReo1].Visible | GInfoArr[(int)ChNames.chReo2].Visible)
             {
-                AmpBarArr[1] = new TrackBar();
-                AmpBarArr[1].ValueChanged += trackBarReo_ValueChanged;
+                AmpBarArr[(int)_ampBarNames.a_reo] = new TrackBar();
+                AmpBarArr[(int)_ampBarNames.a_reo].ValueChanged += trackBarReo_ValueChanged;
             }
             if (GInfoArr[(int)ChNames.chSphigmo1].Visible | GInfoArr[(int)ChNames.chSphigmo2].Visible)
             {
-                AmpBarArr[2] = new TrackBar();
-                AmpBarArr[2].ValueChanged += trackBarSphigmo12_ValueChanged;
+                AmpBarArr[(int)_ampBarNames.a_sphig12] = new TrackBar();
+                AmpBarArr[(int)_ampBarNames.a_sphig12].ValueChanged += trackBarSphigmo12_ValueChanged;
             }
             if (GInfoArr[(int)ChNames.chSphigmo3].Visible | GInfoArr[(int)ChNames.chSphigmo4].Visible)
             {
-                AmpBarArr[3] = new TrackBar();
-                AmpBarArr[3].ValueChanged += trackBarSphigmo34_ValueChanged;
+                AmpBarArr[(int)_ampBarNames.a_sphig34] = new TrackBar();
+                AmpBarArr[(int)_ampBarNames.a_sphig34].ValueChanged += trackBarSphigmo34_ValueChanged;
             }
             if (GInfoArr[(int)ChNames.chApex].Visible)
             {
-                AmpBarArr[4] = new TrackBar();
-                AmpBarArr[4].ValueChanged += trackBarApex_ValueChanged;
+                AmpBarArr[(int)_ampBarNames.a_apex] = new TrackBar();
+                AmpBarArr[(int)_ampBarNames.a_apex].ValueChanged += trackBarApex_ValueChanged;
             }
             if (GInfoArr[(int)ChNames.chPPG].Visible)
             {
-                AmpBarArr[5] = new TrackBar();
-                AmpBarArr[5].ValueChanged += trackBarPPG_ValueChanged;
+                AmpBarArr[(int)_ampBarNames.a_ppg] = new TrackBar();
+                AmpBarArr[(int)_ampBarNames.a_ppg].ValueChanged += trackBarPPG_ValueChanged;
             }
             if (GInfoArr[(int)ChNames.chSound].Visible)
             {
-                AmpBarArr[6] = new TrackBar();
-                AmpBarArr[6].ValueChanged += trackBarSound_ValueChanged;
+                AmpBarArr[(int)_ampBarNames.a_sound] = new TrackBar();
+                AmpBarArr[(int)_ampBarNames.a_sound].ValueChanged += trackBarSound_ValueChanged;
             }
 
             for (int i = 0; i < ApexConstants.NumOfAmpBars; i++)
@@ -422,67 +432,67 @@ namespace Polycardio2
                     AmpBarArr[i].LargeChange = 1;
                 }
             }
-            if (AmpBarArr[0] != null)
+            if (AmpBarArr[(int)_ampBarNames.a_ecg] != null)
             {
                 if ((GInfoArr[(int)ChNames.chECG1].Visible ^ GInfoArr[(int)ChNames.chECG2].Visible))
                 {
-                    AmpBarArr[0].Size = new Size(45, singleHeight);
+                    AmpBarArr[(int)_ampBarNames.a_ecg].Size = new Size(45, singleHeight);
                 }
                 else
                 {
-                    AmpBarArr[0].Size = new Size(45, singleHeight * 2);
+                    AmpBarArr[(int)_ampBarNames.a_ecg].Size = new Size(45, singleHeight * 2);
                 }
             }
 
-            if (AmpBarArr[1] != null)
+            if (AmpBarArr[(int)_ampBarNames.a_reo] != null)
             {
                 if ((GInfoArr[(int)ChNames.chReo1].Visible ^ GInfoArr[(int)ChNames.chReo2].Visible))
                 {
-                    AmpBarArr[1].Size = new Size(45, singleHeight);
+                    AmpBarArr[(int)_ampBarNames.a_reo].Size = new Size(45, singleHeight);
                 }
                 else
                 {
-                    AmpBarArr[1].Size = new Size(45, singleHeight * 2);
+                    AmpBarArr[(int)_ampBarNames.a_reo].Size = new Size(45, singleHeight * 2);
                 }
             }
 
-            if (AmpBarArr[2] != null)
+            if (AmpBarArr[(int)_ampBarNames.a_sphig12] != null)
             {
                 if ((GInfoArr[(int)ChNames.chSphigmo1].Visible ^ GInfoArr[(int)ChNames.chSphigmo2].Visible))
                 {
-                    AmpBarArr[2].Size = new Size(45, singleHeight);
+                    AmpBarArr[(int)_ampBarNames.a_sphig12].Size = new Size(45, singleHeight);
                 }
                 else
                 {
-                    AmpBarArr[2].Size = new Size(45, singleHeight * 2);
+                    AmpBarArr[(int)_ampBarNames.a_sphig12].Size = new Size(45, singleHeight * 2);
                 }
             }
 
-            if (AmpBarArr[3] != null)
+            if (AmpBarArr[(int)_ampBarNames.a_sphig34] != null)
             {
-                if ((GInfoArr[(int)ChNames.chSphigmo3].Visible ^ GInfoArr[(int)ChNames.chSphigmo3].Visible))
+                if ((GInfoArr[(int)ChNames.chSphigmo3].Visible ^ GInfoArr[(int)ChNames.chSphigmo4].Visible))
                 {
-                    AmpBarArr[3].Size = new Size(45, singleHeight);
+                    AmpBarArr[(int)_ampBarNames.a_sphig34].Size = new Size(45, singleHeight);
                 }
                 else
                 {
-                    AmpBarArr[3].Size = new Size(45, singleHeight * 2);
+                    AmpBarArr[(int)_ampBarNames.a_sphig34].Size = new Size(45, singleHeight * 2);
                 }
             }
 
-            if (AmpBarArr[4] != null)
+            if (AmpBarArr[(int)_ampBarNames.a_apex] != null)
             {
-                AmpBarArr[4].Size = new Size(45, singleHeight);
+                AmpBarArr[(int)_ampBarNames.a_apex].Size = new Size(45, singleHeight);
             }
 
-            if (AmpBarArr[5] != null)
+            if (AmpBarArr[(int)_ampBarNames.a_ppg] != null)
             {
-                AmpBarArr[5].Size = new Size(45, singleHeight);
+                AmpBarArr[(int)_ampBarNames.a_ppg].Size = new Size(45, singleHeight);
             }
 
-            if (AmpBarArr[6] != null)
+            if (AmpBarArr[(int)_ampBarNames.a_sound] != null)
             {
-                AmpBarArr[6].Size = new Size(45, singleHeight);
+                AmpBarArr[(int)_ampBarNames.a_sound].Size = new Size(45, singleHeight);
             }
 
             int Y = space;
@@ -554,47 +564,47 @@ namespace Polycardio2
 
         private void bufferedPanel0_Paint(object sender, PaintEventArgs e)
         {
-            buffPanel_Paint(DataA.ECG1ViewArray, null, GInfoArr[0].BufPanel, ChannelsScaleY[0], Cfg.ChannelsMaxSize[0], e);
+            buffPanel_Paint(DataA.ECG1ViewArray, null, GInfoArr[0].BufPanel, ChannelsScaleY[(int)_ampBarNames.a_ecg], Cfg.ChannelsMaxSize[0], e);
         }
         private void bufferedPanel1_Paint(object sender, PaintEventArgs e)
         {
-            buffPanel_Paint(DataA.ECG2ViewArray, null, GInfoArr[1].BufPanel, ChannelsScaleY[0], Cfg.ChannelsMaxSize[1], e);
+            buffPanel_Paint(DataA.ECG2ViewArray, null, GInfoArr[1].BufPanel, ChannelsScaleY[(int)_ampBarNames.a_ecg], Cfg.ChannelsMaxSize[1], e);
         }
         private void bufferedPanel2_Paint(object sender, PaintEventArgs e)
         {
-            buffPanel_Paint(DataA.Reo1ViewArray, null, GInfoArr[2].BufPanel, ChannelsScaleY[1], Cfg.ChannelsMaxSize[2], e);
+            buffPanel_Paint(DataA.Reo1ViewArray, null, GInfoArr[2].BufPanel, ChannelsScaleY[(int)_ampBarNames.a_reo], Cfg.ChannelsMaxSize[2], e);
         }
         private void bufferedPanel3_Paint(object sender, PaintEventArgs e)
         {
-            buffPanel_Paint(DataA.Reo2ViewArray, null, GInfoArr[3].BufPanel, ChannelsScaleY[1], Cfg.ChannelsMaxSize[3], e);
+            buffPanel_Paint(DataA.Reo2ViewArray, null, GInfoArr[3].BufPanel, ChannelsScaleY[(int)_ampBarNames.a_reo], Cfg.ChannelsMaxSize[3], e);
         }
         private void bufferedPanel4_Paint(object sender, PaintEventArgs e)
         {
-            buffPanel_Paint(DataA.SphigmoLeftHandViewArray, null, GInfoArr[4].BufPanel, ChannelsScaleY[2], Cfg.ChannelsMaxSize[4], e);
+            buffPanel_Paint(DataA.SphigmoLeftHandViewArray, null, GInfoArr[4].BufPanel, ChannelsScaleY[(int)_ampBarNames.a_sphig12], Cfg.ChannelsMaxSize[4], e);
         }
         private void bufferedPanel5_Paint(object sender, PaintEventArgs e)
         {
-            buffPanel_Paint(DataA.SphigmoLeftLegViewArray, null, GInfoArr[5].BufPanel, ChannelsScaleY[2], Cfg.ChannelsMaxSize[5], e);
+            buffPanel_Paint(DataA.SphigmoLeftLegViewArray, null, GInfoArr[5].BufPanel, ChannelsScaleY[(int)_ampBarNames.a_sphig12], Cfg.ChannelsMaxSize[5], e);
         }
         private void bufferedPanel6_Paint(object sender, PaintEventArgs e)
         {
-            buffPanel_Paint(DataA.SphigmoRightHandViewArray, null, GInfoArr[6].BufPanel, ChannelsScaleY[2], Cfg.ChannelsMaxSize[4], e);
+            buffPanel_Paint(DataA.SphigmoRightHandViewArray, null, GInfoArr[6].BufPanel, ChannelsScaleY[(int)_ampBarNames.a_sphig34], Cfg.ChannelsMaxSize[4], e);
         }
         private void bufferedPanel7_Paint(object sender, PaintEventArgs e)
         {
-            buffPanel_Paint(DataA.SphigmoRightLegViewArray, null, GInfoArr[7].BufPanel, ChannelsScaleY[2], Cfg.ChannelsMaxSize[5], e);
+            buffPanel_Paint(DataA.SphigmoRightLegViewArray, null, GInfoArr[7].BufPanel, ChannelsScaleY[(int)_ampBarNames.a_sphig34], Cfg.ChannelsMaxSize[5], e);
         }
         private void bufferedPanel8_Paint(object sender, PaintEventArgs e)
         {
-            buffPanel_Paint(DataA.ApexViewArray, null, GInfoArr[8].BufPanel, ChannelsScaleY[3], Cfg.ChannelsMaxSize[6], e);
+            buffPanel_Paint(DataA.ApexViewArray, null, GInfoArr[8].BufPanel, ChannelsScaleY[(int)_ampBarNames.a_apex], Cfg.ChannelsMaxSize[6], e);
         }
         private void bufferedPanel9_Paint(object sender, PaintEventArgs e)
         {
-            buffPanel_Paint(DataA.PPGViewArray, null, GInfoArr[9].BufPanel, ChannelsScaleY[3], Cfg.ChannelsMaxSize[7], e);
+            buffPanel_Paint(DataA.PPGViewArray, null, GInfoArr[9].BufPanel, ChannelsScaleY[(int)_ampBarNames.a_ppg], Cfg.ChannelsMaxSize[7], e);
         }
         private void bufferedPanel10_Paint(object sender, PaintEventArgs e)
         {
-            buffPanel_Paint(DataA.SoundViewArray, null, GInfoArr[10].BufPanel, ChannelsScaleY[3], Cfg.ChannelsMaxSize[7], e);
+            buffPanel_Paint(DataA.SoundViewArray, null, GInfoArr[10].BufPanel, ChannelsScaleY[(int)_ampBarNames.a_sound], Cfg.ChannelsMaxSize[7], e);
         }
 
 
@@ -952,9 +962,10 @@ namespace Polycardio2
         {
             try
             {
-                AmpBarVals[0] = AmpBarArr[0].Value;
-                double a = AmpBarArr[0].Value;
-                ChannelsScaleY[0] = Math.Pow(2, a / 2);
+                int ind = (int)_ampBarNames.a_ecg;
+                AmpBarVals[ind] = AmpBarArr[ind].Value;
+                double a = AmpBarArr[ind].Value;
+                ChannelsScaleY[ind] = Math.Pow(2, a / 2);
                 if (ViewMode)
                 {
                     if (GInfoArr[(int)ChNames.chECG1].Visible) GInfoArr[(int)ChNames.chECG1].BufPanel.Refresh();
@@ -970,9 +981,10 @@ namespace Polycardio2
         {
             try
             {
-                AmpBarVals[1] = AmpBarArr[1].Value;
-                double a = AmpBarArr[1].Value;
-                ChannelsScaleY[1] = Math.Pow(2, a / 2);
+                int ind = (int)_ampBarNames.a_reo;
+                AmpBarVals[ind] = AmpBarArr[ind].Value;
+                double a = AmpBarArr[ind].Value;
+                ChannelsScaleY[ind] = Math.Pow(2, a / 2);
                 if (ViewMode)
                 {
                     if (GInfoArr[(int)ChNames.chReo1].Visible) GInfoArr[(int)ChNames.chReo1].BufPanel.Refresh();
@@ -988,9 +1000,10 @@ namespace Polycardio2
         {
             try
             {
-                AmpBarVals[2] = AmpBarArr[2].Value;
-                double a = AmpBarArr[2].Value;
-                ChannelsScaleY[2] = Math.Pow(2, a / 2);
+                int ind = (int)_ampBarNames.a_sphig12;
+                AmpBarVals[ind] = AmpBarArr[ind].Value;
+                double a = AmpBarArr[ind].Value;
+                ChannelsScaleY[ind] = Math.Pow(2, a / 2);
                 if (ViewMode)
                 {
                     if (GInfoArr[(int)ChNames.chSphigmo1].Visible) GInfoArr[(int)ChNames.chSphigmo1].BufPanel.Refresh();
@@ -1005,9 +1018,10 @@ namespace Polycardio2
         {
             try
             {
-                AmpBarVals[3] = AmpBarArr[3].Value;
-                double a = AmpBarArr[3].Value;
-                ChannelsScaleY[3] = Math.Pow(2, a / 2);
+                int ind = (int)_ampBarNames.a_sphig34;
+                AmpBarVals[ind] = AmpBarArr[ind].Value;
+                double a = AmpBarArr[ind].Value;
+                ChannelsScaleY[ind] = Math.Pow(2, a / 2);
                 if (ViewMode)
                 {
                     if (GInfoArr[(int)ChNames.chSphigmo3].Visible) GInfoArr[(int)ChNames.chSphigmo3].BufPanel.Refresh();
@@ -1023,9 +1037,10 @@ namespace Polycardio2
         {
             try
             {
-                AmpBarVals[4] = AmpBarArr[4].Value;
-                double a = AmpBarArr[4].Value;
-                ChannelsScaleY[4] = Math.Pow(2, a / 2);
+                int ind = (int)_ampBarNames.a_apex;
+                AmpBarVals[ind] = AmpBarArr[ind].Value;
+                double a = AmpBarArr[ind].Value;
+                ChannelsScaleY[ind] = Math.Pow(2, a / 2);
                 if (ViewMode)
                 {
                     if (GInfoArr[(int)ChNames.chApex].Visible) GInfoArr[(int)ChNames.chApex].BufPanel.Refresh();
@@ -1040,9 +1055,10 @@ namespace Polycardio2
         {
             try
             {
-                AmpBarVals[5] = AmpBarArr[5].Value;
-                double a = AmpBarArr[5].Value;
-                ChannelsScaleY[5] = Math.Pow(2, a / 2);
+                int ind = (int)_ampBarNames.a_ppg;
+                AmpBarVals[ind] = AmpBarArr[ind].Value;
+                double a = AmpBarArr[ind].Value;
+                ChannelsScaleY[ind] = Math.Pow(2, a / 2);
                 if (ViewMode)
                 {
                     if (GInfoArr[(int)ChNames.chPPG].Visible) GInfoArr[(int)ChNames.chPPG].BufPanel.Refresh();
@@ -1056,9 +1072,10 @@ namespace Polycardio2
         {
             try
             {
-                AmpBarVals[6] = AmpBarArr[6].Value;
-                double a = AmpBarArr[6].Value;
-                ChannelsScaleY[6] = Math.Pow(2, a / 2);
+                int ind = (int)_ampBarNames.a_sound;
+                AmpBarVals[ind] = AmpBarArr[ind].Value;
+                double a = AmpBarArr[ind].Value;
+                ChannelsScaleY[ind] = Math.Pow(2, a / 2);
                 if (ViewMode)
                 {
                     if (GInfoArr[(int)ChNames.chSound].Visible) GInfoArr[(int)ChNames.chSound].BufPanel.Refresh();
@@ -1081,7 +1098,11 @@ namespace Polycardio2
                 a.Reo2Array[i - skip] = Convert.ToInt32(s[4]);
                 a.SphigmoLeftHandArray[i - skip] = Convert.ToInt32(s[5]);
                 a.SphigmoLeftLegArray[i - skip] = Convert.ToInt32(s[6]);
-                a.ApexArray[i - skip] = Convert.ToInt32(s[7]);
+                a.SphigmoRightHandArray[i - skip] = Convert.ToInt32(s[7]);
+                a.SphigmoRightLegArray[i - skip] = Convert.ToInt32(s[8]);
+                a.ApexArray[i - skip] = Convert.ToInt32(s[9]);
+                a.PPGArray[i - skip] = Convert.ToInt32(s[10]);
+                a.SoundArray[i - skip] = Convert.ToInt16(s[11]);
             }
             var d = new ByteDecomposer(a);
             d.MainIndex = (uint)lines.Length;
