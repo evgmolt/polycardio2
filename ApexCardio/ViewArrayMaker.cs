@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Polycardio2
@@ -21,16 +18,21 @@ namespace Polycardio2
 
         public static Point[] MakeArray(Control view, int[] DataSource, uint index, int max, double scaleY, int scaleX)
         {
-            var size = ByteDecomposer.DataArrSize;// (ushort)DataSource.GetLength(0);
+            // ВАЖНО: ByteDecomposer.DataArrSize ДОЛЖЕН быть степенью двойки (256, 512, 1024 и т.д.)
+            var size = ByteDecomposer.DataArrSize;
             var h = view.Height;
             var w = view.Width;
-            var arr = new Point[w/scaleX];
-            for (int i = 0; i < w/scaleX; i++)
+            int pointsCount = w / scaleX;
+            var arr = new Point[pointsCount];
+
+            for (int i = 0; i < pointsCount; i++)
             {
-                arr[i].X = i*scaleX;
-                double res = h/2-(int)Math.Round(scaleY*(h*DataSource[(index - w/scaleX + i*scaleX) & (size - 1)])/(max));
-//                if (res > h) res = h;
-                //if (res < 0) res = 0;
+                arr[i].X = i * scaleX;
+
+                // Рассчитываем циклический индекс в кольцевом буфере
+                long dataIndex = (index - pointsCount + i) & (size - 1);
+
+                double res = h / 2.0 - (scaleY * (h * DataSource[dataIndex])) / max;
                 arr[i].Y = (int)Math.Round(res);
             }
             return arr;
@@ -50,14 +52,27 @@ namespace Polycardio2
         {
             int H = view.Height;
             int W = view.Width;
-            var arr = new Point[W / scaleX];
-            for (int i = 0; i < W / scaleX; i++)
+            int pointsCount = W / scaleX;
+            var arr = new Point[pointsCount];
+
+            for (int i = 0; i < pointsCount; i++)
             {
-                if (i > W-1) break;
                 arr[i].X = i * scaleX;
+
+                // ИСПРАВЛЕНО: Индекс в массиве должен учитывать шаг масштаба по X (i * scaleX)
+                int currentDataIndex = shift + (i * scaleX);
+
                 double res;
-                if (i > dataSource.Length - 1) res = H / 2;
-                else res = H / 2 - scaleY * (H * dataSource[shift + i]) / max;
+                // ИСПРАВЛЕНО: Проверяем реальный индекс чтения currentDataIndex, а не просто i
+                if (currentDataIndex < 0 || currentDataIndex >= dataSource.Length)
+                {
+                    res = H / 2.0; // Если вышли за пределы, рисуем линию по центру (изолинию)
+                }
+                else
+                {
+                    res = H / 2.0 - scaleY * (H * dataSource[currentDataIndex]) / max;
+                }
+
                 arr[i].Y = (int)Math.Round(res);
             }
             return arr;
@@ -67,14 +82,28 @@ namespace Polycardio2
         {
             double H = view.Height;
             int W = view.Width;
-            var arr = new Point[W / (int)scaleX];
-            for (int i = 0; i < W / scaleX; i++)
+            int scaleXInt = (int)scaleX;
+            int pointsCount = W / scaleXInt;
+            var arr = new Point[pointsCount];
+
+            for (int i = 0; i < pointsCount; i++)
             {
-                if (i > W - 1) break;
-                arr[i].X = i * (int)scaleX;
+                arr[i].X = i * scaleXInt;
+
+                // ИСПРАВЛЕНО: Учитываем масштаб по X при выборе элемента из массива
+                int currentDataIndex = shift + (i * scaleXInt);
+
                 double res;
-                if (i > dataSource.Length - 1) res = H / 2;
-                else res = H / 2 - scaleY * (H * dataSource[shift + i]) / max;
+                // ИСПРАВЛЕНО: Защита от IndexOutOfRangeException по текущему индексу данных
+                if (currentDataIndex < 0 || currentDataIndex >= dataSource.Length)
+                {
+                    res = H / 2.0;
+                }
+                else
+                {
+                    res = H / 2.0 - scaleY * (H * dataSource[currentDataIndex]) / max;
+                }
+
                 arr[i].Y = (int)Math.Round(res);
             }
             return arr;
