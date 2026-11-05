@@ -137,6 +137,7 @@ namespace Polycardio2
         private int nextSphigmo3;
         private int nextSphigmo4;
         private int nextApex;
+        private int nextPpg;
 
         private double detrendECG1 = 0;
         private double detrendECG2 = 0;
@@ -147,6 +148,7 @@ namespace Polycardio2
         private double detrendSphigmo3 = 0;
         private double detrendSphigmo4 = 0;
         private double detrendApex = 0;
+        private double detrendPpg = 0;
 
         private int prevECG1;
         private int prevECG2;
@@ -157,6 +159,7 @@ namespace Polycardio2
         private int prevSphigmo3;
         private int prevSphigmo4;
         private int prevApex;
+        private int prevPpg;
         private int currentPacketSize;
 
         public DeviceStatusFlags Status;
@@ -475,7 +478,10 @@ namespace Polycardio2
                         Ppgtmp |= currentByte << 16;
                         if ((Ppgtmp & 0x800000) != 0) Ppgtmp -= 0x1000000;
                         Data.PPGArray[MainIndex] = Ppgtmp;
-                        Data.PPGViewArray[MainIndex] = Ppgtmp; // Базовое копирование во View
+                        nextPpg = Ppgtmp;
+                        if (cfg?.FilterOn == true) nextPpg = Filter.filter(Filter.coeff50, Data.PPGArray, MainIndex);
+                        detrendPpg = FilterRecursDetrend(filterCoeff, nextPpg, detrendPpg, prevPpg);
+                        Data.PPGViewArray[MainIndex] = (int)Math.Round(detrendPpg);
                         byteNum = 32;
                         break;
 

@@ -90,6 +90,14 @@
             panelAmp = new Panel();
             panel1 = new Panel();
             panel2 = new Panel();
+            labDia4 = new Label();
+            labSys4 = new Label();
+            labDia3 = new Label();
+            labSys3 = new Label();
+            labDia2 = new Label();
+            labSys2 = new Label();
+            labDia1 = new Label();
+            labSys1 = new Label();
             labNIBP4_Press = new Label();
             labNIBP3_Press = new Label();
             labNIBP2_Press = new Label();
@@ -805,6 +813,14 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(labDia4);
+            panel2.Controls.Add(labSys4);
+            panel2.Controls.Add(labDia3);
+            panel2.Controls.Add(labSys3);
+            panel2.Controls.Add(labDia2);
+            panel2.Controls.Add(labSys2);
+            panel2.Controls.Add(labDia1);
+            panel2.Controls.Add(labSys1);
             panel2.Controls.Add(labNIBP4_Press);
             panel2.Controls.Add(labNIBP3_Press);
             panel2.Controls.Add(labNIBP2_Press);
@@ -831,6 +847,78 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(262, 693);
             panel2.TabIndex = 6;
+            // 
+            // labDia4
+            // 
+            labDia4.AutoSize = true;
+            labDia4.Location = new Point(94, 586);
+            labDia4.Name = "labDia4";
+            labDia4.Size = new Size(38, 15);
+            labDia4.TabIndex = 28;
+            labDia4.Text = "ДИА :";
+            // 
+            // labSys4
+            // 
+            labSys4.AutoSize = true;
+            labSys4.Location = new Point(8, 586);
+            labSys4.Name = "labSys4";
+            labSys4.Size = new Size(41, 15);
+            labSys4.TabIndex = 27;
+            labSys4.Text = "СИС : ";
+            // 
+            // labDia3
+            // 
+            labDia3.AutoSize = true;
+            labDia3.Location = new Point(94, 447);
+            labDia3.Name = "labDia3";
+            labDia3.Size = new Size(38, 15);
+            labDia3.TabIndex = 26;
+            labDia3.Text = "ДИА :";
+            // 
+            // labSys3
+            // 
+            labSys3.AutoSize = true;
+            labSys3.Location = new Point(8, 447);
+            labSys3.Name = "labSys3";
+            labSys3.Size = new Size(41, 15);
+            labSys3.TabIndex = 25;
+            labSys3.Text = "СИС : ";
+            // 
+            // labDia2
+            // 
+            labDia2.AutoSize = true;
+            labDia2.Location = new Point(94, 300);
+            labDia2.Name = "labDia2";
+            labDia2.Size = new Size(38, 15);
+            labDia2.TabIndex = 24;
+            labDia2.Text = "ДИА :";
+            // 
+            // labSys2
+            // 
+            labSys2.AutoSize = true;
+            labSys2.Location = new Point(8, 300);
+            labSys2.Name = "labSys2";
+            labSys2.Size = new Size(41, 15);
+            labSys2.TabIndex = 23;
+            labSys2.Text = "СИС : ";
+            // 
+            // labDia1
+            // 
+            labDia1.AutoSize = true;
+            labDia1.Location = new Point(94, 150);
+            labDia1.Name = "labDia1";
+            labDia1.Size = new Size(38, 15);
+            labDia1.TabIndex = 22;
+            labDia1.Text = "ДИА :";
+            // 
+            // labSys1
+            // 
+            labSys1.AutoSize = true;
+            labSys1.Location = new Point(8, 150);
+            labSys1.Name = "labSys1";
+            labSys1.Size = new Size(41, 15);
+            labSys1.TabIndex = 21;
+            labSys1.Text = "СИС : ";
             // 
             // labNIBP4_Press
             // 
@@ -1196,6 +1284,14 @@
         private Label labNIBP3_Press;
         private Label labNIBP2_Press;
         private Label labNIBP1_Press;
+        private Label labDia4;
+        private Label labSys4;
+        private Label labDia3;
+        private Label labSys3;
+        private Label labDia2;
+        private Label labSys2;
+        private Label labDia1;
+        private Label labSys1;
     }
 }
 

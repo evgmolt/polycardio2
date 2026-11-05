@@ -186,6 +186,18 @@ namespace Polycardio2
                 labNIBP2_Press.Text = "Текущее давление : " + DataA.NIBP2_Press.ToString();
                 labNIBP3_Press.Text = "Текущее давление : " + DataA.NIBP3_Press.ToString();
                 labNIBP4_Press.Text = "Текущее давление : " + DataA.NIBP4_Press.ToString();
+
+                labSys1.Text = "СИС : " + DataA.NIBP1_Syst.ToString();
+                labDia1.Text = "ДИА : " + DataA.NIBP1_Diast.ToString();
+
+                labSys2.Text = "СИС : " + DataA.NIBP2_Syst.ToString();
+                labDia2.Text = "ДИА : " + DataA.NIBP2_Diast.ToString();
+
+                labSys3.Text = "СИС : " + DataA.NIBP3_Syst.ToString();
+                labDia3.Text = "ДИА : " + DataA.NIBP3_Diast.ToString();
+
+                labSys4.Text = "СИС : " + DataA.NIBP4_Syst.ToString();
+                labDia4.Text = "ДИА : " + DataA.NIBP4_Diast.ToString();
             }));
         }
 
@@ -1276,18 +1288,19 @@ namespace Polycardio2
         {
             DataA.RInd = 0;
             int InsideC = 0;
-            //            int start = V.Visir1.X;
-            //            int stop = V.Visir2.X;
             int start = 0;
             int stop = DataA.ECG1ViewArray.Length - 100;
             int max = 0;
+
             for (int i = start; i < stop; i++)
             {
                 max = Math.Max(max, (int)Math.Round(DataProcessing.GetCorr(DataA.ECG1ViewArray, i)));
             }
-            double DetectLevel = max / 2;
+
+            double DetectLevel = max / 2.0;
             bool Rnow = false;
             InsideC = 0;
+
             for (int i = start; i < stop; i++)
             {
                 InsideC++;
@@ -1312,6 +1325,7 @@ namespace Polycardio2
                     }
                 }
             }
+
             for (int i = 0; i < DataA.RInd; i++)
             {
                 SearchP(i);
@@ -1323,13 +1337,21 @@ namespace Polycardio2
             const int PRInterval = 20;
             int RPos = DataA.RArray[ind];
             int pos = RPos - 3;
-            while (DataA.ECG1ViewArray[pos] < DataA.ECG1ViewArray[pos + 1])
+
+            // ЗАЩИТА: Добавлено pos > 0, чтобы избежать падения программы
+            while (pos > 0 && DataA.ECG1ViewArray[pos] < DataA.ECG1ViewArray[pos + 1])
             {
                 pos--;
             }
-            int Max = 0;
-            int MaxPos = 0;
-            for (int i = pos; i > RPos - PRInterval; i--)
+
+            // ИСПРАВЛЕНО: Инициализируем первым значением, а не нулем (защита от отрицательного дрейфа изолинии)
+            int Max = DataA.ECG1ViewArray[pos];
+            int MaxPos = pos;
+
+            // ЗАЩИТА: Ограничиваем левую границу, чтобы индекс не ушел ниже 0
+            int leftLimit = Math.Max(0, RPos - PRInterval);
+
+            for (int i = pos; i > leftLimit; i--)
             {
                 if (DataA.ECG1ViewArray[i] > Max)
                 {
@@ -1337,8 +1359,11 @@ namespace Polycardio2
                     MaxPos = i;
                 }
             }
+
+            // Перезаписываем временный R-зубец на итоговый P-зубец
             DataA.RArray[ind] = MaxPos;
         }
+
 
 
 
