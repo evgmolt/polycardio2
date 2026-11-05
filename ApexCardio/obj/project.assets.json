@@ -1762,23 +1762,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\emolchkov\\.nuget\\packages\\": {},
+    "C:\\Users\\Евгений\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VS\\polycardio2\\ApexCardio\\Polycardio2.csproj",
+      "projectUniqueName": "D:\\Projects\\polycardio2\\ApexCardio\\Polycardio2.csproj",
       "projectName": "Polycardio2",
-      "projectPath": "D:\\VS\\polycardio2\\ApexCardio\\Polycardio2.csproj",
-      "packagesPath": "C:\\Users\\emolchkov\\.nuget\\packages\\",
-      "outputPath": "D:\\VS\\polycardio2\\ApexCardio\\obj\\",
+      "projectPath": "D:\\Projects\\polycardio2\\ApexCardio\\Polycardio2.csproj",
+      "packagesPath": "C:\\Users\\Евгений\\.nuget\\packages\\",
+      "outputPath": "D:\\Projects\\polycardio2\\ApexCardio\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\emolchkov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Евгений\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1841,7 +1841,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.403/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

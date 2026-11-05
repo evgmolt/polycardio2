@@ -19,7 +19,7 @@ namespace Polycardio2
         public int[] SphigmoRightLegArray;
         public int[] ApexArray;
         public int[] PPGArray;
-        public short[] SoundArray;
+        public int[] SoundArray;
 
         public int[] ECG1ViewArray;
         public int[] ECG2ViewArray;
@@ -64,7 +64,7 @@ namespace Polycardio2
             SphigmoRightLegArray = new int[size];
             ApexArray = new int[size];
             PPGArray = new int[size];
-            SoundArray = new short[size * 8];
+            SoundArray = new int[size * 8];
 
 
             ECG1ViewArray = new int[size];
@@ -271,7 +271,11 @@ namespace Polycardio2
             ProcessData(Data.Reo2Array, Data.Reo2ViewArray, size, f, Filter.coeff14);
             ProcessData(Data.SphigmoLeftHandArray, Data.SphigmoLeftHandViewArray, size, f, Filter.coeff14);
             ProcessData(Data.SphigmoLeftLegArray, Data.SphigmoLeftLegViewArray, size, f, Filter.coeff14);
+            ProcessData(Data.SphigmoRightHandArray, Data.SphigmoRightHandViewArray, size, f, Filter.coeff14);
+            ProcessData(Data.SphigmoRightLegArray, Data.SphigmoRightLegViewArray, size, f, Filter.coeff14);
             ProcessData(Data.ApexArray, Data.ApexViewArray, size, f, Filter.coeff14);
+            ProcessData(Data.PPGArray, Data.PPGViewArray, size, f, Filter.coeff14);
+            ProcessData(Data.SoundArray, Data.SoundViewArray, size, f, Filter.coeff14);
         }
 
 
@@ -543,10 +547,10 @@ namespace Polycardio2
                         BP4measStarted = (currentStatus & (uint)DeviceStatusFlags.dsBP4_InProgress) != 0;
 
                         // Если насос качает воздух на конечности, зануляем отображение сфигмограммы (шумоподавление)
-                        if (BP1measStarted) Data.SphigmoLeftHandViewArray[MainIndex] = 0;
+/*                        if (BP1measStarted) Data.SphigmoLeftHandViewArray[MainIndex] = 0;
                         if (BP2measStarted) Data.SphigmoLeftLegViewArray[MainIndex] = 0;
                         if (BP3measStarted) Data.SphigmoRightHandViewArray[MainIndex] = 0;
-                        if (BP4measStarted) Data.SphigmoRightLegViewArray[MainIndex] = 0;
+                        if (BP4measStarted) Data.SphigmoRightLegViewArray[MainIndex] = 0;*/
 
                         // Управление задержками помп (если необходимо перенести логику DelayCounter для 4 каналов)
                         // [При необходимости добавьте сюда вашу логику для Pump1Started..Pump4Started]
@@ -600,7 +604,8 @@ namespace Polycardio2
                    $"{Data.Reo1Array[index]}\t" +
                    $"{Data.Reo2Array[index]}\t" +
                    $"{Data.SphigmoLeftHandArray[index]}\t" +
-                   $"{Data.SphigmoLeftLegArray[index]}\t" +
+                   $"{Data.SphigmoLeftHandViewArray[index]}\t" +
+                   //                   $"{Data.SphigmoLeftLegArray[index]}\t" +
                    $"{Data.SphigmoRightHandArray[index]}\t" + // Новый канал: Sfig3
                    $"{Data.SphigmoRightLegArray[index]}\t" +  // Новый канал: Sfig4
                    $"{Data.ApexArray[index]}\t" +
