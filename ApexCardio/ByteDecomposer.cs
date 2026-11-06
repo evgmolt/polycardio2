@@ -483,7 +483,6 @@ namespace Polycardio2
                         if ((Ppgtmp & 0x800000) != 0) Ppgtmp -= 0x1000000;
                         Data.PPGArray[MainIndex] = Ppgtmp;
                         nextPpg = Ppgtmp;
-                        if (cfg?.FilterOn == true) nextPpg = Filter.filter(Filter.coeff50, Data.PPGArray, MainIndex);
                         detrendPpg = FilterRecursDetrend(filterCoeff, nextPpg, detrendPpg, prevPpg);
                         Data.PPGViewArray[MainIndex] = (int)Math.Round(detrendPpg);
                         byteNum = 32;
