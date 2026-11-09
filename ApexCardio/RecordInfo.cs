@@ -17,7 +17,6 @@ namespace Polycardio2
         public decimal Height;  //5
         public decimal Weight;  //6
         public int[] ABP;         //8
-        public string Note;     //8
 
         public string[] ItemNames;
 
@@ -76,7 +75,6 @@ namespace Polycardio2
             string[] s = lines[7].Split(ABPseparator);
             Data.ABP[0] = Convert.ToInt16(s[0]);
             Data.ABP[1] = Convert.ToInt16(s[1]);
-            Data.Note = lines[8];
         }
 
 
@@ -99,7 +97,6 @@ namespace Polycardio2
                 string[] s = lines[7].Split(ABPseparator);
                 Data.ABP[0] = Convert.ToInt16(s[0]);
                 Data.ABP[1] = Convert.ToInt16(s[1]);
-                Data.Note = lines[8];
             }
             catch (Exception)
             {
@@ -118,45 +115,19 @@ namespace Polycardio2
             lines[5] = AddItemName(insertTabs, 5, Data.Height.ToString());
             lines[6] = AddItemName(insertTabs, 6, Data.Weight.ToString());
             lines[7] = AddItemName(insertTabs, 7, Data.ABP[0].ToString() + ABPseparator + Data.ABP[1].ToString());
-            lines[8] = AddItemName(insertTabs, 8, Data.Note);
             return lines;
         }
 
-        public void Save(ApexConfig cfg, List<List<double>> resultlist, List<string> namelist)
+        public void Save(ApexConfig cfg)
         {
             string[] lines = GetRecInfo(true);
             System.IO.File.WriteAllLines(FileName, lines, Encoding.Default);
-            int ResultCount = 0;
-            if (resultlist != null)
-            {
-                ResultCount = resultlist.Count();
-                string[] result = new string[ResultCount];
-//                string s = "Apex result";
-                for (int i = 0; i < resultlist.Count(); i++)
-                {
-                    string s = "Apex" + Convert.ToChar(9);
-                    for (int k = 0; k < resultlist[i].Count(); k++)
-                    {
-                        s += String.Format("{0:0.00}", Convert.ToDouble(resultlist[i][k])) + Convert.ToChar(9);
-                    }
-                    result[i] = s;
-                    System.IO.File.AppendAllLines(FileName, result, Encoding.Default);
-                }
-            }
             string[] snames = new string[1];
             for (int i = 0; i < ApexConstants.NumOfChannels + 1; i++)
             {
                 snames[0] = snames[0] + ColumnNames[i] + Convert.ToChar(9);
             }
             File.AppendAllLines(FileName, snames, Encoding.Default);
-            string[] sEnabled = new string[1];
-            sEnabled[0] =  "" + Convert.ToChar(9);
-            for (int i = 0; i < ApexConstants.NumOfChannels; i++)
-            {
-                string s = cfg.VisibleGraphs[i] ? "V" : "X";
-                sEnabled[0] = sEnabled[0] + s + Convert.ToChar(9);
-            }
-            File.AppendAllLines(FileName, sEnabled, Encoding.Default);
         }
 
         private string AddItemName(bool tabs, int num, string s)

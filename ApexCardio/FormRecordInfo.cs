@@ -27,7 +27,6 @@ namespace Polycardio2
             nudAge.Value = recInfo.Data.Age;
             nudHeight.Value = recInfo.Data.Height;
             nudWeight.Value = recInfo.Data.Weight;
-            tbComment.Text = recInfo.Data.Note;
         }
 
         private void butOk_Click(object sender, EventArgs e)
@@ -37,7 +36,6 @@ namespace Polycardio2
             recInfo.Data.Age = nudAge.Value;
             recInfo.Data.Height = nudHeight.Value;
             recInfo.Data.Weight = nudWeight.Value;
-            recInfo.Data.Note = tbComment.Text;
         }
 
         public RecordInfo GetDialogData()
