@@ -242,7 +242,7 @@ namespace Polycardio2
                     {
                         CurrentRecordInfo.Data.ABP[0] = decomposer.Data.NIBP1_Syst;
                         CurrentRecordInfo.Data.ABP[1] = decomposer.Data.NIBP1_Diast;
-                        CurrentRecordInfo.Save(Cfg, null, null);
+                        CurrentRecordInfo.Save(Cfg);
                         UpdateRecInfoBox(CurrentRecordInfo);
                     }
                 }
@@ -261,7 +261,7 @@ namespace Polycardio2
                     {
                         CurrentRecordInfo.Data.ABP[0] = decomposer.Data.NIBP2_Syst;
                         CurrentRecordInfo.Data.ABP[1] = decomposer.Data.NIBP2_Diast;
-                        CurrentRecordInfo.Save(Cfg, null, null);
+                        CurrentRecordInfo.Save(Cfg);
                         UpdateRecInfoBox(CurrentRecordInfo);
                     }
                 }
@@ -280,7 +280,7 @@ namespace Polycardio2
                     {
                         CurrentRecordInfo.Data.ABP[0] = decomposer.Data.NIBP3_Syst;
                         CurrentRecordInfo.Data.ABP[1] = decomposer.Data.NIBP3_Diast;
-                        CurrentRecordInfo.Save(Cfg, null, null);
+                        CurrentRecordInfo.Save(Cfg);
                         UpdateRecInfoBox(CurrentRecordInfo);
                     }
                 }
@@ -299,7 +299,7 @@ namespace Polycardio2
                     {
                         CurrentRecordInfo.Data.ABP[0] = decomposer.Data.NIBP4_Syst;
                         CurrentRecordInfo.Data.ABP[1] = decomposer.Data.NIBP3_Diast;
-                        CurrentRecordInfo.Save(Cfg, null, null);
+                        CurrentRecordInfo.Save(Cfg);
                         UpdateRecInfoBox(CurrentRecordInfo);
                     }
                 }
@@ -804,7 +804,7 @@ namespace Polycardio2
                 CurrentFile = Path.GetFileName(saveFileDialog1.FileName);
                 var ri = new RecordInfo(Cfg, CurrentFile);
                 ri.Data.Date = DateTime.Now;
-                ri.Save(Cfg, null, null);
+                ri.Save(Cfg);
                 UpdateRecInfoBox(ri);
                 CurrentRecordInfo = ri;
             }
@@ -813,7 +813,7 @@ namespace Polycardio2
         private void StartRecord()
         {
             CurrentRecordInfo.Data.Date = DateTime.Now;
-            CurrentRecordInfo.Save(Cfg, null, null);
+            CurrentRecordInfo.Save(Cfg);
             UpdateRecInfoBox(CurrentRecordInfo);
 
             pbRecordProgress.Maximum = Cfg.RecordLength * ByteDecomposer.SamplingFrequency;
@@ -870,7 +870,7 @@ namespace Polycardio2
             pbRecordProgress.Visible = false;
             labRecordSize.Visible = false;
             CurrentRecordInfo.Data.Length = decomposer.TotalBytes / ByteDecomposer.BytesInBlock / ByteDecomposer.SamplingFrequency;
-            CurrentRecordInfo.Save(Cfg, null, null);
+            CurrentRecordInfo.Save(Cfg);
             UpdateRecInfoBox(CurrentRecordInfo);
             decomposer.DecomposeLineEvent -= NewLineReceived;
             decomposer.DecomposeLineEvent -= LineReceived;
@@ -934,7 +934,7 @@ namespace Polycardio2
                 if (fri.ShowDialog() == DialogResult.OK)
                 {
                     ri = fri.GetDialogData();
-                    ri.Save(Cfg, null, null);
+                    ri.Save(Cfg);
                     UpdateRecInfoBox(ri);
                 }
                 fri.Dispose();
@@ -949,7 +949,7 @@ namespace Polycardio2
                 if (fri.ShowDialog() == DialogResult.OK)
                 {
                     ri = fri.GetDialogData();
-                    ri.Save(Cfg, null, null);
+                    ri.Save(Cfg);
                     UpdateRecInfoBox(ri);
                 }
                 CurrentRecordInfo = ri;
