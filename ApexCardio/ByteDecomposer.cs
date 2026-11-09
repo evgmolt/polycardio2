@@ -375,7 +375,7 @@ namespace Polycardio2
                         Reo1tmp |= currentByte << 16;
                         if ((Reo1tmp & 0x800000) != 0) Reo1tmp -= 0x1000000;
                         if (Reo1tmp > ApexConstants.ReoMaxVal) Reo1tmp = ApexConstants.ReoMaxVal;
-                        Data.Reo1Array[MainIndex] = -Reo1tmp;
+                        Data.Reo1Array[MainIndex] = Reo1tmp;
                         nextReo1 = Reo1tmp;
                         if (cfg?.FilterOn == true) nextReo1 = Filter.filter(Filter.coeff14, Data.Reo1Array, MainIndex);
                         detrendReo1 = FilterRecursDetrend(filterCoeffReo, nextReo1, detrendReo1, prevReo1);
@@ -391,7 +391,7 @@ namespace Polycardio2
                         Reo2tmp |= currentByte << 16;
                         if ((Reo2tmp & 0x800000) != 0) Reo2tmp -= 0x1000000;
                         if (Reo2tmp > ApexConstants.ReoMaxVal) Reo2tmp = ApexConstants.ReoMaxVal;
-                        Data.Reo2Array[MainIndex] = -Reo2tmp;
+                        Data.Reo2Array[MainIndex] = Reo2tmp;
                         nextReo2 = Reo2tmp;
                         if (cfg?.FilterOn == true) nextReo2 = Filter.filter(Filter.coeff14, Data.Reo2Array, MainIndex);
                         detrendReo2 = FilterRecursDetrend(filterCoeffReo, nextReo2, detrendReo2, prevReo2);
@@ -485,6 +485,7 @@ namespace Polycardio2
                         nextPpg = Ppgtmp;
                         detrendPpg = FilterRecursDetrend(filterCoeff, nextPpg, detrendPpg, prevPpg);
                         Data.PPGViewArray[MainIndex] = (int)Math.Round(detrendPpg);
+                        prevPpg = nextPpg;
                         byteNum = 32;
                         break;
 
