@@ -33,6 +33,8 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             panelGraph = new Panel();
             panelButtons = new Panel();
+            butImitatorOn = new Button();
+            butImitatorOff = new Button();
             label1 = new Label();
             labPressure4 = new Label();
             labPressure3 = new Label();
@@ -175,6 +177,8 @@
             // 
             // panelButtons
             // 
+            panelButtons.Controls.Add(butImitatorOn);
+            panelButtons.Controls.Add(butImitatorOff);
             panelButtons.Controls.Add(label1);
             panelButtons.Controls.Add(labPressure4);
             panelButtons.Controls.Add(labPressure3);
@@ -234,10 +238,32 @@
             panelButtons.Size = new Size(392, 693);
             panelButtons.TabIndex = 1;
             // 
+            // butImitatorOn
+            // 
+            butImitatorOn.Location = new Point(17, 9);
+            butImitatorOn.Margin = new Padding(4, 3, 4, 3);
+            butImitatorOn.Name = "butImitatorOn";
+            butImitatorOn.Size = new Size(88, 27);
+            butImitatorOn.TabIndex = 56;
+            butImitatorOn.Text = "Imitator On";
+            butImitatorOn.UseVisualStyleBackColor = true;
+            butImitatorOn.Click += butImitatorOn_Click;
+            // 
+            // butImitatorOff
+            // 
+            butImitatorOff.Location = new Point(116, 9);
+            butImitatorOff.Margin = new Padding(4, 3, 4, 3);
+            butImitatorOff.Name = "butImitatorOff";
+            butImitatorOff.Size = new Size(88, 27);
+            butImitatorOff.TabIndex = 55;
+            butImitatorOff.Text = "Imitator Off";
+            butImitatorOff.UseVisualStyleBackColor = true;
+            butImitatorOff.Click += butImitatorOff_Click;
+            // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(13, 349);
+            label1.Location = new Point(12, 387);
             label1.Name = "label1";
             label1.Size = new Size(38, 15);
             label1.TabIndex = 54;
@@ -246,7 +272,7 @@
             // labPressure4
             // 
             labPressure4.AutoSize = true;
-            labPressure4.Location = new Point(338, 316);
+            labPressure4.Location = new Point(337, 354);
             labPressure4.Name = "labPressure4";
             labPressure4.Size = new Size(13, 15);
             labPressure4.TabIndex = 53;
@@ -255,7 +281,7 @@
             // labPressure3
             // 
             labPressure3.AutoSize = true;
-            labPressure3.Location = new Point(338, 283);
+            labPressure3.Location = new Point(337, 321);
             labPressure3.Name = "labPressure3";
             labPressure3.Size = new Size(13, 15);
             labPressure3.TabIndex = 52;
@@ -264,7 +290,7 @@
             // labPressure2
             // 
             labPressure2.AutoSize = true;
-            labPressure2.Location = new Point(338, 250);
+            labPressure2.Location = new Point(337, 288);
             labPressure2.Name = "labPressure2";
             labPressure2.Size = new Size(13, 15);
             labPressure2.TabIndex = 51;
@@ -273,7 +299,7 @@
             // labPressure1
             // 
             labPressure1.AutoSize = true;
-            labPressure1.Location = new Point(338, 216);
+            labPressure1.Location = new Point(337, 254);
             labPressure1.Name = "labPressure1";
             labPressure1.Size = new Size(13, 15);
             labPressure1.TabIndex = 50;
@@ -281,7 +307,7 @@
             // 
             // butStartFlow
             // 
-            butStartFlow.Location = new Point(16, 11);
+            butStartFlow.Location = new Point(15, 49);
             butStartFlow.Margin = new Padding(4, 3, 4, 3);
             butStartFlow.Name = "butStartFlow";
             butStartFlow.Size = new Size(88, 27);
@@ -292,7 +318,7 @@
             // 
             // butPumps34Stop
             // 
-            butPumps34Stop.Location = new Point(254, 277);
+            butPumps34Stop.Location = new Point(253, 315);
             butPumps34Stop.Margin = new Padding(4, 3, 4, 3);
             butPumps34Stop.Name = "butPumps34Stop";
             butPumps34Stop.Size = new Size(23, 60);
@@ -302,7 +328,7 @@
             // 
             // butPumps34Start
             // 
-            butPumps34Start.Location = new Point(180, 277);
+            butPumps34Start.Location = new Point(179, 315);
             butPumps34Start.Margin = new Padding(4, 3, 4, 3);
             butPumps34Start.Name = "butPumps34Start";
             butPumps34Start.Size = new Size(23, 60);
@@ -312,7 +338,7 @@
             // 
             // butPump4stop
             // 
-            butPump4stop.Location = new Point(279, 310);
+            butPump4stop.Location = new Point(278, 348);
             butPump4stop.Margin = new Padding(4, 3, 4, 3);
             butPump4stop.Name = "butPump4stop";
             butPump4stop.Size = new Size(43, 27);
@@ -323,7 +349,7 @@
             // 
             // butPump4start
             // 
-            butPump4start.Location = new Point(203, 310);
+            butPump4start.Location = new Point(202, 348);
             butPump4start.Margin = new Padding(4, 3, 4, 3);
             butPump4start.Name = "butPump4start";
             butPump4start.Size = new Size(43, 27);
@@ -334,7 +360,7 @@
             // 
             // butPump3stop
             // 
-            butPump3stop.Location = new Point(279, 277);
+            butPump3stop.Location = new Point(278, 315);
             butPump3stop.Margin = new Padding(4, 3, 4, 3);
             butPump3stop.Name = "butPump3stop";
             butPump3stop.Size = new Size(43, 27);
@@ -345,7 +371,7 @@
             // 
             // butPump3start
             // 
-            butPump3start.Location = new Point(203, 277);
+            butPump3start.Location = new Point(202, 315);
             butPump3start.Margin = new Padding(4, 3, 4, 3);
             butPump3start.Name = "butPump3start";
             butPump3start.Size = new Size(43, 27);
@@ -357,7 +383,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(13, 316);
+            label4.Location = new Point(12, 354);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(87, 15);
@@ -366,7 +392,7 @@
             // 
             // numUDplevel4
             // 
-            numUDplevel4.Location = new Point(117, 314);
+            numUDplevel4.Location = new Point(116, 352);
             numUDplevel4.Margin = new Padding(4, 3, 4, 3);
             numUDplevel4.Name = "numUDplevel4";
             numUDplevel4.Size = new Size(56, 23);
@@ -376,7 +402,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(13, 283);
+            label5.Location = new Point(12, 321);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new Size(87, 15);
@@ -385,7 +411,7 @@
             // 
             // numUDplevel3
             // 
-            numUDplevel3.Location = new Point(117, 280);
+            numUDplevel3.Location = new Point(116, 318);
             numUDplevel3.Margin = new Padding(4, 3, 4, 3);
             numUDplevel3.Name = "numUDplevel3";
             numUDplevel3.Size = new Size(56, 23);
@@ -395,7 +421,7 @@
             // labBP4
             // 
             labBP4.AutoSize = true;
-            labBP4.Location = new Point(224, 184);
+            labBP4.Location = new Point(223, 222);
             labBP4.Margin = new Padding(4, 0, 4, 0);
             labBP4.Name = "labBP4";
             labBP4.Size = new Size(38, 15);
@@ -405,7 +431,7 @@
             // labBP3
             // 
             labBP3.AutoSize = true;
-            labBP3.Location = new Point(224, 150);
+            labBP3.Location = new Point(223, 188);
             labBP3.Margin = new Padding(4, 0, 4, 0);
             labBP3.Name = "labBP3";
             labBP3.Size = new Size(38, 15);
@@ -414,7 +440,7 @@
             // 
             // butBPabort4
             // 
-            butBPabort4.Location = new Point(115, 178);
+            butBPabort4.Location = new Point(114, 216);
             butBPabort4.Margin = new Padding(4, 3, 4, 3);
             butBPabort4.Name = "butBPabort4";
             butBPabort4.Size = new Size(88, 27);
@@ -425,7 +451,7 @@
             // 
             // butBPmeas4
             // 
-            butBPmeas4.Location = new Point(15, 178);
+            butBPmeas4.Location = new Point(14, 216);
             butBPmeas4.Margin = new Padding(4, 3, 4, 3);
             butBPmeas4.Name = "butBPmeas4";
             butBPmeas4.Size = new Size(88, 27);
@@ -436,7 +462,7 @@
             // 
             // butBPabort3
             // 
-            butBPabort3.Location = new Point(115, 144);
+            butBPabort3.Location = new Point(114, 182);
             butBPabort3.Margin = new Padding(4, 3, 4, 3);
             butBPabort3.Name = "butBPabort3";
             butBPabort3.Size = new Size(88, 27);
@@ -447,7 +473,7 @@
             // 
             // butBPmeas3
             // 
-            butBPmeas3.Location = new Point(15, 144);
+            butBPmeas3.Location = new Point(14, 182);
             butBPmeas3.Margin = new Padding(4, 3, 4, 3);
             butBPmeas3.Name = "butBPmeas3";
             butBPmeas3.Size = new Size(88, 27);
@@ -458,7 +484,7 @@
             // 
             // butPumps12Stop
             // 
-            butPumps12Stop.Location = new Point(254, 211);
+            butPumps12Stop.Location = new Point(253, 249);
             butPumps12Stop.Margin = new Padding(4, 3, 4, 3);
             butPumps12Stop.Name = "butPumps12Stop";
             butPumps12Stop.Size = new Size(23, 60);
@@ -469,7 +495,7 @@
             // 
             // butPumps12Start
             // 
-            butPumps12Start.Location = new Point(180, 211);
+            butPumps12Start.Location = new Point(179, 249);
             butPumps12Start.Margin = new Padding(4, 3, 4, 3);
             butPumps12Start.Name = "butPumps12Start";
             butPumps12Start.Size = new Size(23, 60);
@@ -481,7 +507,7 @@
             // labBP2
             // 
             labBP2.AutoSize = true;
-            labBP2.Location = new Point(224, 117);
+            labBP2.Location = new Point(223, 155);
             labBP2.Margin = new Padding(4, 0, 4, 0);
             labBP2.Name = "labBP2";
             labBP2.Size = new Size(38, 15);
@@ -491,7 +517,7 @@
             // labBP1
             // 
             labBP1.AutoSize = true;
-            labBP1.Location = new Point(224, 83);
+            labBP1.Location = new Point(223, 121);
             labBP1.Margin = new Padding(4, 0, 4, 0);
             labBP1.Name = "labBP1";
             labBP1.Size = new Size(38, 15);
@@ -500,7 +526,7 @@
             // 
             // butBPabort2
             // 
-            butBPabort2.Location = new Point(115, 111);
+            butBPabort2.Location = new Point(114, 149);
             butBPabort2.Margin = new Padding(4, 3, 4, 3);
             butBPabort2.Name = "butBPabort2";
             butBPabort2.Size = new Size(88, 27);
@@ -511,7 +537,7 @@
             // 
             // butBPmeas2
             // 
-            butBPmeas2.Location = new Point(15, 111);
+            butBPmeas2.Location = new Point(14, 149);
             butBPmeas2.Margin = new Padding(4, 3, 4, 3);
             butBPmeas2.Name = "butBPmeas2";
             butBPmeas2.Size = new Size(88, 27);
@@ -532,7 +558,7 @@
             // 
             // butBPabort1
             // 
-            butBPabort1.Location = new Point(115, 77);
+            butBPabort1.Location = new Point(114, 115);
             butBPabort1.Margin = new Padding(4, 3, 4, 3);
             butBPabort1.Name = "butBPabort1";
             butBPabort1.Size = new Size(88, 27);
@@ -543,7 +569,7 @@
             // 
             // butBPMeas1
             // 
-            butBPMeas1.Location = new Point(15, 77);
+            butBPMeas1.Location = new Point(14, 115);
             butBPMeas1.Margin = new Padding(4, 3, 4, 3);
             butBPMeas1.Name = "butBPMeas1";
             butBPMeas1.Size = new Size(88, 27);
@@ -554,7 +580,7 @@
             // 
             // butNewRecord
             // 
-            butNewRecord.Location = new Point(15, 44);
+            butNewRecord.Location = new Point(14, 82);
             butNewRecord.Margin = new Padding(4, 3, 4, 3);
             butNewRecord.Name = "butNewRecord";
             butNewRecord.Size = new Size(88, 27);
@@ -565,7 +591,7 @@
             // 
             // pbRecordProgress
             // 
-            pbRecordProgress.Location = new Point(112, 376);
+            pbRecordProgress.Location = new Point(111, 414);
             pbRecordProgress.Margin = new Padding(4, 3, 4, 3);
             pbRecordProgress.Name = "pbRecordProgress";
             pbRecordProgress.Size = new Size(210, 27);
@@ -574,7 +600,7 @@
             // 
             // butPump2stop
             // 
-            butPump2stop.Location = new Point(279, 244);
+            butPump2stop.Location = new Point(278, 282);
             butPump2stop.Margin = new Padding(4, 3, 4, 3);
             butPump2stop.Name = "butPump2stop";
             butPump2stop.Size = new Size(43, 27);
@@ -585,7 +611,7 @@
             // 
             // butPump2start
             // 
-            butPump2start.Location = new Point(203, 244);
+            butPump2start.Location = new Point(202, 282);
             butPump2start.Margin = new Padding(4, 3, 4, 3);
             butPump2start.Name = "butPump2start";
             butPump2start.Size = new Size(43, 27);
@@ -596,7 +622,7 @@
             // 
             // butPump1stop
             // 
-            butPump1stop.Location = new Point(279, 211);
+            butPump1stop.Location = new Point(278, 249);
             butPump1stop.Margin = new Padding(4, 3, 4, 3);
             butPump1stop.Name = "butPump1stop";
             butPump1stop.Size = new Size(43, 27);
@@ -607,7 +633,7 @@
             // 
             // butPump1start
             // 
-            butPump1start.Location = new Point(203, 211);
+            butPump1start.Location = new Point(202, 249);
             butPump1start.Margin = new Padding(4, 3, 4, 3);
             butPump1start.Name = "butPump1start";
             butPump1start.Size = new Size(43, 27);
@@ -619,7 +645,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(13, 250);
+            label3.Location = new Point(12, 288);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(87, 15);
@@ -628,7 +654,7 @@
             // 
             // numUDplevel2
             // 
-            numUDplevel2.Location = new Point(117, 248);
+            numUDplevel2.Location = new Point(116, 286);
             numUDplevel2.Margin = new Padding(4, 3, 4, 3);
             numUDplevel2.Name = "numUDplevel2";
             numUDplevel2.Size = new Size(56, 23);
@@ -638,7 +664,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(13, 217);
+            label2.Location = new Point(12, 255);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(87, 15);
@@ -647,7 +673,7 @@
             // 
             // numUDplevel1
             // 
-            numUDplevel1.Location = new Point(117, 214);
+            numUDplevel1.Location = new Point(116, 252);
             numUDplevel1.Margin = new Padding(4, 3, 4, 3);
             numUDplevel1.Name = "numUDplevel1";
             numUDplevel1.Size = new Size(56, 23);
@@ -697,7 +723,7 @@
             // 
             // butStopFlow
             // 
-            butStopFlow.Location = new Point(115, 11);
+            butStopFlow.Location = new Point(114, 49);
             butStopFlow.Margin = new Padding(4, 3, 4, 3);
             butStopFlow.Name = "butStopFlow";
             butStopFlow.Size = new Size(88, 27);
@@ -708,7 +734,7 @@
             // 
             // butOpenFile
             // 
-            butOpenFile.Location = new Point(238, 44);
+            butOpenFile.Location = new Point(237, 82);
             butOpenFile.Margin = new Padding(4, 3, 4, 3);
             butOpenFile.Name = "butOpenFile";
             butOpenFile.Size = new Size(88, 27);
@@ -720,18 +746,18 @@
             // textBoxRecInfo
             // 
             textBoxRecInfo.BorderStyle = BorderStyle.FixedSingle;
-            textBoxRecInfo.Location = new Point(16, 445);
+            textBoxRecInfo.Location = new Point(15, 483);
             textBoxRecInfo.Margin = new Padding(4, 3, 4, 3);
             textBoxRecInfo.Multiline = true;
             textBoxRecInfo.Name = "textBoxRecInfo";
             textBoxRecInfo.ReadOnly = true;
-            textBoxRecInfo.Size = new Size(310, 59);
+            textBoxRecInfo.Size = new Size(310, 138);
             textBoxRecInfo.TabIndex = 7;
             // 
             // labRecordSize
             // 
             labRecordSize.AutoSize = true;
-            labRecordSize.Location = new Point(109, 410);
+            labRecordSize.Location = new Point(108, 448);
             labRecordSize.Margin = new Padding(4, 0, 4, 0);
             labRecordSize.Name = "labRecordSize";
             labRecordSize.Size = new Size(38, 15);
@@ -741,7 +767,7 @@
             // 
             // butSaveRecord
             // 
-            butSaveRecord.Location = new Point(12, 410);
+            butSaveRecord.Location = new Point(11, 448);
             butSaveRecord.Margin = new Padding(4, 3, 4, 3);
             butSaveRecord.Name = "butSaveRecord";
             butSaveRecord.Size = new Size(88, 27);
@@ -752,7 +778,7 @@
             // 
             // butStartRecord
             // 
-            butStartRecord.Location = new Point(12, 376);
+            butStartRecord.Location = new Point(11, 414);
             butStartRecord.Margin = new Padding(4, 3, 4, 3);
             butStartRecord.Name = "butStartRecord";
             butStartRecord.Size = new Size(88, 27);
@@ -763,7 +789,7 @@
             // 
             // butSettings
             // 
-            butSettings.Location = new Point(238, 10);
+            butSettings.Location = new Point(237, 48);
             butSettings.Margin = new Padding(4, 3, 4, 3);
             butSettings.Name = "butSettings";
             butSettings.Size = new Size(88, 27);
@@ -1292,6 +1318,8 @@
         private Label labSys2;
         private Label labDia1;
         private Label labSys1;
+        private Button butImitatorOn;
+        private Button butImitatorOff;
     }
 }
 

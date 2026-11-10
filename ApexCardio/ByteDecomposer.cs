@@ -375,6 +375,7 @@ namespace Polycardio2
                         Reo1tmp |= currentByte << 16;
                         if ((Reo1tmp & 0x800000) != 0) Reo1tmp -= 0x1000000;
                         if (Reo1tmp > ApexConstants.ReoMaxVal) Reo1tmp = ApexConstants.ReoMaxVal;
+                        Reo1tmp = - Reo1tmp;
                         Data.Reo1Array[MainIndex] = Reo1tmp;
                         nextReo1 = Reo1tmp;
                         if (cfg?.FilterOn == true) nextReo1 = Filter.filter(Filter.coeff14, Data.Reo1Array, MainIndex);
@@ -481,6 +482,7 @@ namespace Polycardio2
                     case 31:
                         Ppgtmp |= currentByte << 16;
                         if ((Ppgtmp & 0x800000) != 0) Ppgtmp -= 0x1000000;
+                        Ppgtmp = -Ppgtmp;
                         Data.PPGArray[MainIndex] = Ppgtmp;
                         nextPpg = Ppgtmp;
                         detrendPpg = FilterRecursDetrend(filterCoeff, nextPpg, detrendPpg, prevPpg);

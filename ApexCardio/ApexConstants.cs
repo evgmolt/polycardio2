@@ -34,7 +34,8 @@ namespace Polycardio2
         public const byte cmdSetPressSfig4 = 0x84;// Pressure    Задание давления для съема сфигмограммы на правой ноге(Pressure - в мм.рт.ст.)
         public const byte cmdStartSfig4 = 0x64;//	-	Запуск съема сфигмограммы на правой ноге
         public const byte cmdStopSfig4 = 0x74;//	-	Остановка съема сфигмограммы на правой ноге
-
+        public const byte cmdImitatorOn = 0x5E;
+        public const byte cmdImitatorOff = 0x5F;
         public const int USBTimerInterval = 25;
         public static string TextFileExtension = ".txt";
         public static string RecInfoExtension = ".txt";

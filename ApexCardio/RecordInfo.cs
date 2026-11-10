@@ -27,24 +27,11 @@ namespace Polycardio2
                 {
                     "Date : ",
                     "Length : ",
-                    "Name : ",
                     "Sex : ",
                     "Age : ",
                     "Height : ",
                     "Weight : ",
-                    "ABP : ",
-                    "Note : ",
-                    "CHD",
-                    "SA",
-                    "PIC",
-                    "CHF I class",
-                    "CHF II class.",
-                    "CHF III class",
-                    "CHF IV class",
-                    "AH 1 degree",
-                    "AH 2 degree",
-                    "AH 3 degree",
-                    "DM"};
+                };
             ABP = new int[2];
 
         }
@@ -67,12 +54,11 @@ namespace Polycardio2
             lines = lines.Select(RemoveItemName).ToArray();
             Data.Date = Convert.ToDateTime(lines[0]);
             Data.Length = Convert.ToInt16(lines[1]);
-            Data.Name = lines[2];
-            Data.Sex = lines[3];
-            Data.Age = Convert.ToInt16(lines[4]);
-            Data.Height = Convert.ToInt16(lines[5]);
-            Data.Weight = Convert.ToInt16(lines[6]);
-            string[] s = lines[7].Split(ABPseparator);
+            Data.Sex = lines[2];
+            Data.Age = Convert.ToInt16(lines[3]);
+            Data.Height = Convert.ToInt16(lines[4]);
+            Data.Weight = Convert.ToInt16(lines[5]);
+            string[] s = lines[6].Split(ABPseparator);
             Data.ABP[0] = Convert.ToInt16(s[0]);
             Data.ABP[1] = Convert.ToInt16(s[1]);
         }
@@ -109,12 +95,11 @@ namespace Polycardio2
             var lines = new string[NumOfProperties];
             lines[0] = AddItemName(insertTabs, 0, Data.Date.ToString());
             lines[1] = AddItemName(insertTabs, 1, Data.Length.ToString());
-            lines[2] = AddItemName(insertTabs, 2, Data.Name);
-            lines[3] = AddItemName(insertTabs, 3, Data.Sex);
-            lines[4] = AddItemName(insertTabs, 4, Data.Age.ToString());
-            lines[5] = AddItemName(insertTabs, 5, Data.Height.ToString());
-            lines[6] = AddItemName(insertTabs, 6, Data.Weight.ToString());
-            lines[7] = AddItemName(insertTabs, 7, Data.ABP[0].ToString() + ABPseparator + Data.ABP[1].ToString());
+            lines[2] = AddItemName(insertTabs, 3, Data.Sex);
+            lines[3] = AddItemName(insertTabs, 4, Data.Age.ToString());
+            lines[4] = AddItemName(insertTabs, 5, Data.Height.ToString());
+            lines[5] = AddItemName(insertTabs, 6, Data.Weight.ToString());
+            lines[6] = AddItemName(insertTabs, 7, Data.ABP[0].ToString() + ABPseparator + Data.ABP[1].ToString());
             return lines;
         }
 

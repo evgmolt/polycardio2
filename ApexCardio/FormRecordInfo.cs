@@ -21,7 +21,6 @@ namespace Polycardio2
 
             labDateTime.Text = recInfo.Data.Date.ToString();
             labLength.Text = "Length : "+recInfo.Data.Length.ToString();
-            tbName.Text = recInfo.Data.Name;
             if (recInfoArg.Data.Sex == maleSt) rbMale.Checked = true;
             if (recInfoArg.Data.Sex == femaleSt) rbFemale.Checked = true;
             nudAge.Value = recInfo.Data.Age;
@@ -31,7 +30,6 @@ namespace Polycardio2
 
         private void butOk_Click(object sender, EventArgs e)
         {
-            recInfo.Data.Name = tbName.Text;
             recInfo.Data.Sex = rbMale.Checked ? maleSt : femaleSt;
             recInfo.Data.Age = nudAge.Value;
             recInfo.Data.Height = nudHeight.Value;

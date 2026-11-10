@@ -28,239 +28,204 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labDateTime = new System.Windows.Forms.Label();
-            this.tbName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.gbSex = new System.Windows.Forms.GroupBox();
-            this.rbFemale = new System.Windows.Forms.RadioButton();
-            this.rbMale = new System.Windows.Forms.RadioButton();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.butOk = new System.Windows.Forms.Button();
-            this.butCancel = new System.Windows.Forms.Button();
-            this.nudAge = new System.Windows.Forms.NumericUpDown();
-            this.nudHeight = new System.Windows.Forms.NumericUpDown();
-            this.nudWeight = new System.Windows.Forms.NumericUpDown();
-            this.labLength = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tbComment = new System.Windows.Forms.TextBox();
-            this.gbSex.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAge)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudWeight)).BeginInit();
-            this.SuspendLayout();
+            labDateTime = new Label();
+            gbSex = new GroupBox();
+            rbFemale = new RadioButton();
+            rbMale = new RadioButton();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            butOk = new Button();
+            butCancel = new Button();
+            nudAge = new NumericUpDown();
+            nudHeight = new NumericUpDown();
+            nudWeight = new NumericUpDown();
+            labLength = new Label();
+            gbSex.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudAge).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudHeight).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudWeight).BeginInit();
+            SuspendLayout();
             // 
             // labDateTime
             // 
-            this.labDateTime.AutoSize = true;
-            this.labDateTime.Location = new System.Drawing.Point(22, 18);
-            this.labDateTime.Name = "labDateTime";
-            this.labDateTime.Size = new System.Drawing.Size(67, 13);
-            this.labDateTime.TabIndex = 0;
-            this.labDateTime.Text = "labDateTime";
-            // 
-            // tbName
-            // 
-            this.tbName.Location = new System.Drawing.Point(91, 74);
-            this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(337, 20);
-            this.tbName.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 77);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Name";
+            labDateTime.AutoSize = true;
+            labDateTime.Location = new Point(26, 21);
+            labDateTime.Margin = new Padding(4, 0, 4, 0);
+            labDateTime.Name = "labDateTime";
+            labDateTime.Size = new Size(73, 15);
+            labDateTime.TabIndex = 0;
+            labDateTime.Text = "labDateTime";
             // 
             // gbSex
             // 
-            this.gbSex.Controls.Add(this.rbFemale);
-            this.gbSex.Controls.Add(this.rbMale);
-            this.gbSex.Location = new System.Drawing.Point(25, 114);
-            this.gbSex.Name = "gbSex";
-            this.gbSex.Size = new System.Drawing.Size(131, 42);
-            this.gbSex.TabIndex = 1;
-            this.gbSex.TabStop = false;
-            this.gbSex.Text = "Sex";
+            gbSex.Controls.Add(rbFemale);
+            gbSex.Controls.Add(rbMale);
+            gbSex.Location = new Point(24, 79);
+            gbSex.Margin = new Padding(4, 3, 4, 3);
+            gbSex.Name = "gbSex";
+            gbSex.Padding = new Padding(4, 3, 4, 3);
+            gbSex.Size = new Size(153, 48);
+            gbSex.TabIndex = 1;
+            gbSex.TabStop = false;
+            gbSex.Text = "Sex";
             // 
             // rbFemale
             // 
-            this.rbFemale.AutoSize = true;
-            this.rbFemale.Location = new System.Drawing.Point(66, 19);
-            this.rbFemale.Name = "rbFemale";
-            this.rbFemale.Size = new System.Drawing.Size(59, 17);
-            this.rbFemale.TabIndex = 1;
-            this.rbFemale.TabStop = true;
-            this.rbFemale.Text = "Female";
-            this.rbFemale.UseVisualStyleBackColor = true;
+            rbFemale.AutoSize = true;
+            rbFemale.Location = new Point(77, 22);
+            rbFemale.Margin = new Padding(4, 3, 4, 3);
+            rbFemale.Name = "rbFemale";
+            rbFemale.Size = new Size(63, 19);
+            rbFemale.TabIndex = 1;
+            rbFemale.TabStop = true;
+            rbFemale.Text = "Female";
+            rbFemale.UseVisualStyleBackColor = true;
             // 
             // rbMale
             // 
-            this.rbMale.AutoSize = true;
-            this.rbMale.Location = new System.Drawing.Point(6, 19);
-            this.rbMale.Name = "rbMale";
-            this.rbMale.Size = new System.Drawing.Size(48, 17);
-            this.rbMale.TabIndex = 0;
-            this.rbMale.TabStop = true;
-            this.rbMale.Text = "Male";
-            this.rbMale.UseVisualStyleBackColor = true;
+            rbMale.AutoSize = true;
+            rbMale.Location = new Point(7, 22);
+            rbMale.Margin = new Padding(4, 3, 4, 3);
+            rbMale.Name = "rbMale";
+            rbMale.Size = new Size(51, 19);
+            rbMale.TabIndex = 0;
+            rbMale.TabStop = true;
+            rbMale.Text = "Male";
+            rbMale.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(300, 132);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Age";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            label2.AutoSize = true;
+            label2.Location = new Point(345, 99);
+            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(28, 15);
+            label2.TabIndex = 6;
+            label2.Text = "Age";
+            label2.Click += label2_Click;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(300, 160);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Height";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            label3.AutoSize = true;
+            label3.Location = new Point(345, 132);
+            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(43, 15);
+            label3.TabIndex = 7;
+            label3.Text = "Height";
+            label3.Click += label3_Click;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(300, 189);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Weight";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            label4.AutoSize = true;
+            label4.Location = new Point(345, 165);
+            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(45, 15);
+            label4.TabIndex = 8;
+            label4.Text = "Weight";
+            label4.Click += label4_Click;
             // 
             // butOk
             // 
-            this.butOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.butOk.Location = new System.Drawing.Point(263, 397);
-            this.butOk.Name = "butOk";
-            this.butOk.Size = new System.Drawing.Size(75, 23);
-            this.butOk.TabIndex = 5;
-            this.butOk.Text = "Ok";
-            this.butOk.UseVisualStyleBackColor = true;
-            this.butOk.Click += new System.EventHandler(this.butOk_Click);
+            butOk.DialogResult = DialogResult.OK;
+            butOk.Location = new Point(302, 216);
+            butOk.Margin = new Padding(4, 3, 4, 3);
+            butOk.Name = "butOk";
+            butOk.Size = new Size(88, 27);
+            butOk.TabIndex = 5;
+            butOk.Text = "Ok";
+            butOk.UseVisualStyleBackColor = true;
+            butOk.Click += butOk_Click;
             // 
             // butCancel
             // 
-            this.butCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butCancel.Location = new System.Drawing.Point(353, 397);
-            this.butCancel.Name = "butCancel";
-            this.butCancel.Size = new System.Drawing.Size(75, 23);
-            this.butCancel.TabIndex = 6;
-            this.butCancel.Text = "Cancel";
-            this.butCancel.UseVisualStyleBackColor = true;
+            butCancel.DialogResult = DialogResult.Cancel;
+            butCancel.Location = new Point(407, 216);
+            butCancel.Margin = new Padding(4, 3, 4, 3);
+            butCancel.Name = "butCancel";
+            butCancel.Size = new Size(88, 27);
+            butCancel.TabIndex = 6;
+            butCancel.Text = "Cancel";
+            butCancel.UseVisualStyleBackColor = true;
             // 
             // nudAge
             // 
-            this.nudAge.Location = new System.Drawing.Point(363, 130);
-            this.nudAge.Name = "nudAge";
-            this.nudAge.Size = new System.Drawing.Size(65, 20);
-            this.nudAge.TabIndex = 2;
-            this.nudAge.ValueChanged += new System.EventHandler(this.nudAge_ValueChanged);
+            nudAge.Location = new Point(419, 97);
+            nudAge.Margin = new Padding(4, 3, 4, 3);
+            nudAge.Name = "nudAge";
+            nudAge.Size = new Size(76, 23);
+            nudAge.TabIndex = 2;
+            nudAge.ValueChanged += nudAge_ValueChanged;
             // 
             // nudHeight
             // 
-            this.nudHeight.Location = new System.Drawing.Point(363, 158);
-            this.nudHeight.Maximum = new decimal(new int[] {
-            250,
-            0,
-            0,
-            0});
-            this.nudHeight.Name = "nudHeight";
-            this.nudHeight.Size = new System.Drawing.Size(65, 20);
-            this.nudHeight.TabIndex = 3;
-            this.nudHeight.ValueChanged += new System.EventHandler(this.nudHeight_ValueChanged);
+            nudHeight.Location = new Point(419, 129);
+            nudHeight.Margin = new Padding(4, 3, 4, 3);
+            nudHeight.Maximum = new decimal(new int[] { 250, 0, 0, 0 });
+            nudHeight.Name = "nudHeight";
+            nudHeight.Size = new Size(76, 23);
+            nudHeight.TabIndex = 3;
+            nudHeight.ValueChanged += nudHeight_ValueChanged;
             // 
             // nudWeight
             // 
-            this.nudWeight.Location = new System.Drawing.Point(363, 187);
-            this.nudWeight.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.nudWeight.Name = "nudWeight";
-            this.nudWeight.Size = new System.Drawing.Size(65, 20);
-            this.nudWeight.TabIndex = 4;
-            this.nudWeight.ValueChanged += new System.EventHandler(this.nudWeight_ValueChanged);
+            nudWeight.Location = new Point(419, 163);
+            nudWeight.Margin = new Padding(4, 3, 4, 3);
+            nudWeight.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
+            nudWeight.Name = "nudWeight";
+            nudWeight.Size = new Size(76, 23);
+            nudWeight.TabIndex = 4;
+            nudWeight.ValueChanged += nudWeight_ValueChanged;
             // 
             // labLength
             // 
-            this.labLength.AutoSize = true;
-            this.labLength.Location = new System.Drawing.Point(22, 40);
-            this.labLength.Name = "labLength";
-            this.labLength.Size = new System.Drawing.Size(54, 13);
-            this.labLength.TabIndex = 18;
-            this.labLength.Text = "labLength";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(28, 357);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(51, 13);
-            this.label5.TabIndex = 19;
-            this.label5.Text = "Comment";
-            // 
-            // tbComment
-            // 
-            this.tbComment.Location = new System.Drawing.Point(91, 350);
-            this.tbComment.Name = "tbComment";
-            this.tbComment.Size = new System.Drawing.Size(337, 20);
-            this.tbComment.TabIndex = 20;
+            labLength.AutoSize = true;
+            labLength.Location = new Point(26, 46);
+            labLength.Margin = new Padding(4, 0, 4, 0);
+            labLength.Name = "labLength";
+            labLength.Size = new Size(60, 15);
+            labLength.TabIndex = 18;
+            labLength.Text = "labLength";
             // 
             // FormRecordInfo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.butCancel;
-            this.ClientSize = new System.Drawing.Size(460, 478);
-            this.Controls.Add(this.tbComment);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.labLength);
-            this.Controls.Add(this.nudWeight);
-            this.Controls.Add(this.nudHeight);
-            this.Controls.Add(this.nudAge);
-            this.Controls.Add(this.butCancel);
-            this.Controls.Add(this.butOk);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.gbSex);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.tbName);
-            this.Controls.Add(this.labDateTime);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.KeyPreview = true;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "FormRecordInfo";
-            this.Text = "Record information";
-            this.gbSex.ResumeLayout(false);
-            this.gbSex.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAge)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudWeight)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = butCancel;
+            ClientSize = new Size(537, 267);
+            Controls.Add(labLength);
+            Controls.Add(nudWeight);
+            Controls.Add(nudHeight);
+            Controls.Add(nudAge);
+            Controls.Add(butCancel);
+            Controls.Add(butOk);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(gbSex);
+            Controls.Add(labDateTime);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            KeyPreview = true;
+            Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "FormRecordInfo";
+            Text = "Record information";
+            gbSex.ResumeLayout(false);
+            gbSex.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudAge).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudHeight).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudWeight).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Label labDateTime;
-        private System.Windows.Forms.TextBox tbName;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox gbSex;
         private System.Windows.Forms.RadioButton rbFemale;
         private System.Windows.Forms.RadioButton rbMale;
@@ -273,7 +238,5 @@
         private System.Windows.Forms.NumericUpDown nudHeight;
         private System.Windows.Forms.NumericUpDown nudWeight;
         private System.Windows.Forms.Label labLength;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox tbComment;
     }
 }

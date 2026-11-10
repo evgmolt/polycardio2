@@ -772,13 +772,8 @@ namespace Polycardio2
         private void UpdateRecInfoBox(RecordInfo riarg)
         {
             textBoxRecInfo.Clear();
-            //            textBoxRecInfo.Text += "Record information" + System.Environment.NewLine + System.Environment.NewLine;
             textBoxRecInfo.Text += "File : " + Convert.ToChar(9) + Path.GetFileName(riarg.FileName) + System.Environment.NewLine;
             string[] lines = riarg.GetRecInfo(true);
-            /*            foreach (string line in lines)
-                        {
-                            textBoxRecInfo.Text += line + System.Environment.NewLine;
-                        }*/
             for (int i = 0; i < lines.Length; i++)
             {
                 string s;
@@ -804,9 +799,14 @@ namespace Polycardio2
                 CurrentFile = Path.GetFileName(saveFileDialog1.FileName);
                 var ri = new RecordInfo(Cfg, CurrentFile);
                 ri.Data.Date = DateTime.Now;
+                ri.Data.Age = 40;
+                ri.Data.Height = 175;
+                ri.Data.Weight = 75;
                 ri.Save(Cfg);
                 UpdateRecInfoBox(ri);
                 CurrentRecordInfo = ri;
+                FormRecordInfo fri = new FormRecordInfo(ri);
+                fri.ShowDialog();
             }
         }
 
@@ -1490,6 +1490,16 @@ namespace Polycardio2
             timerRead.Enabled = !ViewMode;
             timerPaint.Enabled = !ViewMode;
             USBPort.WriteByte(ApexConstants.cmdStreamOn);
+        }
+
+        private void butImitatorOn_Click(object sender, EventArgs e)
+        {
+            USBPort.WriteByte(ApexConstants.cmdImitatorOn);
+        }
+
+        private void butImitatorOff_Click(object sender, EventArgs e)
+        {
+            USBPort.WriteByte(ApexConstants.cmdImitatorOff);
         }
     }
 }
