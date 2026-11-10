@@ -1,10 +1,10 @@
-Date : 	10.11.2026 7:49:23
+Date : 	10.11.2026 10:16:48
 Length : 	0
-Name : 	
-Sex : 	
+Sex : 	40
 Age : 	40
 Height : 	175
 Weight : 	75
-ABP : 	0/0
+ABP	0/0
+
 
 Date/time	ECG1	ECG2	Reo 1	Reo 2	Sphigmo 1	Sphigmo 2	Sphigmo 3	Sphigmo 4	PPG	Apex	Sound	

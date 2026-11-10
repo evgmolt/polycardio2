@@ -63,3 +63,4 @@ BPM.*.*
 /ApexCardio/bin/Debug/net8.0-windows/222.txt
 /ApexCardio/bin/Debug/net8.0-windows/3.txt
 /ApexCardio/bin/Debug/net8.0-windows/PCConf.cfg
+*.cache

@@ -803,10 +803,10 @@ namespace Polycardio2
                 ri.Data.Height = 175;
                 ri.Data.Weight = 75;
                 ri.Save(Cfg);
-                UpdateRecInfoBox(ri);
                 CurrentRecordInfo = ri;
                 FormRecordInfo fri = new FormRecordInfo(ri);
                 fri.ShowDialog();
+                UpdateRecInfoBox(ri);
             }
         }
 

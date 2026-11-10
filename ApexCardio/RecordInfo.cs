@@ -31,6 +31,7 @@ namespace Polycardio2
                     "Age : ",
                     "Height : ",
                     "Weight : ",
+                    "ABP"
                 };
             ABP = new int[2];
 
@@ -95,11 +96,11 @@ namespace Polycardio2
             var lines = new string[NumOfProperties];
             lines[0] = AddItemName(insertTabs, 0, Data.Date.ToString());
             lines[1] = AddItemName(insertTabs, 1, Data.Length.ToString());
-            lines[2] = AddItemName(insertTabs, 3, Data.Sex);
-            lines[3] = AddItemName(insertTabs, 4, Data.Age.ToString());
-            lines[4] = AddItemName(insertTabs, 5, Data.Height.ToString());
-            lines[5] = AddItemName(insertTabs, 6, Data.Weight.ToString());
-            lines[6] = AddItemName(insertTabs, 7, Data.ABP[0].ToString() + ABPseparator + Data.ABP[1].ToString());
+            lines[2] = AddItemName(insertTabs, 2, Data.Sex);
+            lines[3] = AddItemName(insertTabs, 3, Data.Age.ToString());
+            lines[4] = AddItemName(insertTabs, 4, Data.Height.ToString());
+            lines[5] = AddItemName(insertTabs, 5, Data.Weight.ToString());
+            lines[6] = AddItemName(insertTabs, 6, Data.ABP[0].ToString() + ABPseparator + Data.ABP[1].ToString());
             return lines;
         }
 
