@@ -895,7 +895,7 @@ namespace Polycardio2
             //            timerPaint.Enabled = false;
 
             DataA = new DataArrays(lines.Length);
-            decomposer = ParseData(lines, DataA, 0);
+            decomposer = DataProcessing.ParseData(lines, DataA, 0);
             decomposer.CountViewArrays(lines.Length, Cfg.FilterOn);
             SetScale(lines.Length);
             for (int i = 0; i < AmpBarVals.Length; i++)
@@ -1094,27 +1094,7 @@ namespace Polycardio2
         }
 
 
-        private ByteDecomposer ParseData(string[] lines, DataArrays a, int skip)
-        {
-            for (int i = skip; i < lines.Length; i++)
-            {
-                string[] s = lines[i].Split(Convert.ToChar(9));
-                a.ECG1Array[i - skip] = Convert.ToInt32(s[1]);
-                a.ECG2Array[i - skip] = Convert.ToInt32(s[2]);
-                a.Reo1Array[i - skip] = Convert.ToInt32(s[3]);
-                a.Reo2Array[i - skip] = Convert.ToInt32(s[4]);
-                a.SphigmoLeftHandArray[i - skip] = Convert.ToInt32(s[5]);
-                a.SphigmoLeftLegArray[i - skip] = Convert.ToInt32(s[6]);
-                a.SphigmoRightHandArray[i - skip] = Convert.ToInt32(s[7]);
-                a.SphigmoRightLegArray[i - skip] = Convert.ToInt32(s[8]);
-                a.ApexArray[i - skip] = Convert.ToInt32(s[9]);
-                a.PPGArray[i - skip] = Convert.ToInt32(s[10]);
-                a.SoundArray[i - skip] = Convert.ToInt16(s[11]);
-            }
-            var d = new ByteDecomposer(a);
-            d.MainIndex = (uint)lines.Length;
-            return d;
-        }
+        
 
         private void butOpenFile_Click(object sender, EventArgs e)
         {
@@ -1147,7 +1127,7 @@ namespace Polycardio2
                     UpdateScrollBar(size);
 
                     DataA = new DataArrays(size + 1000);
-                    decomposer = ParseData(lines, DataA, ApexConstants.HeaderSize);
+                    decomposer = DataProcessing.ParseData(lines, DataA, ApexConstants.HeaderSize);
                     decomposer.CountViewArrays(lines.Length - ApexConstants.HeaderSize, Cfg.FilterOn);
                     SetScale(size);
                     foreach (GraphicsInfo gi in GInfoArr)
@@ -1315,34 +1295,6 @@ namespace Polycardio2
         private void butBPabort2_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdCancelBP2);
-        }
-
-        
-
-
-
-
-
-        private string GetName(int n)
-        {
-            switch (n)
-            {
-                case 0:
-                    return ApexConstants.ECG1name;
-                case 1:
-                    return ApexConstants.ECG2name;
-                case 2:
-                    return ApexConstants.Reo1name;
-                case 3:
-                    return ApexConstants.Reo2name;
-                case 4:
-                    return ApexConstants.Sphigmo1name;
-                case 5:
-                    return ApexConstants.Sphigmo2name;
-                case 6:
-                    return ApexConstants.Apexname;
-            }
-            return null;
         }
 
         private void butBPmeas3_Click(object sender, EventArgs e)

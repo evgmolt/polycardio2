@@ -104,7 +104,7 @@ namespace Polycardio2
         public uint status { get; set; }
     }
 
-    class ByteDecomposer
+    public class ByteDecomposer
     {
         public bool Calibrate;
         public event EventHandler DecomposeLineEvent;

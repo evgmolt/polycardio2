@@ -9,7 +9,27 @@ namespace Polycardio2
     public static class DataProcessing
     {
         public const int SamplingFrequency = 125;
-
+        public static ByteDecomposer ParseData(string[] lines, DataArrays a, int skip)
+        {
+            for (int i = skip; i < lines.Length; i++)
+            {
+                string[] s = lines[i].Split(Convert.ToChar(9));
+                a.ECG1Array[i - skip] = Convert.ToInt32(s[1]);
+                a.ECG2Array[i - skip] = Convert.ToInt32(s[2]);
+                a.Reo1Array[i - skip] = Convert.ToInt32(s[3]);
+                a.Reo2Array[i - skip] = Convert.ToInt32(s[4]);
+                a.SphigmoLeftHandArray[i - skip] = Convert.ToInt32(s[5]);
+                a.SphigmoLeftLegArray[i - skip] = Convert.ToInt32(s[6]);
+                a.SphigmoRightHandArray[i - skip] = Convert.ToInt32(s[7]);
+                a.SphigmoRightLegArray[i - skip] = Convert.ToInt32(s[8]);
+                a.ApexArray[i - skip] = Convert.ToInt32(s[9]);
+                a.PPGArray[i - skip] = Convert.ToInt32(s[10]);
+                a.SoundArray[i - skip] = Convert.ToInt16(s[11]);
+            }
+            var d = new ByteDecomposer(a);
+            d.MainIndex = (uint)lines.Length;
+            return d;
+        }
         public static void DetectECG(DataArrays D, uint index)
         {
             D.RInd = 0;
