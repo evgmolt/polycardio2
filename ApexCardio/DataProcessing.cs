@@ -8,7 +8,175 @@ namespace Polycardio2
 {
     public static class DataProcessing
     {
-        public static int CorrPattLen = 14;
+        public const int SamplingFrequency = 125;
+
+        public static void DetectECG(DataArrays D, uint index)
+        {
+            D.RInd = 0;
+            int InsideC = 0;
+            int start = 0;
+            uint stop = index - 100;
+            int max = 0;
+
+            for (int i = start; i < stop; i++)
+            {
+                max = Math.Max(max, (int)Math.Round(DataProcessing.GetCorr(D.ECG1ViewArray, i)));
+            }
+
+            double DetectLevel = max / 2.0;
+            bool Rnow = false;
+            InsideC = 0;
+
+            for (int i = start; i < stop; i++)
+            {
+                InsideC++;
+                if (InsideC > 20)
+                {
+                    if (!Rnow)
+                    {
+                        if (DataProcessing.GetCorr(D.ECG1ViewArray, i) > DetectLevel)
+                        {
+                            Rnow = true;
+                        }
+                    }
+                    else
+                    {
+                        if (D.ECG1ViewArray[i] < D.ECG1ViewArray[i - 1])
+                        {
+                            D.RArray[D.RInd] = i + DataProcessing.CorrPattLen / 2;
+                            D.RInd++;
+                            InsideC = 0;
+                            Rnow = false;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < D.RInd; i++)
+            {
+                SearchP(D, i);
+            }
+        }
+
+        private static void SearchP(DataArrays D, int ind)
+        {
+            const int PRInterval = 20;
+            int RPos = D.RArray[ind];
+            int pos = RPos - 3;
+
+            // ЗАЩИТА: Добавлено pos > 0, чтобы избежать падения программы
+            while (pos > 0 && D.ECG1ViewArray[pos] < D.ECG1ViewArray[pos + 1])
+            {
+                pos--;
+            }
+
+            // ИСПРАВЛЕНО: Инициализируем первым значением, а не нулем (защита от отрицательного дрейфа изолинии)
+            int Max = D.ECG1ViewArray[pos];
+            int MaxPos = pos;
+
+            // ЗАЩИТА: Ограничиваем левую границу, чтобы индекс не ушел ниже 0
+            int leftLimit = Math.Max(0, RPos - PRInterval);
+
+            for (int i = pos; i > leftLimit; i--)
+            {
+                if (D.ECG1ViewArray[i] > Max)
+                {
+                    Max = D.ECG1ViewArray[i];
+                    MaxPos = i;
+                }
+            }
+
+            // Перезаписываем временный R-зубец на итоговый P-зубец
+            D.RArray[ind] = MaxPos;
+        }
+
+        /// <summary>
+        /// Надежный поиск систолических максимумов на реальном живом сигнале PPG (ФПГ).
+        /// </summary>
+        /// <param name="ppgArray">Массив данных PPG (желательно после удаления дрейфа ViewArray)</param>
+        /// <param name="dataSize">Фактическая длина заполненных данных в массиве</param>
+        /// <param name="samplingRate">Частота дискретизации прибора (для PolyCardio2 это 125 Гц)</param>
+        /// <returns>Список индексов истинных пульсовых пиков</returns>
+        public static List<int> FindRealPPGMaximums(int[] ppgArray, uint dataSize)
+    {
+        List<int> peakIndices = new List<int>();
+
+        if (ppgArray == null || dataSize < 25) return peakIndices;
+
+        // 1. Физиологические константы:
+        // Рефрактерный период (время абсолютной невозбудимости сердца). 
+        // Между ударами пульса должно пройти минимум ~280 мс (максимальный ЧСС ~210 уд/мин).
+        // Для частоты 125 Гц это: 0.280 * 125 = 35 отсчетов.
+        int minSamplesBetweenPeaks = (int)Math.Round(0.280 * SamplingFrequency);
+
+        // Размер окна для расчета скользящего среднего (динамического порога).
+        // Окно должно быть примерно равным длительности одного сердечного цикла (~0.8-1.0 секунды).
+        // Для 125 Гц берем окно в 125 отсчетов.
+        int windowSize = (int)Math.Round(1.0 * SamplingFrequency);
+
+        // 2. Предварительный расчет динамического порога (Скользящее среднее + поправка)
+        double[] adaptiveThreshold = new double[dataSize];
+        double runningSum = 0;
+
+        // Инициализируем первое окно
+        for (int i = 0; i < Math.Min(windowSize, dataSize); i++)
+        {
+            runningSum += ppgArray[i];
+        }
+
+        for (int i = 0; i < dataSize; i++)
+        {
+            // Сдвигаем окно скользящего среднего
+            if (i >= windowSize)
+            {
+                runningSum += ppgArray[i] - ppgArray[i - windowSize];
+            }
+
+            double mean = runningSum / Math.Min(windowSize, i + 1);
+
+            // Динамический порог — это среднее значение сигнала + 15% от стандартного размаха,
+            // чтобы отсечь дикротическую вырезку и дыхательные волны.
+            adaptiveThreshold[i] = mean + 400.0; // Для реального сигнала можно настроить коэффициент
+        }
+
+        // 3. Основной цикл поиска пиков
+        int lastPeakIndex = -minSamplesBetweenPeaks; // Инициализируем далеко в прошлом
+
+        for (int i = 2; i < dataSize - 2; i++)
+        {
+            int curr = ppgArray[i];
+
+            // Проверяем, что точка выше скользящего динамического порога
+            if (curr > adaptiveThreshold[i])
+            {
+                // Проверяем локальный пик (сглаженный по 5 точкам, чтобы убрать ВЧ-шум)
+                if (curr >= ppgArray[i - 1] && curr >= ppgArray[i - 2] &&
+                    curr > ppgArray[i + 1] && curr > ppgArray[i + 2])
+                {
+                    // Защита по времени: проверяем, прошло ли достаточно времени с прошлого удара
+                    if (i - lastPeakIndex >= minSamplesBetweenPeaks)
+                    {
+                        peakIndices.Add(i);
+                        lastPeakIndex = i; // Запоминаем индекс последнего подтвержденного пика
+                    }
+                    else
+                    {
+                        // Если новый пик оказался выше предыдущего внутри рефрактерного периода,
+                        // значит прошлый выбор был ошибочным (попали на шум), обновляем вершину.
+                        if (peakIndices.Count > 0 && curr > ppgArray[peakIndices[peakIndices.Count - 1]])
+                        {
+                            peakIndices[peakIndices.Count - 1] = i;
+                            lastPeakIndex = i;
+                        }
+                    }
+                }
+            }
+        }
+
+        return peakIndices;
+    }
+
+    public static int CorrPattLen = 14;
         public static double GetCorr(int[] inArr, int ind)
         {
             int[] CorrPattern = {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0 };

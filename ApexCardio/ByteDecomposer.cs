@@ -37,6 +37,7 @@ namespace Polycardio2
         
         private const int RRMaxNum = 1000;
         public int[] RArray;
+        public int[] PPGRArray;
         public int RInd;
         public int FragSize;
         public byte NIBP1_Syst;
@@ -93,6 +94,7 @@ namespace Polycardio2
             ViewList.Add(SoundViewArray);
 
             RArray = new int[RRMaxNum];
+            PPGRArray = new int[RRMaxNum];
             RInd = 0;
         }
     }
@@ -109,7 +111,7 @@ namespace Polycardio2
         public event EventHandler ConnectionBreakdown;
         public event EventHandler BPcompleted;
 
-        public const int SamplingFrequency = 125;
+        
 
         public DataArrays Data;
         private const byte Marker1 = 0x19;

@@ -1,0 +1,8 @@
+D:\pub\Polycardio2.pdb
+D:\pub\Polycardio2.dll.config
+D:\pub\D3DCompiler_47_cor3.dll
+D:\pub\PenImc_cor3.dll
+D:\pub\PresentationNative_cor3.dll
+D:\pub\vcruntime140_cor3.dll
+D:\pub\wpfgfx_cor3.dll
+D:\pub\Polycardio2.exe

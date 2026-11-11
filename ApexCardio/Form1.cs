@@ -214,11 +214,11 @@ namespace Polycardio2
         void NewLineReceived(object sender, EventArgs agr)
         {
             //            if (decomposer.LineCounter % ByteDecomposer.SamplingFrequency != 0) return;
-            int lc = decomposer.LineCounter / ByteDecomposer.SamplingFrequency;
+            int lc = decomposer.LineCounter / DataProcessing.SamplingFrequency;
             labRecordSize.Text = String.Concat("Record size : ",
                                                lc.ToString(),
                                                " sec");
-            if (decomposer.LineCounter > (Cfg.RecordLength * ByteDecomposer.SamplingFrequency))
+            if (decomposer.LineCounter > (Cfg.RecordLength * DataProcessing.SamplingFrequency))
             {
                 StopRecord();
                 return;
@@ -559,6 +559,13 @@ namespace Polycardio2
                     e.Graphics.DrawLine(penR, DataA.RArray[i] - ViewShift, R0.Top, DataA.RArray[i] - ViewShift, R0.Height);
                 }
                 penR.Dispose();
+
+                var penPPGR = new Pen(Color.Red, 1);
+                for (int i = 0; i < DataA.RInd; i++)
+                {
+                    e.Graphics.DrawLine(penPPGR, DataA.PPGRArray[i] - ViewShift, R0.Top, DataA.PPGRArray[i] - ViewShift, R0.Height);
+                }
+                penPPGR.Dispose();
             }
         }
 
@@ -816,7 +823,7 @@ namespace Polycardio2
             CurrentRecordInfo.Save(Cfg);
             UpdateRecInfoBox(CurrentRecordInfo);
 
-            pbRecordProgress.Maximum = Cfg.RecordLength * ByteDecomposer.SamplingFrequency;
+            pbRecordProgress.Maximum = Cfg.RecordLength * DataProcessing.SamplingFrequency;
             //            string fname = String.Concat(Cfg.DataDir.ToString(), CurrentFile, ApexConstants.DataFileExtension);
             //            filestream = new FileStream(fname, FileMode.Create);
             textWriter = new StreamWriter(Cfg.DataDir.ToString() + ApexConstants.TmpTextFile);
@@ -869,7 +876,7 @@ namespace Polycardio2
             V.ResetVisirs();
             pbRecordProgress.Visible = false;
             labRecordSize.Visible = false;
-            CurrentRecordInfo.Data.Length = decomposer.TotalBytes / ByteDecomposer.BytesInBlock / ByteDecomposer.SamplingFrequency;
+            CurrentRecordInfo.Data.Length = decomposer.TotalBytes / ByteDecomposer.BytesInBlock / DataProcessing.SamplingFrequency;
             CurrentRecordInfo.Save(Cfg);
             UpdateRecInfoBox(CurrentRecordInfo);
             decomposer.DecomposeLineEvent -= NewLineReceived;
@@ -1148,7 +1155,12 @@ namespace Polycardio2
                         if (gi.Visible) gi.BufPanel.Refresh();
                     }
                     textBoxRecInfo.SelectionStart = 0;
-                    DetectECG();
+                    DataProcessing.DetectECG(DataA, decomposer.MainIndex);
+                    var ppgindexes = DataProcessing.FindRealPPGMaximums(DataA.PPGViewArray, decomposer.MainIndex);
+                    for (int i = 0; i < ppgindexes.Count; i++)
+                    {
+                        DataA.PPGRArray[i] = ppgindexes[i];
+                    }
                 }
             }
 
@@ -1305,85 +1317,8 @@ namespace Polycardio2
             USBPort.WriteByte(ApexConstants.cmdCancelBP2);
         }
 
-        private void DetectECG()
-        {
-            DataA.RInd = 0;
-            int InsideC = 0;
-            int start = 0;
-            int stop = DataA.ECG1ViewArray.Length - 100;
-            int max = 0;
+        
 
-            for (int i = start; i < stop; i++)
-            {
-                max = Math.Max(max, (int)Math.Round(DataProcessing.GetCorr(DataA.ECG1ViewArray, i)));
-            }
-
-            double DetectLevel = max / 2.0;
-            bool Rnow = false;
-            InsideC = 0;
-
-            for (int i = start; i < stop; i++)
-            {
-                InsideC++;
-                if (InsideC > 20)
-                {
-                    if (!Rnow)
-                    {
-                        if (DataProcessing.GetCorr(DataA.ECG1ViewArray, i) > DetectLevel)
-                        {
-                            Rnow = true;
-                        }
-                    }
-                    else
-                    {
-                        if (DataA.ECG1ViewArray[i] < DataA.ECG1ViewArray[i - 1])
-                        {
-                            DataA.RArray[DataA.RInd] = i + DataProcessing.CorrPattLen / 2;
-                            DataA.RInd++;
-                            InsideC = 0;
-                            Rnow = false;
-                        }
-                    }
-                }
-            }
-
-            for (int i = 0; i < DataA.RInd; i++)
-            {
-                SearchP(i);
-            }
-        }
-
-        private void SearchP(int ind)
-        {
-            const int PRInterval = 20;
-            int RPos = DataA.RArray[ind];
-            int pos = RPos - 3;
-
-            // ЗАЩИТА: Добавлено pos > 0, чтобы избежать падения программы
-            while (pos > 0 && DataA.ECG1ViewArray[pos] < DataA.ECG1ViewArray[pos + 1])
-            {
-                pos--;
-            }
-
-            // ИСПРАВЛЕНО: Инициализируем первым значением, а не нулем (защита от отрицательного дрейфа изолинии)
-            int Max = DataA.ECG1ViewArray[pos];
-            int MaxPos = pos;
-
-            // ЗАЩИТА: Ограничиваем левую границу, чтобы индекс не ушел ниже 0
-            int leftLimit = Math.Max(0, RPos - PRInterval);
-
-            for (int i = pos; i > leftLimit; i--)
-            {
-                if (DataA.ECG1ViewArray[i] > Max)
-                {
-                    Max = DataA.ECG1ViewArray[i];
-                    MaxPos = i;
-                }
-            }
-
-            // Перезаписываем временный R-зубец на итоговый P-зубец
-            DataA.RArray[ind] = MaxPos;
-        }
 
 
 
