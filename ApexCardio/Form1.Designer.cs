@@ -325,6 +325,7 @@
             butPumps34Stop.TabIndex = 48;
             butPumps34Stop.Text = "X";
             butPumps34Stop.UseVisualStyleBackColor = true;
+            butPumps34Stop.Click += butPumps34Stop_Click;
             // 
             // butPumps34Start
             // 
@@ -335,6 +336,7 @@
             butPumps34Start.TabIndex = 47;
             butPumps34Start.Text = ">";
             butPumps34Start.UseVisualStyleBackColor = true;
+            butPumps34Start.Click += butPumps34Start_Click;
             // 
             // butPump4stop
             // 
@@ -491,7 +493,7 @@
             butPumps12Stop.TabIndex = 31;
             butPumps12Stop.Text = "X";
             butPumps12Stop.UseVisualStyleBackColor = true;
-            butPumps12Stop.Click += butPumpsStop_Click;
+            butPumps12Stop.Click += butPumps12Stop_Click;
             // 
             // butPumps12Start
             // 
@@ -778,6 +780,7 @@
             // 
             // butStartRecord
             // 
+            butStartRecord.Enabled = false;
             butStartRecord.Location = new Point(11, 414);
             butStartRecord.Margin = new Padding(4, 3, 4, 3);
             butStartRecord.Name = "butStartRecord";

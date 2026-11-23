@@ -167,6 +167,7 @@ namespace Polycardio2
         public DeviceStatusFlags Status;
 
         public uint MainIndex = 0;
+        public uint StartIndex = 0;
         public int LineCounter = 0;
         private const byte AccelZero = 128-105;
         private const int MaxDTOCounter = 10;
@@ -545,27 +546,6 @@ namespace Polycardio2
 
                         uint currentStatus = (uint)Data.DeviceStatus;
 
-                        // Проверка флагов работы модулей давления (Идет измерение АД)
-                        BP1measStarted = (currentStatus & (uint)DeviceStatusFlags.dsBP1_InProgress) != 0;
-                        BP2measStarted = (currentStatus & (uint)DeviceStatusFlags.dsBP2_InProgress) != 0;
-                        BP3measStarted = (currentStatus & (uint)DeviceStatusFlags.dsBP3_InProgress) != 0;
-                        BP4measStarted = (currentStatus & (uint)DeviceStatusFlags.dsBP4_InProgress) != 0;
-
-                        // Если насос качает воздух на конечности, зануляем отображение сфигмограммы (шумоподавление)
-/*                        if (BP1measStarted) Data.SphigmoLeftHandViewArray[MainIndex] = 0;
-                        if (BP2measStarted) Data.SphigmoLeftLegViewArray[MainIndex] = 0;
-                        if (BP3measStarted) Data.SphigmoRightHandViewArray[MainIndex] = 0;
-                        if (BP4measStarted) Data.SphigmoRightLegViewArray[MainIndex] = 0;*/
-
-                        // Управление задержками помп (если необходимо перенести логику DelayCounter для 4 каналов)
-                        // [При необходимости добавьте сюда вашу логику для Pump1Started..Pump4Started]
-
-                        // Проверка на завершение измерения или ошибку по любому из каналов
-                        if (Calibrate || Data.DeviceStatus > 0)
-                        {
-                            var args = new BPEventArgs { status = Data.DeviceStatus };
-                            OnBPcompleted(args);
-                        }
 
                         FinalizePacket(txtFileStream); // Конец полной посылки (67 байт)
                         break;
@@ -603,7 +583,7 @@ namespace Polycardio2
             uint soundIdx = index << 3;
 
             // Высокопроизводительная интерполяция строк .NET 8/9 (автоматически компилируется в оптимальный StringHandler)
-            return $"{DateTime.Now}\t" +
+            return $"{(((MainIndex - StartIndex) & (uint)(DataArrSize - 1)) * 8).ToString()}\t" +
                    $"{Data.ECG1Array[index]}\t" +
                    $"{Data.ECG2Array[index]}\t" +
                    $"{Data.Reo1Array[index]}\t" +

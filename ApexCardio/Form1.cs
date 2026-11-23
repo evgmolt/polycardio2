@@ -197,6 +197,42 @@ namespace Polycardio2
                 labNIBP3_Press.Text = "Текущее давление : " + DataA.NIBP3_Press.ToString();
                 labNIBP4_Press.Text = "Текущее давление : " + DataA.NIBP4_Press.ToString();
 
+                if (cb1_InProgress.Checked)
+                {
+                    labBP1.Text = DataA.NIBP1_Press.ToString();
+                }
+                else
+                {
+                    labBP1.Text = DataA.NIBP1_Syst.ToString() + " / " + DataA.NIBP1_Diast.ToString();
+                }
+
+                if (cb2_InProgress.Checked)
+                {
+                    labBP2.Text = DataA.NIBP2_Press.ToString();
+                }
+                else
+                {
+                    labBP2.Text = DataA.NIBP2_Syst.ToString() + " / " + DataA.NIBP2_Diast.ToString();
+                }
+
+                if (cb3_InProgress.Checked)
+                {
+                    labBP3.Text = DataA.NIBP3_Press.ToString();
+                }
+                else
+                {
+                    labBP3.Text = DataA.NIBP3_Syst.ToString() + " / " + DataA.NIBP3_Diast.ToString();
+                }
+
+                if (cb4_InProgress.Checked)
+                {
+                    labBP4.Text = DataA.NIBP4_Press.ToString();
+                }
+                else
+                {
+                    labBP4.Text = DataA.NIBP4_Syst.ToString() + " / " + DataA.NIBP4_Diast.ToString();
+                }
+
                 labSys1.Text = "СИС : " + DataA.NIBP1_Syst.ToString();
                 labDia1.Text = "ДИА : " + DataA.NIBP1_Diast.ToString();
 
@@ -814,6 +850,7 @@ namespace Polycardio2
                 FormRecordInfo fri = new FormRecordInfo(ri);
                 fri.ShowDialog();
                 UpdateRecInfoBox(ri);
+                butStartRecord.Enabled = true;
             }
         }
 
@@ -831,6 +868,8 @@ namespace Polycardio2
             decomposer.LineCounter = 0;
             decomposer.DecomposeLineEvent += NewLineReceived;
             decomposer.RecordStarted = true;
+            decomposer.StartIndex = decomposer.MainIndex;
+
         }
 
         private void butStartRecord_Click(object sender, EventArgs e)
@@ -908,7 +947,10 @@ namespace Polycardio2
             }
             for (int i = 0; i < AmpBarArr.Length; i++)
             {
-                AmpBarArr[i].Value = 0;
+                if (AmpBarArr[i] != null)
+                {
+                    AmpBarArr[i].Value = 0;
+                }
             }
             UpdateScrollBar(lines.Length);
             foreach (GraphicsInfo gi in GInfoArr)
@@ -1094,7 +1136,7 @@ namespace Polycardio2
         }
 
 
-        
+
 
         private void butOpenFile_Click(object sender, EventArgs e)
         {
@@ -1161,7 +1203,7 @@ namespace Polycardio2
                     var ppgindexes = DataProcessing.FindRealPPGMaximums(DataA.PPGViewArray, decomposer.MainIndex);
                     for (int i = 0; i < ppgindexes.Count; i++)
                     {
-//                        DataA.PPGRArray[i] = ppgindexes[i];
+                        //                        DataA.PPGRArray[i] = ppgindexes[i];
                     }
                 }
             }
@@ -1248,6 +1290,20 @@ namespace Polycardio2
             }
         }
 
+        private void butPumps34Start_Click(object sender, EventArgs e)
+        {
+            USBPort.WriteByte(ApexConstants.cmdSetPressSfig3);
+            USBPort.WriteByte(Cfg.PressLevel3);
+            USBPort.WriteByte(ApexConstants.cmdSetPressSfig4);
+            USBPort.WriteByte(Cfg.PressLevel4);
+            USBPort.WriteByte(ApexConstants.cmdStartSfig3);
+            USBPort.WriteByte(ApexConstants.cmdStartSfig4);
+            if (decomposer != null)
+            {
+                decomposer.Pump3Started = true;
+                decomposer.Pump4Started = true;
+            }
+        }
         private void butPump1start_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdSetPressSfig1);
@@ -1270,7 +1326,7 @@ namespace Polycardio2
             }
         }
 
-        private void butPumpsStop_Click(object sender, EventArgs e)
+        private void butPumps12Stop_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdStopSfig1);
             USBPort.WriteByte(ApexConstants.cmdStopSfig2);
@@ -1278,6 +1334,17 @@ namespace Polycardio2
             {
                 decomposer.Pump1Started = false;
                 decomposer.Pump2Started = false;
+            }
+        }
+
+        private void butPumps34Stop_Click(object sender, EventArgs e)
+        {
+            USBPort.WriteByte(ApexConstants.cmdStopSfig3);
+            USBPort.WriteByte(ApexConstants.cmdStopSfig4);
+            if (decomposer != null)
+            {
+                decomposer.Pump3Started = false;
+                decomposer.Pump4Started = false;
             }
         }
 
@@ -1409,7 +1476,7 @@ namespace Polycardio2
         private void butImitatorOff_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdImitatorOff);
-        }
+        }        
     }
 }
 
