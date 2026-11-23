@@ -1,4 +1,9 @@
-Objects
+# Build folders & C# / .NET outputs
+Objects/
+[Bb]in/
+[Oo]bj/
+.vs/
+
 # Prerequisites
 *.d
 
@@ -37,11 +42,12 @@ Objects
 *.x86_64
 *.hex
 
-# Debug files
+# Debug & Cache files
 *.dSYM/
 *.su
 *.idb
 *.pdb
+*.cache
 
 # Kernel Module Compile Results
 *.mod*
@@ -52,15 +58,8 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+# Project specific data & configs
 Data/*.txt
-
 BPM.*
-BPM.*.*
 *.bin
-*.obj
-.vs/
-/ApexCardio/bin/Debug/net8.0-windows/111.txt
-/ApexCardio/bin/Debug/net8.0-windows/222.txt
-/ApexCardio/bin/Debug/net8.0-windows/3.txt
-/ApexCardio/bin/Debug/net8.0-windows/PCConf.cfg
-*.cache
+PCConf.cfg
