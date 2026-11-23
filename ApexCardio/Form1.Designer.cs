@@ -84,7 +84,6 @@
             butOpenFile = new Button();
             textBoxRecInfo = new TextBox();
             labRecordSize = new Label();
-            butSaveRecord = new Button();
             butStartRecord = new Button();
             butSettings = new Button();
             hScrollBar1 = new HScrollBar();
@@ -228,7 +227,6 @@
             panelButtons.Controls.Add(butOpenFile);
             panelButtons.Controls.Add(textBoxRecInfo);
             panelButtons.Controls.Add(labRecordSize);
-            panelButtons.Controls.Add(butSaveRecord);
             panelButtons.Controls.Add(butStartRecord);
             panelButtons.Controls.Add(butSettings);
             panelButtons.Dock = DockStyle.Fill;
@@ -767,17 +765,6 @@
             labRecordSize.Text = "label2";
             labRecordSize.Visible = false;
             // 
-            // butSaveRecord
-            // 
-            butSaveRecord.Location = new Point(11, 448);
-            butSaveRecord.Margin = new Padding(4, 3, 4, 3);
-            butSaveRecord.Name = "butSaveRecord";
-            butSaveRecord.Size = new Size(88, 27);
-            butSaveRecord.TabIndex = 5;
-            butSaveRecord.Text = "Save record";
-            butSaveRecord.UseVisualStyleBackColor = true;
-            butSaveRecord.Click += butSaveRecord_Click;
-            // 
             // butStartRecord
             // 
             butStartRecord.Enabled = false;
@@ -1233,7 +1220,6 @@
         private System.Windows.Forms.Button butSettings;
         private System.Windows.Forms.Timer timerPaint;
         private System.Windows.Forms.Label labConnected;
-        private System.Windows.Forms.Button butSaveRecord;
         private System.Windows.Forms.Button butStartRecord;
         private System.Windows.Forms.Timer timerStatus;
         private System.Windows.Forms.Label labRecordSize;

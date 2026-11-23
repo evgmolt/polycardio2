@@ -77,7 +77,6 @@ namespace Polycardio2
         StreamWriter textWriter;
         private string CurrentFile;
         private RecordInfo CurrentRecordInfo;
-        private bool DataReadyToSave = false;
         private int DelayCounter;
         private ApexVisirs V;
 
@@ -741,7 +740,6 @@ namespace Polycardio2
         private void timerStatus_Tick(object sender, EventArgs e)
         {
 
-            butSaveRecord.Enabled = DataReadyToSave;
             /*
             if (decomposer != null)
             {
@@ -926,9 +924,8 @@ namespace Polycardio2
 
             ViewMode = true;
             timerRead.Enabled = false;
-            //            timerPaint.Enabled = false;
 
-            DataA = new DataArrays(lines.Length);
+/*            DataA = new DataArrays(lines.Length);
             decomposer = DataProcessing.ParseData(lines, DataA, 0);
             decomposer.CountViewArrays(lines.Length, Cfg.FilterOn);
             SetScale(lines.Length);
@@ -946,25 +943,16 @@ namespace Polycardio2
                 {
                     AmpBarArr[i].Value = 0;
                 }
-            }
+            }*/
             UpdateScrollBar(lines.Length);
             foreach (GraphicsInfo gi in GInfoArr)
             {
                 if (gi.Visible) gi.BufPanel.Refresh();
             }
-            DataReadyToSave = true;
-        }
-
-        private void butSaveRecord_Click(object sender, EventArgs e)
-        {
             Cfg.DataFileNum++;
             ApexConfig.SaveConfig(Cfg);
-            DataReadyToSave = false;
-            CurrentRecordInfo = null;
-            textBoxRecInfo.Clear();
+
         }
-
-
 
         private void EditRecInfo()
         {
@@ -1238,7 +1226,6 @@ namespace Polycardio2
 
         private void butStopFlow_Click(object sender, EventArgs e)
         {
-            //            DataReadyToSave = false;
             ViewMode = true;
             timerRead.Enabled = false;
             timerPaint.Enabled = false;
