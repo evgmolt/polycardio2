@@ -1135,11 +1135,33 @@ namespace Polycardio2
                         if (gi.Visible) gi.BufPanel.Refresh();
                     }
                     textBoxRecInfo.SelectionStart = 0;
+
+
+                    // Предполагается, что dataArrays уже заполнен данными с прибора и манжет NIBP
+                    double patientHeight = 178.0; // Рост пациента в см
+                    int actualSamples = DataA.FragSize > 0 ? DataA.FragSize : DataA.ECG1Array.Length;
+
+                    // Расчёт для левой стороны (берет NIBP1_Syst и NIBP1_Diast автоматически)
+                    var leftCavi = CaviProcessor.CalculateCavi(
+                        DataA,
+                        BodySide.Left,
+                        patientHeight,
+                        validSamplesCount: actualSamples);
+
+                    // Расчёт для правой стороны (например, если АД правой руки в NIBP2)
+                    var rightCavi = CaviProcessor.CalculateCavi(
+                        DataA,
+                        BodySide.Right,
+                        patientHeight,
+                        sbp: DataA.NIBP2_Syst,
+                        dbp: DataA.NIBP2_Diast,
+                        validSamplesCount: actualSamples);
+
                     DataProcessing.DetectECG(DataA, decomposer.MainIndex);
                     var ppgindexes = DataProcessing.FindRealPPGMaximums(DataA.PPGViewArray, decomposer.MainIndex);
                     for (int i = 0; i < ppgindexes.Count; i++)
                     {
-                        DataA.PPGRArray[i] = ppgindexes[i];
+//                        DataA.PPGRArray[i] = ppgindexes[i];
                     }
                 }
             }
