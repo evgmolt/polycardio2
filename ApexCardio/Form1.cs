@@ -147,8 +147,11 @@ namespace Polycardio2
         {
             DataA = new DataArrays(ByteDecomposer.DataArrSize);
             decomposer = new ByteDecomposer(DataA);
+            decomposer.ConnectionBreakdown -= ConnectionBreak;
             decomposer.ConnectionBreakdown += ConnectionBreak;
+            decomposer.DecomposeLineEvent -= LineReceived;
             decomposer.DecomposeLineEvent += LineReceived;
+            decomposer.BPcompleted -= BPcomplete;
             decomposer.BPcompleted += BPcomplete;
         }
 
@@ -737,14 +740,6 @@ namespace Polycardio2
 
         private void timerStatus_Tick(object sender, EventArgs e)
         {
-            if (ViewMode)
-            {
-                butStopFlow.Text = "Start stream";
-            }
-            else
-            {
-                butStopFlow.Text = "Stop stream";
-            }
 
             butSaveRecord.Enabled = DataReadyToSave;
             /*
@@ -1245,8 +1240,8 @@ namespace Polycardio2
         {
             //            DataReadyToSave = false;
             ViewMode = true;
-            timerRead.Enabled = !ViewMode;
-            timerPaint.Enabled = !ViewMode;
+            timerRead.Enabled = false;
+            timerPaint.Enabled = false;
             USBPort.WriteByte(ApexConstants.cmdStreamOff);
         }
 
@@ -1462,9 +1457,11 @@ namespace Polycardio2
 
         private void butStartFlow_Click(object sender, EventArgs e)
         {
+            InitArraysForFlow();
             ViewMode = false;
-            timerRead.Enabled = !ViewMode;
-            timerPaint.Enabled = !ViewMode;
+            timerRead.Enabled = true;
+            timerPaint.Enabled = true;
+            decomposer.MainIndex = 0;
             USBPort.WriteByte(ApexConstants.cmdStreamOn);
         }
 

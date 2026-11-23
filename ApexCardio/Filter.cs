@@ -53,12 +53,18 @@ namespace Polycardio2
         public static int filter(double[] coeff, int[] inArr, uint ind)
         {
             double sum = 0;
-            for (int i = 0; i < coeff.Length; i++)
+            try
             {
-                double a;
-                a = inArr[(ind - coeff.Length + i + 1) & (ByteDecomposer.DataArrSize - 1)];
-                a = a * coeff[i];
-                sum = sum + a;
+                for (int i = 0; i < coeff.Length; i++)
+                {
+                    double a;
+                    a = inArr[(ind - coeff.Length + i + 1) & (ByteDecomposer.DataArrSize - 1)];
+                    a = a * coeff[i];
+                    sum = sum + a;
+                }
+            }
+            catch (Exception)
+            {
             }
             return (int)Math.Round(sum);
         }
