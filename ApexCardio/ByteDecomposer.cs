@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Polycardio2
 {
@@ -177,22 +178,6 @@ namespace Polycardio2
         public bool RecordStarted;
         public bool DeviceTurnedOn;
         private int DTOCounter;
-        public bool BP1measStarted;
-        public bool BP2measStarted;
-        public bool BP3measStarted;
-        public bool BP4measStarted;
-        public bool Pump1Started;
-        public bool Pump2Started;
-        public bool Pump3Started;
-        public bool Pump4Started;
-        private bool Pump1RealyStarted;
-        private bool Pump2RealyStarted;
-        private bool Pump3RealyStarted;
-        private bool Pump4RealyStarted;
-
-        private int DelayCounter1;
-        private int DelayCounter2;
-        private const int MaxDelayCounter = 300;
         public int TotalBytes;
         const double filterCoeff = 0.005;
         const double filterCoeffReo = 0.01;
@@ -202,16 +187,6 @@ namespace Polycardio2
         {
             Calibrate = false;
             Data = data;
-            BP1measStarted = false;
-            BP2measStarted = false;
-            Pump1Started = false;
-            Pump2Started = false;
-            Pump3Started = false;
-            Pump4Started = false;
-            Pump1RealyStarted = false;
-            Pump2RealyStarted = false;
-            Pump3RealyStarted = false;
-            Pump4RealyStarted = false;
             RecordStarted = false;
             DeviceTurnedOn = true;
             DTOCounter = 0;
@@ -545,7 +520,6 @@ namespace Polycardio2
                         Data.DeviceStatus |= (uint)(currentByte << 16);
 
                         uint currentStatus = (uint)Data.DeviceStatus;
-
 
                         FinalizePacket(txtFileStream); // Конец полной посылки (67 байт)
                         break;

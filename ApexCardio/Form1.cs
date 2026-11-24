@@ -158,6 +158,7 @@ namespace Polycardio2
 
         void LineReceived(object sender, EventArgs arg)
         {
+#pragma warning disable CA1416 // Проверка совместимости платформы
             this.Invoke(new Action(() =>
             {
                 label1.Text = "Счетчик пакетов " + decomposer.MainIndex.ToString();
@@ -194,6 +195,11 @@ namespace Polycardio2
                 else
                 {
                     labBP1.Text = DataA.NIBP1_Syst.ToString() + " / " + DataA.NIBP1_Diast.ToString();
+                    if (CurrentRecordInfo != null)
+                    {
+                        CurrentRecordInfo.Data.ABP1 = [DataA.NIBP1_Syst, DataA.NIBP1_Diast];
+//                        UpdateRecInfoBox(CurrentRecordInfo);
+                    }
                 }
 
                 if (cb2_InProgress.Checked)
@@ -203,15 +209,30 @@ namespace Polycardio2
                 else
                 {
                     labBP2.Text = DataA.NIBP2_Syst.ToString() + " / " + DataA.NIBP2_Diast.ToString();
+                    if (CurrentRecordInfo != null)
+                    {
+                        CurrentRecordInfo.Data.ABP2 = [DataA.NIBP2_Syst, DataA.NIBP2_Diast];
+//                        UpdateRecInfoBox(CurrentRecordInfo);
+                    }
                 }
 
                 if (cb3_InProgress.Checked)
                 {
                     labBP3.Text = DataA.NIBP3_Press.ToString();
+                    if (CurrentRecordInfo != null)
+                    {
+                        CurrentRecordInfo.Data.ABP3 = [DataA.NIBP3_Syst, DataA.NIBP3_Diast];
+//                        UpdateRecInfoBox(CurrentRecordInfo);
+                    }
                 }
                 else
                 {
                     labBP3.Text = DataA.NIBP3_Syst.ToString() + " / " + DataA.NIBP3_Diast.ToString();
+                    if (CurrentRecordInfo != null)
+                    {
+                        CurrentRecordInfo.Data.ABP4 = [DataA.NIBP4_Syst, DataA.NIBP4_Diast];
+//                        UpdateRecInfoBox(CurrentRecordInfo);
+                    }
                 }
 
                 if (cb4_InProgress.Checked)
@@ -235,6 +256,7 @@ namespace Polycardio2
                 labSys4.Text = "СИС : " + DataA.NIBP4_Syst.ToString();
                 labDia4.Text = "ДИА : " + DataA.NIBP4_Diast.ToString();
             }));
+#pragma warning restore CA1416 // Проверка совместимости платформы
         }
 
         void NewLineReceived(object sender, EventArgs agr)
@@ -256,6 +278,7 @@ namespace Polycardio2
         private void BPcomplete(object sender, EventArgs arg)
         {
             string mess;
+#pragma warning disable CA1416 // Проверка совместимости платформы
             this.Invoke(new Action(() =>
             {
 
@@ -335,6 +358,7 @@ namespace Polycardio2
                     labBP4.Text = "Error";
                 }
             }));
+#pragma warning restore CA1416 // Проверка совместимости платформы
         }
 
 
@@ -845,6 +869,7 @@ namespace Polycardio2
         private void butStartRecord_Click(object sender, EventArgs e)
         {
             //            timerDelay.Interval = Cfg.StartDelay * 1000;
+            UpdateRecInfoBox(CurrentRecordInfo);
             timerDelay.Enabled = true;
             DelayCounter = Cfg.StartDelay;
             labRecordSize.Text = "Start delay : " + DelayCounter.ToString() + " sec";
@@ -1241,11 +1266,6 @@ namespace Polycardio2
             USBPort.WriteByte(Cfg.PressLevel2);
             USBPort.WriteByte(ApexConstants.cmdStartSfig1);
             USBPort.WriteByte(ApexConstants.cmdStartSfig2);
-            if (decomposer != null)
-            {
-                decomposer.Pump1Started = true;
-                decomposer.Pump2Started = true;
-            }
         }
 
         private void butPumps34Start_Click(object sender, EventArgs e)
@@ -1256,21 +1276,12 @@ namespace Polycardio2
             USBPort.WriteByte(Cfg.PressLevel4);
             USBPort.WriteByte(ApexConstants.cmdStartSfig3);
             USBPort.WriteByte(ApexConstants.cmdStartSfig4);
-            if (decomposer != null)
-            {
-                decomposer.Pump3Started = true;
-                decomposer.Pump4Started = true;
-            }
         }
         private void butPump1start_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdSetPressSfig1);
             USBPort.WriteByte(Cfg.PressLevel1);
             USBPort.WriteByte(ApexConstants.cmdStartSfig1);
-            if (decomposer != null)
-            {
-                decomposer.Pump1Started = true;
-            }
         }
 
         private void butPump2start_Click(object sender, EventArgs e)
@@ -1278,50 +1289,28 @@ namespace Polycardio2
             USBPort.WriteByte(ApexConstants.cmdSetPressSfig2);
             USBPort.WriteByte(Cfg.PressLevel2);
             USBPort.WriteByte(ApexConstants.cmdStartSfig2);
-            if (decomposer != null)
-            {
-                decomposer.Pump2Started = true;
-            }
         }
 
         private void butPumps12Stop_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdStopSfig1);
             USBPort.WriteByte(ApexConstants.cmdStopSfig2);
-            if (decomposer != null)
-            {
-                decomposer.Pump1Started = false;
-                decomposer.Pump2Started = false;
-            }
         }
 
         private void butPumps34Stop_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdStopSfig3);
             USBPort.WriteByte(ApexConstants.cmdStopSfig4);
-            if (decomposer != null)
-            {
-                decomposer.Pump3Started = false;
-                decomposer.Pump4Started = false;
-            }
         }
 
         private void butPump1stop_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdStopSfig1);
-            if (decomposer != null)
-            {
-                decomposer.Pump1Started = false;
-            }
         }
 
         private void butPump2stop_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdStopSfig2);
-            if (decomposer != null)
-            {
-                decomposer.Pump2Started = false;
-            }
         }
 
         private void butBPMeas_Click(object sender, EventArgs e)
@@ -1369,10 +1358,6 @@ namespace Polycardio2
             USBPort.WriteByte(ApexConstants.cmdSetPressSfig3);
             USBPort.WriteByte(Cfg.PressLevel3);
             USBPort.WriteByte(ApexConstants.cmdStartSfig3);
-            if (decomposer != null)
-            {
-                decomposer.Pump3Started = true;
-            }
         }
 
         private void butPump4start_Click(object sender, EventArgs e)
@@ -1380,28 +1365,16 @@ namespace Polycardio2
             USBPort.WriteByte(ApexConstants.cmdSetPressSfig4);
             USBPort.WriteByte(Cfg.PressLevel4);
             USBPort.WriteByte(ApexConstants.cmdStartSfig4);
-            if (decomposer != null)
-            {
-                decomposer.Pump4Started = true;
-            }
         }
 
         private void butPump3stop_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdStopSfig3);
-            if (decomposer != null)
-            {
-                decomposer.Pump3Started = false;
-            }
         }
 
         private void butPump4stop_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdStopSfig4);
-            if (decomposer != null)
-            {
-                decomposer.Pump4Started = false;
-            }
         }
 
         private void numUDplevel3_ValueChanged(object sender, EventArgs e)
