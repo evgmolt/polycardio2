@@ -41,11 +41,7 @@ namespace Polycardio2
         public static string RecInfoExtension = ".txt";
         public static string TmpTextFile = "tmp.t";
 
-        public static int PatientFieldsCount = 9;
-        public static int HeaderAndVisibleCount = 2;
-        public static int HeaderSize = PatientFieldsCount + HeaderAndVisibleCount;
-        //        public static double ScaleECG_Y = 1;
-//        public static double ScalePPG_Y = 1;
+        public static int HeaderSize = 12;
 
         public const string ConfigFileName = "PCConf.cfg";
 

@@ -63,7 +63,6 @@
             labBP1 = new Label();
             butBPabort2 = new Button();
             butBPmeas2 = new Button();
-            labStatus = new Label();
             butBPabort1 = new Button();
             butBPMeas1 = new Button();
             butNewRecord = new Button();
@@ -76,9 +75,6 @@
             numUDplevel2 = new NumericUpDown();
             label2 = new Label();
             numUDplevel1 = new NumericUpDown();
-            labP3 = new Label();
-            labP2 = new Label();
-            labP1 = new Label();
             butEditRecInfo = new Button();
             butStopFlow = new Button();
             butOpenFile = new Button();
@@ -206,7 +202,6 @@
             panelButtons.Controls.Add(labBP1);
             panelButtons.Controls.Add(butBPabort2);
             panelButtons.Controls.Add(butBPmeas2);
-            panelButtons.Controls.Add(labStatus);
             panelButtons.Controls.Add(butBPabort1);
             panelButtons.Controls.Add(butBPMeas1);
             panelButtons.Controls.Add(butNewRecord);
@@ -219,9 +214,6 @@
             panelButtons.Controls.Add(numUDplevel2);
             panelButtons.Controls.Add(label2);
             panelButtons.Controls.Add(numUDplevel1);
-            panelButtons.Controls.Add(labP3);
-            panelButtons.Controls.Add(labP2);
-            panelButtons.Controls.Add(labP1);
             panelButtons.Controls.Add(butEditRecInfo);
             panelButtons.Controls.Add(butStopFlow);
             panelButtons.Controls.Add(butOpenFile);
@@ -546,16 +538,6 @@
             butBPmeas2.UseVisualStyleBackColor = true;
             butBPmeas2.Click += butBPmeas2_Click;
             // 
-            // labStatus
-            // 
-            labStatus.AutoSize = true;
-            labStatus.Location = new Point(131, 647);
-            labStatus.Margin = new Padding(4, 0, 4, 0);
-            labStatus.Name = "labStatus";
-            labStatus.Size = new Size(38, 15);
-            labStatus.TabIndex = 25;
-            labStatus.Text = "label1";
-            // 
             // butBPabort1
             // 
             butBPabort1.Location = new Point(114, 115);
@@ -680,39 +662,9 @@
             numUDplevel1.TabIndex = 13;
             numUDplevel1.ValueChanged += numUDplevel1_ValueChanged;
             // 
-            // labP3
-            // 
-            labP3.AutoSize = true;
-            labP3.Location = new Point(264, 673);
-            labP3.Margin = new Padding(4, 0, 4, 0);
-            labP3.Name = "labP3";
-            labP3.Size = new Size(20, 15);
-            labP3.TabIndex = 12;
-            labP3.Text = "P3";
-            // 
-            // labP2
-            // 
-            labP2.AutoSize = true;
-            labP2.Location = new Point(264, 658);
-            labP2.Margin = new Padding(4, 0, 4, 0);
-            labP2.Name = "labP2";
-            labP2.Size = new Size(20, 15);
-            labP2.TabIndex = 11;
-            labP2.Text = "P2";
-            // 
-            // labP1
-            // 
-            labP1.AutoSize = true;
-            labP1.Location = new Point(264, 643);
-            labP1.Margin = new Padding(4, 0, 4, 0);
-            labP1.Name = "labP1";
-            labP1.Size = new Size(20, 15);
-            labP1.TabIndex = 10;
-            labP1.Text = "P1";
-            // 
             // butEditRecInfo
             // 
-            butEditRecInfo.Location = new Point(16, 647);
+            butEditRecInfo.Location = new Point(11, 663);
             butEditRecInfo.Margin = new Padding(4, 3, 4, 3);
             butEditRecInfo.Name = "butEditRecInfo";
             butEditRecInfo.Size = new Size(88, 27);
@@ -746,12 +698,12 @@
             // textBoxRecInfo
             // 
             textBoxRecInfo.BorderStyle = BorderStyle.FixedSingle;
-            textBoxRecInfo.Location = new Point(15, 483);
+            textBoxRecInfo.Location = new Point(11, 448);
             textBoxRecInfo.Margin = new Padding(4, 3, 4, 3);
             textBoxRecInfo.Multiline = true;
             textBoxRecInfo.Name = "textBoxRecInfo";
             textBoxRecInfo.ReadOnly = true;
-            textBoxRecInfo.Size = new Size(310, 138);
+            textBoxRecInfo.Size = new Size(310, 209);
             textBoxRecInfo.TabIndex = 7;
             // 
             // labRecordSize
@@ -1230,9 +1182,6 @@
         private System.Windows.Forms.Button butOpenFile;
         private System.Windows.Forms.Button butStopFlow;
         private System.Windows.Forms.Button butEditRecInfo;
-        private System.Windows.Forms.Label labP3;
-        private System.Windows.Forms.Label labP2;
-        private System.Windows.Forms.Label labP1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numUDplevel2;
         private System.Windows.Forms.Label label2;
@@ -1245,7 +1194,6 @@
         private System.Windows.Forms.Button butNewRecord;
         private System.Windows.Forms.Button butBPMeas1;
         private System.Windows.Forms.Button butBPabort1;
-        private System.Windows.Forms.Label labStatus;
         private System.Windows.Forms.Button butBPabort2;
         private System.Windows.Forms.Button butBPmeas2;
         private System.Windows.Forms.Label labBP2;

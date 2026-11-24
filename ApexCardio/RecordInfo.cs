@@ -16,8 +16,11 @@ namespace Polycardio2
         public int Age;     //4
         public int Height;  //5
         public int Weight;  //6
-        public int[] ABP;         //8
-
+        public byte[] ABP1;         //7
+        public byte[] ABP2;         //8
+        public byte[] ABP3;         //9
+        public byte[] ABP4;         //10
+        public int Pulse;
         public string[] ItemNames;
 
 
@@ -31,16 +34,22 @@ namespace Polycardio2
                     "Age : ",
                     "Height : ",
                     "Weight : ",
-                    "ABP"
+                    "ABP1 : ",
+                    "ABP2 : ",
+                    "ABP3 : ",
+                    "ABP4 : ",
+                    "Pulse : "
                 };
-            ABP = new int[2];
-
+            ABP1 = new byte[2];
+            ABP2 = new byte[2];
+            ABP3 = new byte[2];
+            ABP4 = new byte[2];
         }
     }
 
     public class RecordInfo
     {
-        public int NumOfProperties = ApexConstants.PatientFieldsCount;
+        public int NumOfProperties = ApexConstants.HeaderSize;
         private string SignSelected = "V";
         private char ABPseparator = '/';
         public RecordInfoData Data;
@@ -60,8 +69,18 @@ namespace Polycardio2
             Data.Height = Convert.ToInt16(lines[4]);
             Data.Weight = Convert.ToInt16(lines[5]);
             string[] s = lines[6].Split(ABPseparator);
-            Data.ABP[0] = Convert.ToInt16(s[0]);
-            Data.ABP[1] = Convert.ToInt16(s[1]);
+            Data.ABP1[0] = Convert.ToByte(s[0]);
+            Data.ABP1[1] = Convert.ToByte(s[1]);
+            s = lines[7].Split(ABPseparator);
+            Data.ABP2[0] = Convert.ToByte(s[0]);
+            Data.ABP2[1] = Convert.ToByte(s[1]);
+            s = lines[8].Split(ABPseparator);
+            Data.ABP3[0] = Convert.ToByte(s[0]);
+            Data.ABP3[1] = Convert.ToByte(s[1]);
+            s = lines[9].Split(ABPseparator);
+            Data.ABP4[0] = Convert.ToByte(s[0]);
+            Data.ABP4[1] = Convert.ToByte(s[1]);
+            Data.Pulse = Convert.ToByte(lines[10]);
         }
 
 
@@ -81,10 +100,21 @@ namespace Polycardio2
                 Data.Height = Convert.ToInt16(lines[4]);
                 Data.Weight = Convert.ToInt16(lines[5]);
                 string[] s = lines[6].Split(ABPseparator);
-                Data.ABP[0] = Convert.ToInt16(s[0]);
-                Data.ABP[1] = Convert.ToInt16(s[1]);
+                Data.ABP1[0] = Convert.ToByte(s[0]);
+                Data.ABP1[1] = Convert.ToByte(s[1]);
+                s = lines[7].Split(ABPseparator);
+                Data.ABP2[0] = Convert.ToByte(s[0]);
+                Data.ABP2[1] = Convert.ToByte(s[1]);
+                s = lines[8].Split(ABPseparator);
+                Data.ABP3[0] = Convert.ToByte(s[0]);
+                Data.ABP3[1] = Convert.ToByte(s[1]);
+                s = lines[9].Split(ABPseparator);
+                Data.ABP4[0] = Convert.ToByte(s[0]);
+                Data.ABP4[1] = Convert.ToByte(s[1]);
+                Data.Pulse = Convert.ToInt16(lines[10]);
+                    
             }
-            catch (Exception)
+                catch (Exception)
             {
             }
         }
@@ -92,14 +122,18 @@ namespace Polycardio2
         
         public string[] GetRecInfo(bool insertTabs)
         {
-            var lines = new string[NumOfProperties];
+            var lines = new string[NumOfProperties - 1];
             lines[0] = AddItemName(insertTabs, 0, Data.Date.ToString());
             lines[1] = AddItemName(insertTabs, 1, Data.Length.ToString());
             lines[2] = AddItemName(insertTabs, 2, Data.Sex);
             lines[3] = AddItemName(insertTabs, 3, Data.Age.ToString());
             lines[4] = AddItemName(insertTabs, 4, Data.Height.ToString());
             lines[5] = AddItemName(insertTabs, 5, Data.Weight.ToString());
-            lines[6] = AddItemName(insertTabs, 6, Data.ABP[0].ToString() + ABPseparator + Data.ABP[1].ToString());
+            lines[6] = AddItemName(insertTabs, 6, Data.ABP1[0].ToString() + ABPseparator + Data.ABP1[1].ToString());
+            lines[7] = AddItemName(insertTabs, 7, Data.ABP2[0].ToString() + ABPseparator + Data.ABP2[1].ToString());
+            lines[8] = AddItemName(insertTabs, 8, Data.ABP3[0].ToString() + ABPseparator + Data.ABP3[1].ToString());
+            lines[9] = AddItemName(insertTabs, 9, Data.ABP4[0].ToString() + ABPseparator + Data.ABP4[1].ToString());
+            lines[10] = AddItemName(insertTabs, 10, Data.Pulse.ToString());
             return lines;
         }
 

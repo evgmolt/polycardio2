@@ -162,9 +162,6 @@ namespace Polycardio2
             {
                 label1.Text = "Счетчик пакетов " + decomposer.MainIndex.ToString();
 
-                labP1.Text = (DataA.ECG1Array[decomposer.MainIndex]).ToString();
-                labP2.Text = (DataA.Reo1Array[decomposer.MainIndex]).ToString();
-                labP3.Text = (DataA.ECG2Array[decomposer.MainIndex]).ToString();
 
                 uint status = DataA.DeviceStatus;
                 cb1_InProgress.Checked = (status & (uint)DeviceStatusFlags.dsBP1_InProgress) != 0;
@@ -269,8 +266,8 @@ namespace Polycardio2
                     labBP1.Text = decomposer.Data.NIBP1_Syst.ToString() + " / " + decomposer.Data.NIBP1_Diast.ToString();
                     if (CurrentRecordInfo != null)
                     {
-                        CurrentRecordInfo.Data.ABP[0] = decomposer.Data.NIBP1_Syst;
-                        CurrentRecordInfo.Data.ABP[1] = decomposer.Data.NIBP1_Diast;
+                        CurrentRecordInfo.Data.ABP1[0] = decomposer.Data.NIBP1_Syst;
+                        CurrentRecordInfo.Data.ABP1[1] = decomposer.Data.NIBP1_Diast;
                         CurrentRecordInfo.Save(Cfg);
                         UpdateRecInfoBox(CurrentRecordInfo);
                     }
@@ -288,8 +285,8 @@ namespace Polycardio2
                     labBP2.Text = decomposer.Data.NIBP2_Syst.ToString() + " / " + decomposer.Data.NIBP2_Diast.ToString();
                     if (CurrentRecordInfo != null)
                     {
-                        CurrentRecordInfo.Data.ABP[0] = decomposer.Data.NIBP2_Syst;
-                        CurrentRecordInfo.Data.ABP[1] = decomposer.Data.NIBP2_Diast;
+                        CurrentRecordInfo.Data.ABP2[0] = decomposer.Data.NIBP2_Syst;
+                        CurrentRecordInfo.Data.ABP2[1] = decomposer.Data.NIBP2_Diast;
                         CurrentRecordInfo.Save(Cfg);
                         UpdateRecInfoBox(CurrentRecordInfo);
                     }
@@ -307,8 +304,8 @@ namespace Polycardio2
                     labBP2.Text = decomposer.Data.NIBP3_Syst.ToString() + " / " + decomposer.Data.NIBP3_Diast.ToString();
                     if (CurrentRecordInfo != null)
                     {
-                        CurrentRecordInfo.Data.ABP[0] = decomposer.Data.NIBP3_Syst;
-                        CurrentRecordInfo.Data.ABP[1] = decomposer.Data.NIBP3_Diast;
+                        CurrentRecordInfo.Data.ABP3[0] = decomposer.Data.NIBP3_Syst;
+                        CurrentRecordInfo.Data.ABP3[1] = decomposer.Data.NIBP3_Diast;
                         CurrentRecordInfo.Save(Cfg);
                         UpdateRecInfoBox(CurrentRecordInfo);
                     }
@@ -326,8 +323,8 @@ namespace Polycardio2
                     labBP2.Text = decomposer.Data.NIBP4_Syst.ToString() + " / " + decomposer.Data.NIBP3_Diast.ToString();
                     if (CurrentRecordInfo != null)
                     {
-                        CurrentRecordInfo.Data.ABP[0] = decomposer.Data.NIBP4_Syst;
-                        CurrentRecordInfo.Data.ABP[1] = decomposer.Data.NIBP3_Diast;
+                        CurrentRecordInfo.Data.ABP4[0] = decomposer.Data.NIBP4_Syst;
+                        CurrentRecordInfo.Data.ABP4[1] = decomposer.Data.NIBP3_Diast;
                         CurrentRecordInfo.Save(Cfg);
                         UpdateRecInfoBox(CurrentRecordInfo);
                     }
@@ -792,14 +789,12 @@ namespace Polycardio2
             textBoxRecInfo.Clear();
             textBoxRecInfo.Text += "File : " + Convert.ToChar(9) + Path.GetFileName(riarg.FileName) + System.Environment.NewLine;
             string[] lines = riarg.GetRecInfo(true);
-            for (int i = 0; i < lines.Length; i++)
+            for (int i = 0; i < lines.Length - 1; i++)
             {
-                string s;
-                if (i < ApexConstants.PatientFieldsCount)
-                {
-                    s = lines[i] + System.Environment.NewLine;
+                string s = lines[i];
+                    if (i != (lines.Length - 2)) 
+                        s = s + System.Environment.NewLine;
                     textBoxRecInfo.Text += s;
-                }
             }
             textBoxRecInfo.SelectionStart = 0;
         }
@@ -1125,12 +1120,13 @@ namespace Polycardio2
                     CurrentRecordInfo = ri;
 
                     string[] lines = File.ReadAllLines(openFileDialog1.FileName);
-                    int size = lines.Count() - ApexConstants.PatientFieldsCount;
+                    int size = lines.Count() - ApexConstants.HeaderSize;
                     if (size <= 0)
                     {
                         MessageBox.Show("Error reading file " + openFileDialog1.FileName);
                         return;
                     }
+//                    ri.Data.Length = size;
                     UpdateScrollBar(size);
 
                     DataA = new DataArrays(size + 1000);
@@ -1142,7 +1138,7 @@ namespace Polycardio2
                         if (gi.Visible) gi.BufPanel.Refresh();
                     }
                     textBoxRecInfo.SelectionStart = 0;
-                    DataA.NIBP1_Syst = 130;
+                    DataA.NIBP1_Syst = ri.Data.ABP1[0];
                     DataA.NIBP1_Diast = 88;
                     DataA.NIBP2_Syst = 180;
                     DataA.NIBP2_Diast = 110;
