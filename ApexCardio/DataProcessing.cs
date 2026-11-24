@@ -11,6 +11,7 @@ namespace Polycardio2
         public const int SamplingFrequency = 125;
         public static ByteDecomposer ParseData(string[] lines, DataArrays a, int skip)
         {
+            
             for (int i = skip; i < lines.Length; i++)
             {
                 string[] s = lines[i].Split(Convert.ToChar(9));
@@ -78,37 +79,6 @@ namespace Polycardio2
             }*/
         }
 
-        private static void SearchP(DataArrays D, int ind)
-        {
-            const int PRInterval = 20;
-            int RPos = D.RArray[ind];
-            int pos = RPos - 3;
-
-            // ЗАЩИТА: Добавлено pos > 0, чтобы избежать падения программы
-            while (pos > 0 && D.ECG1ViewArray[pos] < D.ECG1ViewArray[pos + 1])
-            {
-                pos--;
-            }
-
-            // ИСПРАВЛЕНО: Инициализируем первым значением, а не нулем (защита от отрицательного дрейфа изолинии)
-            int Max = D.ECG1ViewArray[pos];
-            int MaxPos = pos;
-
-            // ЗАЩИТА: Ограничиваем левую границу, чтобы индекс не ушел ниже 0
-            int leftLimit = Math.Max(0, RPos - PRInterval);
-
-            for (int i = pos; i > leftLimit; i--)
-            {
-                if (D.ECG1ViewArray[i] > Max)
-                {
-                    Max = D.ECG1ViewArray[i];
-                    MaxPos = i;
-                }
-            }
-
-            // Перезаписываем временный R-зубец на итоговый P-зубец
-            D.RArray[ind] = MaxPos;
-        }
 
         /// <summary>
         /// Надежный поиск систолических максимумов на реальном живом сигнале PPG (ФПГ).

@@ -54,7 +54,11 @@ namespace Polycardio2
         public byte NIBP4_Diast;
         public ushort NIBP4_Press;
         public uint DeviceStatus;
-    public DataArrays(int size)
+        public byte bp1status;
+        public byte bp2status;
+        public byte bp3status;
+        public byte bp4status;
+        public DataArrays(int size)
         {
             ECG1Array = new int[size];
             ECG2Array = new int[size];
@@ -97,6 +101,11 @@ namespace Polycardio2
             RArray = new int[RRMaxNum];
             PPGRArray = new int[RRMaxNum];
             RInd = 0;
+
+            bp1status = 0;
+            bp2status = 0;
+            bp3status = 0;
+            bp4status = 0;
         }
     }
 

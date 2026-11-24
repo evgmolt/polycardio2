@@ -57,7 +57,7 @@ namespace Polycardio2
             double diast = dbp > 0 ? dbp : data.NIBP1_Diast;
 
             if (syst <= diast || diast <= 0)
-                throw new ArgumentException($"Некорректные значения АД: {syst}/{diast}");
+                return new CaviMeasurementResult { Side = side };
 
             // 2. Выбираем каналы сфигмограммы для нужной стороны
             int[] rawHand = side == BodySide.Left ? data.SphigmoLeftHandArray : data.SphigmoRightHandArray;

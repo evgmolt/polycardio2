@@ -197,8 +197,8 @@ namespace Polycardio2
                     labBP1.Text = DataA.NIBP1_Syst.ToString() + " / " + DataA.NIBP1_Diast.ToString();
                     if (CurrentRecordInfo != null)
                     {
-                        CurrentRecordInfo.Data.ABP1 = [DataA.NIBP1_Syst, DataA.NIBP1_Diast];
-//                        UpdateRecInfoBox(CurrentRecordInfo);
+                            CurrentRecordInfo.Data.ABP1 = [DataA.NIBP1_Syst, DataA.NIBP1_Diast];
+                        //                        UpdateRecInfoBox(CurrentRecordInfo);
                     }
                 }
 
@@ -1140,9 +1140,7 @@ namespace Polycardio2
                     timerRead.Enabled = false;
 
                     CurrentFile = Path.GetFileName(openFileDialog1.FileName);
-                    var ri = new RecordInfo(Cfg, CurrentFile);
-                    UpdateRecInfoBox(ri);
-                    CurrentRecordInfo = ri;
+                    
 
                     string[] lines = File.ReadAllLines(openFileDialog1.FileName);
                     int size = lines.Count() - ApexConstants.HeaderSize;
@@ -1151,26 +1149,22 @@ namespace Polycardio2
                         MessageBox.Show("Error reading file " + openFileDialog1.FileName);
                         return;
                     }
-//                    ri.Data.Length = size;
-                    UpdateScrollBar(size);
+                    //                    ri.Data.Length = size;
 
                     DataA = new DataArrays(size + 1000);
                     decomposer = DataProcessing.ParseData(lines, DataA, ApexConstants.HeaderSize);
                     decomposer.CountViewArrays(lines.Length - ApexConstants.HeaderSize, Cfg.FilterOn);
                     SetScale(size);
+                    var ri = new RecordInfo(Cfg, CurrentFile, lines);
+                    UpdateDataFromRI(DataA, ri.Data);
+                    UpdateRecInfoBox(ri);
+                    CurrentRecordInfo = ri;
+                    UpdateScrollBar(size);
                     foreach (GraphicsInfo gi in GInfoArr)
                     {
                         if (gi.Visible) gi.BufPanel.Refresh();
                     }
-                    textBoxRecInfo.SelectionStart = 0;
-                    DataA.NIBP1_Syst = ri.Data.ABP1[0];
-                    DataA.NIBP1_Diast = 88;
-                    DataA.NIBP2_Syst = 180;
-                    DataA.NIBP2_Diast = 110;
-
-                    // Предполагается, что dataArrays уже заполнен данными с прибора и манжет NIBP
-                    double patientHeight = ri.Data.Height; // Рост пациента в см
-                    int actualSamples = DataA.FragSize > 0 ? DataA.FragSize : DataA.ECG1Array.Length;
+//                    textBoxRecInfo.SelectionStart = 0;
                     
                     DataProcessing.DetectECG(DataA, decomposer.MainIndex);
 
@@ -1178,22 +1172,32 @@ namespace Polycardio2
                     var leftCavi = CaviProcessor.CalculateCavi(
                         DataA,
                         BodySide.Left,
-                        patientHeight,
-                        validSamplesCount: actualSamples);
+                        ri.Data.Height,
+                        size);
 
                     // Расчёт для правой стороны (например, если АД правой руки в NIBP2)
                     var rightCavi = CaviProcessor.CalculateCavi(
                         DataA,
                         BodySide.Right,
-                        patientHeight,
-                        sbp: DataA.NIBP2_Syst,
-                        dbp: DataA.NIBP2_Diast,
-                        validSamplesCount: actualSamples);
+                        ri.Data.Height,
+                        size);
+                    
                 }
             }
 
         }
 
+        private void UpdateDataFromRI(DataArrays d, RecordInfoData recdata)
+        {
+            d.NIBP1_Syst = recdata.ABP1[0];
+            d.NIBP1_Diast = recdata.ABP1[1];
+            d.NIBP2_Syst = recdata.ABP2[0];
+            d.NIBP2_Diast = recdata.ABP2[1];
+            d.NIBP3_Syst = recdata.ABP3[0];
+            d.NIBP3_Diast = recdata.ABP3[1];
+            d.NIBP4_Syst = recdata.ABP4[0];
+            d.NIBP4_Diast = recdata.ABP4[1];
+        }
         private void SetScale(int size)
         {
             double coeff = 1.5;
@@ -1316,41 +1320,49 @@ namespace Polycardio2
         private void butBPMeas_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdStartBP1);
+            DataA.bp1status = 1;
         }
 
         private void butBPabort_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdCancelBP1);
+            DataA.bp1status = 0;
         }
 
         private void butBPmeas2_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdStartBP2);
+            DataA.bp2status = 1;
         }
 
         private void butBPabort2_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdCancelBP2);
+            DataA.bp2status = 0;
         }
 
         private void butBPmeas3_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdStartBP3);
+            DataA.bp3status = 1;
         }
 
         private void butBPabort3_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdCancelBP3);
+            DataA.bp3status = 0;
         }
 
         private void butBPmeas4_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdStartBP4);
+            DataA.bp4status = 1;
         }
 
         private void butBPabort4_Click(object sender, EventArgs e)
         {
             USBPort.WriteByte(ApexConstants.cmdCancelBP4);
+            DataA.bp4status = 0;
         }
 
         private void butPump3start_Click(object sender, EventArgs e)
