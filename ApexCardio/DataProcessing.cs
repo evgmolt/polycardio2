@@ -72,10 +72,10 @@ namespace Polycardio2
                 }
             }
 
-            for (int i = 0; i < D.RInd; i++)
+/*            for (int i = 0; i < D.RInd; i++)
             {
                 SearchP(D, i);
-            }
+            }*/
         }
 
         private static void SearchP(DataArrays D, int ind)

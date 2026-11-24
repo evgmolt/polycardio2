@@ -81,7 +81,7 @@ namespace Polycardio2
 
             // 5. Анализируем каждый сердечный цикл (R-R интервал)
             var delaysSeconds = new List<double>();
-
+            int ppgWriteIdx = 0;
             for (int i = 0; i < rPeaks.Count - 1; i++)
             {
                 int cycleStart = rPeaks[i];
@@ -103,6 +103,11 @@ namespace Polycardio2
                     if (deltaT >= 0.030 && deltaT <= 0.250)
                     {
                         delaysSeconds.Add(deltaT);
+                        if (data.PPGRArray != null && ppgWriteIdx + 1 < data.PPGRArray.Length)
+                        {
+                            data.PPGRArray[ppgWriteIdx++] = (int)Math.Round(handFootIdx);
+//                            data.PPGRArray[ppgWriteIdx++] = (int)Math.Round(legFootIdx);
+                        }
                     }
                 }
             }
@@ -118,7 +123,7 @@ namespace Polycardio2
             double distanceMeters = CalculateEffectivePathLengthMeters(patientHeightCm);
 
             // 8. Скорость пульсовой волны (м/с) и итоговый индекс CAVI
-            double pwv = distanceMeters / cleanMeanDelay;
+            double pwv = distanceMeters / (cleanMeanDelay + 0.045);
             double cavi = ComputeCaviFormula(syst, diast, pwv);
 
             return new CaviMeasurementResult
@@ -149,8 +154,10 @@ namespace Polycardio2
         /// </summary>
         private static double ComputeCaviFormula(double sbp, double dbp, double pwv)
         {
+            const double unitConversionFactor = 1050.0 / 133.322;
+
             double deltaP = sbp - dbp;
-            double haBeta = (2.0 * BloodDensity / deltaP) * Math.Log(sbp / dbp) * (pwv * pwv);
+            double haBeta = (2.0 * unitConversionFactor / deltaP) * Math.Log(sbp / dbp) * (pwv * pwv);
 
             double a, b;
             if (haBeta < 7.34875)
