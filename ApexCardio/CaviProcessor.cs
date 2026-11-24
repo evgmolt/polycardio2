@@ -70,6 +70,9 @@ namespace Polycardio2
             if (length < 250) // Минимум 2 секунды записи при 125 Гц
                 return new CaviMeasurementResult { Side = side };
 
+            if (!HasSignalActivity(rawHand, length) || !HasSignalActivity(rawLeg, length))
+                return new CaviMeasurementResult { Side = side };
+
             // 3. Предварительное сглаживание (ФНЧ скользящим средним 3-го порядка для подавления шума АЦП)
             double[] handSmooth = SmoothSignal(rawHand, length);
             double[] legSmooth = SmoothSignal(rawLeg, length);
@@ -313,6 +316,21 @@ namespace Polycardio2
             int trim = (int)(sorted.Count * 0.15);
             var trimmed = sorted.Skip(trim).Take(sorted.Count - 2 * trim);
             return trimmed.Average();
+        }
+
+        private static bool HasSignalActivity(int[] signal, int length)
+        {
+            int min = signal[0];
+            int max = signal[0];
+
+            for (int i = 1; i < length; i++)
+            {
+                if (signal[i] < min) min = signal[i];
+                if (signal[i] > max) max = signal[i];
+            }
+
+            // Если размах сигнала меньше 500 единиц АЦП (нет пульсовой волны, только шум) — считаем канал пустым
+            return (max - min) > 500;
         }
     }
 }

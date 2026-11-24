@@ -13,9 +13,9 @@ namespace Polycardio2
         public decimal Length;  //1
         public string Name;     //2
         public string Sex;      //3
-        public decimal Age;     //4
-        public decimal Height;  //5
-        public decimal Weight;  //6
+        public int Age;     //4
+        public int Height;  //5
+        public int Weight;  //6
         public int[] ABP;         //8
 
         public string[] ItemNames;
@@ -76,12 +76,11 @@ namespace Polycardio2
                 lines = lines.Select(RemoveItemName).ToArray();
                 Data.Date = Convert.ToDateTime(lines[0]);
                 Data.Length = Convert.ToInt16(lines[1]);
-                Data.Name = lines[2];
-                Data.Sex = lines[3];
-                Data.Age = Convert.ToInt16(lines[4]);
-                Data.Height = Convert.ToInt16(lines[5]);
-                Data.Weight = Convert.ToInt16(lines[6]);
-                string[] s = lines[7].Split(ABPseparator);
+                Data.Sex = lines[2];
+                Data.Age = Convert.ToInt16(lines[3]);
+                Data.Height = Convert.ToInt16(lines[4]);
+                Data.Weight = Convert.ToInt16(lines[5]);
+                string[] s = lines[6].Split(ABPseparator);
                 Data.ABP[0] = Convert.ToInt16(s[0]);
                 Data.ABP[1] = Convert.ToInt16(s[1]);
             }

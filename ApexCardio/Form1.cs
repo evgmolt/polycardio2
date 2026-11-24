@@ -578,9 +578,7 @@ namespace Polycardio2
                 e.Graphics.DrawLine(pen1, V.Visir2.X - ViewShift, R0.Top, V.Visir2.X - ViewShift, R0.Height);
             pen1.Dispose();
 
-            //            if (data == DataA.ECG1ViewArray)
-
-            //                if (V.Visir1.Visible & V.Visir2.Visible)
+            if (data == DataA.ECG1ViewArray)
             {
                 var penR = new Pen(Color.Green, 1);
                 for (int i = 0; i < DataA.RInd; i++)
@@ -588,13 +586,6 @@ namespace Polycardio2
                     e.Graphics.DrawLine(penR, DataA.RArray[i] - ViewShift, R0.Top, DataA.RArray[i] - ViewShift, R0.Height);
                 }
                 penR.Dispose();
-
-                var penPPGR = new Pen(Color.Red, 1);
-                for (int i = 0; i < DataA.RInd; i++)
-                {
-                    e.Graphics.DrawLine(penPPGR, DataA.PPGRArray[i] - ViewShift, R0.Top, DataA.PPGRArray[i] - ViewShift, R0.Height);
-                }
-                penPPGR.Dispose();
             }
         }
 
@@ -1157,7 +1148,7 @@ namespace Polycardio2
                     DataA.NIBP2_Diast = 110;
 
                     // Предполагается, что dataArrays уже заполнен данными с прибора и манжет NIBP
-                    double patientHeight = 178.0; // Рост пациента в см
+                    double patientHeight = ri.Data.Height; // Рост пациента в см
                     int actualSamples = DataA.FragSize > 0 ? DataA.FragSize : DataA.ECG1Array.Length;
                     
                     DataProcessing.DetectECG(DataA, decomposer.MainIndex);
@@ -1177,12 +1168,6 @@ namespace Polycardio2
                         sbp: DataA.NIBP2_Syst,
                         dbp: DataA.NIBP2_Diast,
                         validSamplesCount: actualSamples);
-
-                    var ppgindexes = DataProcessing.FindRealPPGMaximums(DataA.PPGViewArray, decomposer.MainIndex);
-                    for (int i = 0; i < ppgindexes.Count; i++)
-                    {
-                        //                        DataA.PPGRArray[i] = ppgindexes[i];
-                    }
                 }
             }
 

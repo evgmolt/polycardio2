@@ -31,9 +31,9 @@ namespace Polycardio2
         private void butOk_Click(object sender, EventArgs e)
         {
             recInfo.Data.Sex = rbMale.Checked ? maleSt : femaleSt;
-            recInfo.Data.Age = nudAge.Value;
-            recInfo.Data.Height = nudHeight.Value;
-            recInfo.Data.Weight = nudWeight.Value;
+            recInfo.Data.Age = (int)nudAge.Value;
+            recInfo.Data.Height = (int)nudHeight.Value;
+            recInfo.Data.Weight = (int)nudWeight.Value;
         }
 
         public RecordInfo GetDialogData()
