@@ -493,7 +493,7 @@ namespace Polycardio2
 
                         if (byteNum == 48 && currentPacketSize == 48)
                         {
-                            FinalizePacket(txtFileStream); // Конец короткого пакета (48 байт)
+                            FinalizePacket(txtFileStream, txtSoundStream); // Конец короткого пакета (48 байт)
                         }
                         break;
                     // --- Данные с модулей давления (NIBP1..4, Offsets 48–63) ---
@@ -539,14 +539,13 @@ namespace Polycardio2
             // Запись в текстовый лог, если запущена запись
             if (RecordStarted && txtFileStream != null)
             {
-                // Передаем MainIndex (кастуем к int, если метод GetDataString принимает int)
                 txtFileStream.WriteLine(GetDataString(MainIndex));
             }
 /*            if (RecordStarted && txtSoundStream != null)
             {
                 for (int i = 0; i < 8; i++)
                 {
-                    txtFileStream.WriteLine(Data.SoundArray[MainIndex + i]);
+                    txtSoundStream.WriteLine(Data.SoundArray[MainIndex * 8 + i]);
                 }
             }*/
 
