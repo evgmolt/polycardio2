@@ -1156,6 +1156,7 @@ namespace Polycardio2
                     decomposer.CountViewArrays(lines.Length - ApexConstants.HeaderSize, Cfg.FilterOn);
                     SetScale(size);
                     var ri = new RecordInfo(Cfg, CurrentFile, lines);
+                    ri.Data.Length = lines.Length - ApexConstants.HeaderSize;
                     UpdateDataFromRI(DataA, ri.Data);
                     UpdateRecInfoBox(ri);
                     CurrentRecordInfo = ri;
@@ -1164,29 +1165,36 @@ namespace Polycardio2
                     {
                         if (gi.Visible) gi.BufPanel.Refresh();
                     }
-//                    textBoxRecInfo.SelectionStart = 0;
-                    
-                    DataProcessing.DetectECG(DataA, decomposer.MainIndex);
+                    //                    textBoxRecInfo.SelectionStart = 0;
 
-                    // Расчёт для левой стороны (берет NIBP1_Syst и NIBP1_Diast автоматически)
-                    var leftCavi = CaviProcessor.CalculateCavi(
-                        DataA,
-                        BodySide.Left,
-                        ri.Data.Height,
-                        size);
-
-                    // Расчёт для правой стороны (например, если АД правой руки в NIBP2)
-                    var rightCavi = CaviProcessor.CalculateCavi(
-                        DataA,
-                        BodySide.Right,
-                        ri.Data.Height,
-                        size);
-                    
+                    ProcessCavi(ri);
                 }
             }
 
         }
+        
+        private void ProcessCavi(RecordInfo ri)
+        {
+            DataProcessing.DetectECG(DataA, decomposer.MainIndex);
 
+            // Расчёт для левой стороны (берет NIBP1_Syst и NIBP1_Diast автоматически)
+            var leftCavi = CaviProcessor.CalculateCavi(
+                DataA,
+                BodySide.Left,
+                ri.Data.Height,
+                ri.Data.Length);
+
+            // Расчёт для правой стороны (например, если АД правой руки в NIBP2)
+            var rightCavi = CaviProcessor.CalculateCavi(
+                DataA,
+                BodySide.Right,
+                ri.Data.Height,
+                ri.Data.Length);
+            using (FormResult fr = new FormResult(ri, leftCavi, rightCavi))
+            {
+                fr.ShowDialog();
+            }
+        }
         private void UpdateDataFromRI(DataArrays d, RecordInfoData recdata)
         {
             d.NIBP1_Syst = recdata.ABP1[0];

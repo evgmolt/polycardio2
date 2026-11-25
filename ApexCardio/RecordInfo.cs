@@ -10,7 +10,7 @@ namespace Polycardio2
     public class RecordInfoData
     {
         public DateTime Date;   //0
-        public decimal Length;  //1
+        public int Length;  //1
         public string Name;     //2
         public string Sex;      //3
         public int Age;     //4

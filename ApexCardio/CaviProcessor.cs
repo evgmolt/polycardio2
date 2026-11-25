@@ -17,15 +17,7 @@ namespace Polycardio2
         Right
     }
 
-    public class CaviMeasurementResult
-    {
-        public BodySide Side { get; set; }
-        public double Cavi { get; set; }
-        public double PwvMetersPerSec { get; set; }
-        public double MeanDelayMs { get; set; }
-        public int ValidBeatsCount { get; set; }
-        public bool IsValid => ValidBeatsCount > 0 && !double.IsNaN(Cavi);
-    }
+    
 
     public static class CaviProcessor
     {

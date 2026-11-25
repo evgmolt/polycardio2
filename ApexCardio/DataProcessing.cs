@@ -9,6 +9,7 @@ namespace Polycardio2
     public static class DataProcessing
     {
         public const int SamplingFrequency = 125;
+       
         public static ByteDecomposer ParseData(string[] lines, DataArrays a, int skip)
         {
             
