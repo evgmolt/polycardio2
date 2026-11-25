@@ -274,12 +274,7 @@ namespace Polycardio2
             return (val & 0x800000) != 0 ? val - 0x1000000 : val;
         }
 
-        private readonly byte[] _packetBuffer = new byte[67]; // Буфер под максимальный размер пакета
-        private int _packetIdx = 0;                          // Текущая позиция заполнения буфера
-        private int _currentPacketSize = 48;                 // Ожидаемый размер (динамически меняется)
-
-
-        public int Decompos(USBserialPort usbport, Stream saveFileStream, StreamWriter txtFileStream, ApexConfig cfg)
+        public int Decompos(USBserialPort usbport, Stream saveFileStream, StreamWriter txtFileStream, StreamWriter txtSoundStream, ApexConfig cfg)
         {
             int bytes = usbport.BytesRead;
             if (bytes == 0)
@@ -530,7 +525,7 @@ namespace Polycardio2
 
                         uint currentStatus = (uint)Data.DeviceStatus;
 
-                        FinalizePacket(txtFileStream); // Конец полной посылки (67 байт)
+                        FinalizePacket(txtFileStream, txtSoundStream); // Конец полной посылки (67 байт)
                         break;
                 }
             }
@@ -539,7 +534,7 @@ namespace Polycardio2
             return bytes;
         }
 
-        private void FinalizePacket(StreamWriter? txtFileStream)
+        private void FinalizePacket(StreamWriter? txtFileStream, StreamWriter? txtSoundStream)
         {
             // Запись в текстовый лог, если запущена запись
             if (RecordStarted && txtFileStream != null)
@@ -547,6 +542,14 @@ namespace Polycardio2
                 // Передаем MainIndex (кастуем к int, если метод GetDataString принимает int)
                 txtFileStream.WriteLine(GetDataString(MainIndex));
             }
+/*            if (RecordStarted && txtSoundStream != null)
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    txtFileStream.WriteLine(Data.SoundArray[MainIndex + i]);
+                }
+            }*/
+
 
             // Вызов события отрисовки интерфейса
             OnDecomposeLineEvent();

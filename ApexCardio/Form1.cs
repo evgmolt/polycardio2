@@ -66,6 +66,7 @@ namespace Polycardio2
         private bool ViewMode = false;
         FileStream filestream;
         StreamWriter textWriter;
+        StreamWriter textSoundWriter;
         private string CurrentFile;
         private RecordInfo CurrentRecordInfo;
         private int DelayCounter;
@@ -736,7 +737,7 @@ namespace Polycardio2
             if (!USBPort.PortHandle.IsOpen) return;
             if (decomposer != null)
             {
-                decomposer.Decompos(USBPort, filestream, textWriter, Cfg).ToString();
+                decomposer.Decompos(USBPort, filestream, textWriter, textSoundWriter, Cfg);
             }
         }
 
@@ -858,6 +859,8 @@ namespace Polycardio2
             //            string fname = String.Concat(Cfg.DataDir.ToString(), CurrentFile, ApexConstants.DataFileExtension);
             //            filestream = new FileStream(fname, FileMode.Create);
             textWriter = new StreamWriter(Cfg.DataDir.ToString() + ApexConstants.TmpTextFile);
+            string sf = Path.GetFileName(CurrentRecordInfo.FileName);
+            textSoundWriter = new StreamWriter(Cfg.DataDir + sf + "_sound.txt");
             decomposer.TotalBytes = 0;
             decomposer.LineCounter = 0;
             decomposer.DecomposeLineEvent += NewLineReceived;
@@ -918,9 +921,16 @@ namespace Polycardio2
             //            String fname = filestream.Name;
             decomposer.RecordStarted = false;
             decomposer = null;
-            //            filestream.Close();
-            //            filestream.Dispose();
-            if (textWriter != null) textWriter.Dispose();
+            if (textSoundWriter != null)
+            {
+                textSoundWriter.Close();
+                textSoundWriter.Dispose();
+            }
+            if (textWriter != null)
+            {
+                textWriter.Close();
+                textWriter.Dispose();
+            }
             string[] lines = File.ReadAllLines(Cfg.DataDir.ToString() + ApexConstants.TmpTextFile);
             File.AppendAllLines(CurrentRecordInfo.FileName, lines);
 
