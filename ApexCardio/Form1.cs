@@ -1150,14 +1150,14 @@ namespace Polycardio2
                         MessageBox.Show("Error reading file " + openFileDialog1.FileName);
                         return;
                     }
-                    //                    ri.Data.Length = size;
+                    
 
                     DataA = new DataArrays(size + 1000);
                     decomposer = DataProcessing.ParseData(lines, DataA, ApexConstants.HeaderSize);
                     decomposer.CountViewArrays(lines.Length - ApexConstants.HeaderSize, Cfg.FilterOn);
                     SetScale(size);
                     var ri = new RecordInfo(Cfg, CurrentFile, lines);
-                    ri.Data.Length = lines.Length - ApexConstants.HeaderSize;
+                    ri.Data.Length = size;
                     UpdateDataFromRI(DataA, ri.Data);
                     UpdateRecInfoBox(ri);
                     CurrentRecordInfo = ri;

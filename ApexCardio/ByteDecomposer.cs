@@ -577,9 +577,9 @@ namespace Polycardio2
                    $"{Data.SphigmoRightHandArray[index]}\t" + // Новый канал: Sfig3
                    $"{Data.SphigmoRightLegArray[index]}\t" +  // Новый канал: Sfig4
                    $"{Data.ApexArray[index]}\t" +
-                   $"{Data.PPGArray[index]}\t" +               // Новый канал: Фотоплетизмограмма
+                   $"{Data.PPGArray[index]}";
 
-                   // Выгрузка 8 последовательных отсчетов микрофона (ФКГ)
+/*                   // Выгрузка 8 последовательных отсчетов микрофона (ФКГ)
                    $"{Data.SoundArray[soundIdx]}\t" +
                    $"{Data.SoundArray[soundIdx + 1]}\t" +
                    $"{Data.SoundArray[soundIdx + 2]}\t" +
@@ -596,7 +596,7 @@ namespace Polycardio2
                    $"{Data.NIBP4_Syst}\t{Data.NIBP4_Diast}\t{Data.NIBP4_Press}\t" +
 
                    // Текущее полное состояние прибора (3-байтовое)
-                   $"{Data.DeviceStatus}";
+                   $"{Data.DeviceStatus}";*/
         }
 
     }

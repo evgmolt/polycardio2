@@ -26,7 +26,7 @@ namespace Polycardio2
                 a.SphigmoRightLegArray[i - skip] = Convert.ToInt32(s[8]);
                 a.ApexArray[i - skip] = Convert.ToInt32(s[9]);
                 a.PPGArray[i - skip] = Convert.ToInt32(s[10]);
-                a.SoundArray[i - skip] = Convert.ToInt16(s[11]);
+//                a.SoundArray[i - skip] = Convert.ToInt16(s[11]);
             }
             var d = new ByteDecomposer(a);
             d.MainIndex = (uint)lines.Length;
