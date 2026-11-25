@@ -572,10 +572,9 @@ namespace Polycardio2
                    $"{Data.Reo1Array[index]}\t" +
                    $"{Data.Reo2Array[index]}\t" +
                    $"{Data.SphigmoLeftHandArray[index]}\t" +
-                   $"{Data.SphigmoLeftHandViewArray[index]}\t" +
-                   //                   $"{Data.SphigmoLeftLegArray[index]}\t" +
-                   $"{Data.SphigmoRightHandArray[index]}\t" + // Новый канал: Sfig3
-                   $"{Data.SphigmoRightLegArray[index]}\t" +  // Новый канал: Sfig4
+                   $"{Data.SphigmoLeftLegArray[index]}\t" +
+                   $"{Data.SphigmoRightHandArray[index]}\t" + 
+                   $"{Data.SphigmoRightLegArray[index]}\t" +
                    $"{Data.ApexArray[index]}\t" +
                    $"{Data.PPGArray[index]}";
 
