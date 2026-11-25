@@ -926,6 +926,7 @@ namespace Polycardio2
 
             ViewMode = true;
             timerRead.Enabled = false;
+            ProcessCavi(CurrentRecordInfo);
 
 /*            DataA = new DataArrays(lines.Length);
             decomposer = DataProcessing.ParseData(lines, DataA, 0);
