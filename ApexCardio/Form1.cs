@@ -189,60 +189,21 @@ namespace Polycardio2
                 labNIBP3_Press.Text = "Текущее давление : " + DataA.NIBP3_Press.ToString();
                 labNIBP4_Press.Text = "Текущее давление : " + DataA.NIBP4_Press.ToString();
 
-                if (cb1_InProgress.Checked)
-                {
-                    labBP1.Text = DataA.NIBP1_Press.ToString();
-                }
-                else
-                {
-                    labBP1.Text = DataA.NIBP1_Syst.ToString() + " / " + DataA.NIBP1_Diast.ToString();
-                    if (CurrentRecordInfo != null)
-                    {
-                            CurrentRecordInfo.Data.ABP1 = [DataA.NIBP1_Syst, DataA.NIBP1_Diast];
-                        //                        UpdateRecInfoBox(CurrentRecordInfo);
-                    }
-                }
+                labBP1.Text = (cb1_InProgress.Checked)? DataA.NIBP1_Press.ToString() :
+                                                        DataA.NIBP1_Syst.ToString() + " / " + DataA.NIBP1_Diast.ToString();
+                labBP2.Text = (cb2_InProgress.Checked)? DataA.NIBP2_Press.ToString() :
+                                                        DataA.NIBP2_Syst.ToString() + " / " + DataA.NIBP2_Diast.ToString();
+                labBP3.Text = (cb3_InProgress.Checked)? DataA.NIBP3_Press.ToString() :
+                                                        DataA.NIBP3_Syst.ToString() + " / " + DataA.NIBP3_Diast.ToString();
+                labBP4.Text = (cb4_InProgress.Checked)? DataA.NIBP4_Press.ToString() :
+                                                        DataA.NIBP4_Syst.ToString() + " / " + DataA.NIBP4_Diast.ToString();
 
-                if (cb2_InProgress.Checked)
+                if (CurrentRecordInfo != null)
                 {
-                    labBP2.Text = DataA.NIBP2_Press.ToString();
-                }
-                else
-                {
-                    labBP2.Text = DataA.NIBP2_Syst.ToString() + " / " + DataA.NIBP2_Diast.ToString();
-                    if (CurrentRecordInfo != null)
-                    {
-                        CurrentRecordInfo.Data.ABP2 = [DataA.NIBP2_Syst, DataA.NIBP2_Diast];
-//                        UpdateRecInfoBox(CurrentRecordInfo);
-                    }
-                }
-
-                if (cb3_InProgress.Checked)
-                {
-                    labBP3.Text = DataA.NIBP3_Press.ToString();
-                    if (CurrentRecordInfo != null)
-                    {
-                        CurrentRecordInfo.Data.ABP3 = [DataA.NIBP3_Syst, DataA.NIBP3_Diast];
-//                        UpdateRecInfoBox(CurrentRecordInfo);
-                    }
-                }
-                else
-                {
-                    labBP3.Text = DataA.NIBP3_Syst.ToString() + " / " + DataA.NIBP3_Diast.ToString();
-                    if (CurrentRecordInfo != null)
-                    {
-                        CurrentRecordInfo.Data.ABP4 = [DataA.NIBP4_Syst, DataA.NIBP4_Diast];
-//                        UpdateRecInfoBox(CurrentRecordInfo);
-                    }
-                }
-
-                if (cb4_InProgress.Checked)
-                {
-                    labBP4.Text = DataA.NIBP4_Press.ToString();
-                }
-                else
-                {
-                    labBP4.Text = DataA.NIBP4_Syst.ToString() + " / " + DataA.NIBP4_Diast.ToString();
+                    CurrentRecordInfo.Data.ABP1 = [DataA.NIBP1_Syst, DataA.NIBP1_Diast];
+                    CurrentRecordInfo.Data.ABP2 = [DataA.NIBP2_Syst, DataA.NIBP2_Diast];
+                    CurrentRecordInfo.Data.ABP3 = [DataA.NIBP3_Syst, DataA.NIBP3_Diast];
+                    CurrentRecordInfo.Data.ABP4 = [DataA.NIBP4_Syst, DataA.NIBP4_Diast];
                 }
 
                 labSys1.Text = "СИС : " + DataA.NIBP1_Syst.ToString();
@@ -743,34 +704,6 @@ namespace Polycardio2
 
         private void timerStatus_Tick(object sender, EventArgs e)
         {
-
-            /*
-            if (decomposer != null)
-            {
-                butNewRecord.Enabled = Connected & decomposer.DeviceTurnedOn & !decomposer.RecordStarted & !decomposer.BP1measStarted;
-                butStartRecord.Enabled = Connected & !decomposer.RecordStarted & !ViewMode & decomposer.DeviceTurnedOn & CurrentRecordInfo != null & !decomposer.BP1measStarted;
-                butFlow.Enabled = Connected & decomposer.DeviceTurnedOn & !decomposer.RecordStarted;
-                butEditRecInfo.Enabled = CurrentRecordInfo != null & !decomposer.RecordStarted;
-                butBPMeas1.Enabled = Connected & decomposer.DeviceTurnedOn & !decomposer.RecordStarted & !decomposer.BP1measStarted;
-                butBPabort1.Enabled = Connected & decomposer.DeviceTurnedOn & !decomposer.RecordStarted & decomposer.BP1measStarted;
-                butBPmeas2.Enabled = Connected & decomposer.DeviceTurnedOn & !decomposer.RecordStarted & !decomposer.BP2measStarted;
-                butBPabort2.Enabled = Connected & decomposer.DeviceTurnedOn & !decomposer.RecordStarted & decomposer.BP2measStarted;
-                butPump1start.Enabled = Connected & decomposer.DeviceTurnedOn & !decomposer.Pump1Started;
-                butPump2start.Enabled = Connected & decomposer.DeviceTurnedOn & !decomposer.Pump2Started; ;
-                butPump1stop.Enabled = Connected & decomposer.DeviceTurnedOn;
-                butPump2stop.Enabled = Connected & decomposer.DeviceTurnedOn;
-                butPumps12Start.Enabled = Connected & decomposer.DeviceTurnedOn & (!decomposer.Pump1Started | !decomposer.Pump2Started);
-                butPumps12Stop.Enabled = Connected & decomposer.DeviceTurnedOn;
-            }
-            else
-            {
-                butFlow.Enabled = false;
-                butEditRecInfo.Enabled = CurrentRecordInfo != null;
-                butBPMeas1.Enabled = CurrentRecordInfo != null;
-                butBPMeas1.Enabled = false;
-                butBPabort1.Enabled = false;
-            }
-            */
             if (USBPort == null)
             {
                 labConnected.Text = "Disconnected";
@@ -842,10 +775,14 @@ namespace Polycardio2
                 ri.Data.Weight = 75;
                 ri.Save(Cfg);
                 CurrentRecordInfo = ri;
-                FormRecordInfo fri = new FormRecordInfo(ri);
-                fri.ShowDialog();
+                using (FormRecordInfo fri = new FormRecordInfo(ri))
+                {
+                    if (fri.ShowDialog() == DialogResult.OK)
+                    {
+                        butStartRecord.Enabled = true;
+                    }
+                }
                 UpdateRecInfoBox(ri);
-                butStartRecord.Enabled = true;
             }
         }
 
@@ -910,17 +847,19 @@ namespace Polycardio2
 
         private void StopRecord()
         {
+            
             V.ResetVisirs();
+            USBPort.WriteByte(ApexConstants.cmdStreamOff);
+            CurrentRecordInfo.Data.Length = DataA.RInd;
             pbRecordProgress.Visible = false;
             labRecordSize.Visible = false;
-            CurrentRecordInfo.Data.Length = decomposer.TotalBytes / ByteDecomposer.BytesInBlock / DataProcessing.SamplingFrequency;
+            CurrentRecordInfo.Data.Length = (int)(decomposer.MainIndex - decomposer.StartIndex);
             CurrentRecordInfo.Save(Cfg);
             UpdateRecInfoBox(CurrentRecordInfo);
             decomposer.DecomposeLineEvent -= NewLineReceived;
             decomposer.DecomposeLineEvent -= LineReceived;
             //            String fname = filestream.Name;
             decomposer.RecordStarted = false;
-            decomposer = null;
             if (textSoundWriter != null)
             {
                 textSoundWriter.Close();
@@ -964,6 +903,7 @@ namespace Polycardio2
             }
             Cfg.DataFileNum++;
             ApexConfig.SaveConfig(Cfg);
+            decomposer = null;
 
         }
 

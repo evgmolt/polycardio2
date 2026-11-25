@@ -541,13 +541,13 @@ namespace Polycardio2
             {
                 txtFileStream.WriteLine(GetDataString(MainIndex));
             }
-/*            if (RecordStarted && txtSoundStream != null)
+            if (RecordStarted && txtSoundStream != null)
             {
                 for (int i = 0; i < 8; i++)
                 {
                     txtSoundStream.WriteLine(Data.SoundArray[MainIndex * 8 + i]);
                 }
-            }*/
+            }
 
 
             // Вызов события отрисовки интерфейса

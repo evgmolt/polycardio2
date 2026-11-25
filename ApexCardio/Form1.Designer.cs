@@ -432,6 +432,7 @@
             // 
             // butBPabort4
             // 
+            butBPabort4.Enabled = false;
             butBPabort4.Location = new Point(114, 216);
             butBPabort4.Margin = new Padding(4, 3, 4, 3);
             butBPabort4.Name = "butBPabort4";
@@ -454,6 +455,7 @@
             // 
             // butBPabort3
             // 
+            butBPabort3.Enabled = false;
             butBPabort3.Location = new Point(114, 182);
             butBPabort3.Margin = new Padding(4, 3, 4, 3);
             butBPabort3.Name = "butBPabort3";
@@ -518,6 +520,7 @@
             // 
             // butBPabort2
             // 
+            butBPabort2.Enabled = false;
             butBPabort2.Location = new Point(114, 149);
             butBPabort2.Margin = new Padding(4, 3, 4, 3);
             butBPabort2.Name = "butBPabort2";
@@ -540,6 +543,7 @@
             // 
             // butBPabort1
             // 
+            butBPabort1.Enabled = false;
             butBPabort1.Location = new Point(114, 115);
             butBPabort1.Margin = new Padding(4, 3, 4, 3);
             butBPabort1.Name = "butBPabort1";
