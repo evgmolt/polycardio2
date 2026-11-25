@@ -1147,7 +1147,7 @@
             Margin = new Padding(4, 3, 4, 3);
             MinimumSize = new Size(1001, 617);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Polycardio 2";
             FormClosing += Form1_FormClosing;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
