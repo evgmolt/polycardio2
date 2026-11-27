@@ -37,8 +37,6 @@ namespace Polycardio2
             DataArrays data,
             BodySide side,
             double patientHeightCm,
-            double sbp = 0,
-            double dbp = 0,
             int validSamplesCount = 0)
         {
             if (data == null)
@@ -101,7 +99,7 @@ namespace Polycardio2
                         if (data.PPGRArray != null && ppgWriteIdx + 1 < data.PPGRArray.Length)
                         {
                             data.PPGRArray[ppgWriteIdx++] = (int)Math.Round(handFootIdx);
-//                            data.PPGRArray[ppgWriteIdx++] = (int)Math.Round(legFootIdx);
+                            data.PPGRArray[ppgWriteIdx++] = (int)Math.Round(legFootIdx);
                         }
                     }
                 }
