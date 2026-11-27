@@ -45,8 +45,8 @@ namespace Polycardio2
                 throw new ArgumentNullException(nameof(data));
 
             // 1. Определяем давление (по умолчанию берём из NIBP1 — обычно это плечевая манжета)
-            double syst = sbp > 0 ? sbp : data.NIBP1_Syst;
-            double diast = dbp > 0 ? dbp : data.NIBP1_Diast;
+            double syst = side == BodySide.Left ? data.NIBP1_Syst : data.NIBP3_Syst;
+            double diast = side == BodySide.Left ? data.NIBP1_Diast : data.NIBP3_Diast;
 
             if (syst <= diast || diast <= 0)
                 return new CaviMeasurementResult { Side = side };

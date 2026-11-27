@@ -1133,7 +1133,7 @@ namespace Polycardio2
                 ri.Data.Height,
                 ri.Data.Length);
 
-            // Расчёт для правой стороны (например, если АД правой руки в NIBP2)
+            // Расчёт для правой стороны ( если АД правой руки в NIBP3)
             var rightCavi = CaviProcessor.CalculateCavi(
                 DataA,
                 BodySide.Right,
