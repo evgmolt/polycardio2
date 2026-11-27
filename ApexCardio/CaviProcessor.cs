@@ -99,7 +99,7 @@ namespace Polycardio2
                         if (data.PPGRArray != null && ppgWriteIdx + 1 < data.PPGRArray.Length)
                         {
                             data.PPGRArray[ppgWriteIdx++] = (int)Math.Round(handFootIdx);
-                            data.PPGRArray[ppgWriteIdx++] = (int)Math.Round(legFootIdx);
+//                            data.PPGRArray[ppgWriteIdx++] = (int)Math.Round(legFootIdx);
                         }
                     }
                 }

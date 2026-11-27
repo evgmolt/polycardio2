@@ -570,7 +570,7 @@ namespace Polycardio2
                 }
                 penR.Dispose();
             }
-/*            if (data == DataA.SphigmoLeftHandViewArray)
+            if (data == DataA.SphigmoLeftHandViewArray)
             {
                 var penR = new Pen(Color.Blue, 1);
                 for (int i = 0; i < DataA.RInd; i++)
@@ -578,7 +578,7 @@ namespace Polycardio2
                     e.Graphics.DrawLine(penR, DataA.PPGRArray[i] - ViewShift, R0.Top, DataA.PPGRArray[i] - ViewShift, R0.Height);
                 }
                 penR.Dispose();
-            }*/
+            }
         }
 
         private void bufferedPanel0_Paint(object sender, PaintEventArgs e)

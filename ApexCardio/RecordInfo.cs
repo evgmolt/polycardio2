@@ -63,7 +63,7 @@ namespace Polycardio2
             Data = new RecordInfoData();
             lines = lines.Select(RemoveItemName).ToArray();
             Data.Date = Convert.ToDateTime(lines[0]);
-            Data.Length = Convert.ToInt16(lines[1]);
+            Data.Length = Convert.ToInt32(lines[1]);
             Data.Sex = lines[2];
             Data.Age = Convert.ToInt16(lines[3]);
             Data.Height = Convert.ToInt16(lines[4]);
