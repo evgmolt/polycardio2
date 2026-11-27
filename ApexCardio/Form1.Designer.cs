@@ -33,54 +33,55 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             panelGraph = new Panel();
             panelButtons = new Panel();
+            panelFlow = new Panel();
+            butBPabort2 = new Button();
+            numUDplevel1 = new NumericUpDown();
+            label2 = new Label();
+            numUDplevel2 = new NumericUpDown();
+            pbRecordProgress = new ProgressBar();
+            butStartFlow = new Button();
+            labPressure4 = new Label();
+            labRecordSize = new Label();
+            butNewRecord = new Button();
+            label3 = new Label();
+            butStartRecord = new Button();
+            labPressure3 = new Label();
+            butPump1start = new Button();
+            butStopFlow = new Button();
+            labPressure2 = new Label();
+            butPump1stop = new Button();
+            labPressure1 = new Label();
+            butPump2start = new Button();
+            butPump2stop = new Button();
+            butPumps34Stop = new Button();
+            butBPMeas1 = new Button();
+            butPumps34Start = new Button();
+            butBPabort1 = new Button();
+            butPump4stop = new Button();
+            butBPmeas2 = new Button();
+            butPump4start = new Button();
+            labBP1 = new Label();
+            butPump3stop = new Button();
+            labBP2 = new Label();
+            butPump3start = new Button();
+            butPumps12Start = new Button();
+            label4 = new Label();
+            butPumps12Stop = new Button();
+            numUDplevel4 = new NumericUpDown();
+            butBPmeas3 = new Button();
+            label5 = new Label();
+            butBPabort3 = new Button();
+            numUDplevel3 = new NumericUpDown();
+            butBPmeas4 = new Button();
+            labBP4 = new Label();
+            butBPabort4 = new Button();
+            labBP3 = new Label();
             butImitatorOn = new Button();
             butImitatorOff = new Button();
             label1 = new Label();
-            labPressure4 = new Label();
-            labPressure3 = new Label();
-            labPressure2 = new Label();
-            labPressure1 = new Label();
-            butStartFlow = new Button();
-            butPumps34Stop = new Button();
-            butPumps34Start = new Button();
-            butPump4stop = new Button();
-            butPump4start = new Button();
-            butPump3stop = new Button();
-            butPump3start = new Button();
-            label4 = new Label();
-            numUDplevel4 = new NumericUpDown();
-            label5 = new Label();
-            numUDplevel3 = new NumericUpDown();
-            labBP4 = new Label();
-            labBP3 = new Label();
-            butBPabort4 = new Button();
-            butBPmeas4 = new Button();
-            butBPabort3 = new Button();
-            butBPmeas3 = new Button();
-            butPumps12Stop = new Button();
-            butPumps12Start = new Button();
-            labBP2 = new Label();
-            labBP1 = new Label();
-            butBPabort2 = new Button();
-            butBPmeas2 = new Button();
-            butBPabort1 = new Button();
-            butBPMeas1 = new Button();
-            butNewRecord = new Button();
-            pbRecordProgress = new ProgressBar();
-            butPump2stop = new Button();
-            butPump2start = new Button();
-            butPump1stop = new Button();
-            butPump1start = new Button();
-            label3 = new Label();
-            numUDplevel2 = new NumericUpDown();
-            label2 = new Label();
-            numUDplevel1 = new NumericUpDown();
             butEditRecInfo = new Button();
-            butStopFlow = new Button();
             butOpenFile = new Button();
             textBoxRecInfo = new TextBox();
-            labRecordSize = new Label();
-            butStartRecord = new Button();
             butSettings = new Button();
             hScrollBar1 = new HScrollBar();
             labConnected = new Label();
@@ -123,10 +124,11 @@
             timerDelay = new System.Windows.Forms.Timer(components);
             tableLayoutPanel1.SuspendLayout();
             panelButtons.SuspendLayout();
+            panelFlow.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numUDplevel1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numUDplevel2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numUDplevel4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numUDplevel3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numUDplevel2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numUDplevel1).BeginInit();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
@@ -172,54 +174,13 @@
             // 
             // panelButtons
             // 
+            panelButtons.Controls.Add(panelFlow);
             panelButtons.Controls.Add(butImitatorOn);
             panelButtons.Controls.Add(butImitatorOff);
             panelButtons.Controls.Add(label1);
-            panelButtons.Controls.Add(labPressure4);
-            panelButtons.Controls.Add(labPressure3);
-            panelButtons.Controls.Add(labPressure2);
-            panelButtons.Controls.Add(labPressure1);
-            panelButtons.Controls.Add(butStartFlow);
-            panelButtons.Controls.Add(butPumps34Stop);
-            panelButtons.Controls.Add(butPumps34Start);
-            panelButtons.Controls.Add(butPump4stop);
-            panelButtons.Controls.Add(butPump4start);
-            panelButtons.Controls.Add(butPump3stop);
-            panelButtons.Controls.Add(butPump3start);
-            panelButtons.Controls.Add(label4);
-            panelButtons.Controls.Add(numUDplevel4);
-            panelButtons.Controls.Add(label5);
-            panelButtons.Controls.Add(numUDplevel3);
-            panelButtons.Controls.Add(labBP4);
-            panelButtons.Controls.Add(labBP3);
-            panelButtons.Controls.Add(butBPabort4);
-            panelButtons.Controls.Add(butBPmeas4);
-            panelButtons.Controls.Add(butBPabort3);
-            panelButtons.Controls.Add(butBPmeas3);
-            panelButtons.Controls.Add(butPumps12Stop);
-            panelButtons.Controls.Add(butPumps12Start);
-            panelButtons.Controls.Add(labBP2);
-            panelButtons.Controls.Add(labBP1);
-            panelButtons.Controls.Add(butBPabort2);
-            panelButtons.Controls.Add(butBPmeas2);
-            panelButtons.Controls.Add(butBPabort1);
-            panelButtons.Controls.Add(butBPMeas1);
-            panelButtons.Controls.Add(butNewRecord);
-            panelButtons.Controls.Add(pbRecordProgress);
-            panelButtons.Controls.Add(butPump2stop);
-            panelButtons.Controls.Add(butPump2start);
-            panelButtons.Controls.Add(butPump1stop);
-            panelButtons.Controls.Add(butPump1start);
-            panelButtons.Controls.Add(label3);
-            panelButtons.Controls.Add(numUDplevel2);
-            panelButtons.Controls.Add(label2);
-            panelButtons.Controls.Add(numUDplevel1);
             panelButtons.Controls.Add(butEditRecInfo);
-            panelButtons.Controls.Add(butStopFlow);
             panelButtons.Controls.Add(butOpenFile);
             panelButtons.Controls.Add(textBoxRecInfo);
-            panelButtons.Controls.Add(labRecordSize);
-            panelButtons.Controls.Add(butStartRecord);
             panelButtons.Controls.Add(butSettings);
             panelButtons.Dock = DockStyle.Fill;
             panelButtons.Location = new Point(4, 3);
@@ -227,6 +188,492 @@
             panelButtons.Name = "panelButtons";
             panelButtons.Size = new Size(392, 693);
             panelButtons.TabIndex = 1;
+            // 
+            // panelFlow
+            // 
+            panelFlow.Controls.Add(butBPabort2);
+            panelFlow.Controls.Add(numUDplevel1);
+            panelFlow.Controls.Add(label2);
+            panelFlow.Controls.Add(numUDplevel2);
+            panelFlow.Controls.Add(pbRecordProgress);
+            panelFlow.Controls.Add(butStartFlow);
+            panelFlow.Controls.Add(labPressure4);
+            panelFlow.Controls.Add(labRecordSize);
+            panelFlow.Controls.Add(butNewRecord);
+            panelFlow.Controls.Add(label3);
+            panelFlow.Controls.Add(butStartRecord);
+            panelFlow.Controls.Add(labPressure3);
+            panelFlow.Controls.Add(butPump1start);
+            panelFlow.Controls.Add(butStopFlow);
+            panelFlow.Controls.Add(labPressure2);
+            panelFlow.Controls.Add(butPump1stop);
+            panelFlow.Controls.Add(labPressure1);
+            panelFlow.Controls.Add(butPump2start);
+            panelFlow.Controls.Add(butPump2stop);
+            panelFlow.Controls.Add(butPumps34Stop);
+            panelFlow.Controls.Add(butBPMeas1);
+            panelFlow.Controls.Add(butPumps34Start);
+            panelFlow.Controls.Add(butBPabort1);
+            panelFlow.Controls.Add(butPump4stop);
+            panelFlow.Controls.Add(butBPmeas2);
+            panelFlow.Controls.Add(butPump4start);
+            panelFlow.Controls.Add(labBP1);
+            panelFlow.Controls.Add(butPump3stop);
+            panelFlow.Controls.Add(labBP2);
+            panelFlow.Controls.Add(butPump3start);
+            panelFlow.Controls.Add(butPumps12Start);
+            panelFlow.Controls.Add(label4);
+            panelFlow.Controls.Add(butPumps12Stop);
+            panelFlow.Controls.Add(numUDplevel4);
+            panelFlow.Controls.Add(butBPmeas3);
+            panelFlow.Controls.Add(label5);
+            panelFlow.Controls.Add(butBPabort3);
+            panelFlow.Controls.Add(numUDplevel3);
+            panelFlow.Controls.Add(butBPmeas4);
+            panelFlow.Controls.Add(labBP4);
+            panelFlow.Controls.Add(butBPabort4);
+            panelFlow.Controls.Add(labBP3);
+            panelFlow.Location = new Point(3, 75);
+            panelFlow.Name = "panelFlow";
+            panelFlow.Size = new Size(385, 387);
+            panelFlow.TabIndex = 57;
+            // 
+            // butBPabort2
+            // 
+            butBPabort2.Location = new Point(116, 107);
+            butBPabort2.Margin = new Padding(4, 3, 4, 3);
+            butBPabort2.Name = "butBPabort2";
+            butBPabort2.Size = new Size(88, 27);
+            butBPabort2.TabIndex = 27;
+            butBPabort2.Text = "Abort ABP";
+            butBPabort2.UseVisualStyleBackColor = true;
+            butBPabort2.Click += butBPabort2_Click;
+            // 
+            // numUDplevel1
+            // 
+            numUDplevel1.Location = new Point(118, 210);
+            numUDplevel1.Margin = new Padding(4, 3, 4, 3);
+            numUDplevel1.Name = "numUDplevel1";
+            numUDplevel1.Size = new Size(56, 23);
+            numUDplevel1.TabIndex = 13;
+            numUDplevel1.ValueChanged += numUDplevel1_ValueChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(14, 213);
+            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(87, 15);
+            label2.TabIndex = 14;
+            label2.Text = "Pressure level 1";
+            // 
+            // numUDplevel2
+            // 
+            numUDplevel2.Location = new Point(118, 244);
+            numUDplevel2.Margin = new Padding(4, 3, 4, 3);
+            numUDplevel2.Name = "numUDplevel2";
+            numUDplevel2.Size = new Size(56, 23);
+            numUDplevel2.TabIndex = 15;
+            numUDplevel2.ValueChanged += numUDplevel2_ValueChanged;
+            // 
+            // pbRecordProgress
+            // 
+            pbRecordProgress.Location = new Point(118, 339);
+            pbRecordProgress.Margin = new Padding(4, 3, 4, 3);
+            pbRecordProgress.Name = "pbRecordProgress";
+            pbRecordProgress.Size = new Size(205, 27);
+            pbRecordProgress.TabIndex = 21;
+            pbRecordProgress.Visible = false;
+            // 
+            // butStartFlow
+            // 
+            butStartFlow.Location = new Point(14, 3);
+            butStartFlow.Margin = new Padding(4, 3, 4, 3);
+            butStartFlow.Name = "butStartFlow";
+            butStartFlow.Size = new Size(88, 27);
+            butStartFlow.TabIndex = 49;
+            butStartFlow.Text = "Start flow";
+            butStartFlow.UseVisualStyleBackColor = true;
+            butStartFlow.Click += butStartFlow_Click;
+            // 
+            // labPressure4
+            // 
+            labPressure4.AutoSize = true;
+            labPressure4.Location = new Point(339, 312);
+            labPressure4.Name = "labPressure4";
+            labPressure4.Size = new Size(13, 15);
+            labPressure4.TabIndex = 53;
+            labPressure4.Text = "0";
+            // 
+            // labRecordSize
+            // 
+            labRecordSize.AutoSize = true;
+            labRecordSize.Location = new Point(13, 369);
+            labRecordSize.Margin = new Padding(4, 0, 4, 0);
+            labRecordSize.Name = "labRecordSize";
+            labRecordSize.Size = new Size(38, 15);
+            labRecordSize.TabIndex = 6;
+            labRecordSize.Text = "label2";
+            labRecordSize.Visible = false;
+            // 
+            // butNewRecord
+            // 
+            butNewRecord.Location = new Point(13, 36);
+            butNewRecord.Margin = new Padding(4, 3, 4, 3);
+            butNewRecord.Name = "butNewRecord";
+            butNewRecord.Size = new Size(88, 27);
+            butNewRecord.TabIndex = 22;
+            butNewRecord.Text = "New record";
+            butNewRecord.UseVisualStyleBackColor = true;
+            butNewRecord.Click += butNewRecord_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(14, 246);
+            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(87, 15);
+            label3.TabIndex = 16;
+            label3.Text = "Pressure level 2";
+            // 
+            // butStartRecord
+            // 
+            butStartRecord.Enabled = false;
+            butStartRecord.Location = new Point(13, 339);
+            butStartRecord.Margin = new Padding(4, 3, 4, 3);
+            butStartRecord.Name = "butStartRecord";
+            butStartRecord.Size = new Size(88, 27);
+            butStartRecord.TabIndex = 4;
+            butStartRecord.Text = "Start record";
+            butStartRecord.UseVisualStyleBackColor = true;
+            butStartRecord.Click += butStartRecord_Click;
+            // 
+            // labPressure3
+            // 
+            labPressure3.AutoSize = true;
+            labPressure3.Location = new Point(339, 279);
+            labPressure3.Name = "labPressure3";
+            labPressure3.Size = new Size(13, 15);
+            labPressure3.TabIndex = 52;
+            labPressure3.Text = "0";
+            // 
+            // butPump1start
+            // 
+            butPump1start.Location = new Point(204, 207);
+            butPump1start.Margin = new Padding(4, 3, 4, 3);
+            butPump1start.Name = "butPump1start";
+            butPump1start.Size = new Size(43, 27);
+            butPump1start.TabIndex = 17;
+            butPump1start.Text = "Start";
+            butPump1start.UseVisualStyleBackColor = true;
+            butPump1start.Click += butPump1start_Click;
+            // 
+            // butStopFlow
+            // 
+            butStopFlow.Location = new Point(113, 3);
+            butStopFlow.Margin = new Padding(4, 3, 4, 3);
+            butStopFlow.Name = "butStopFlow";
+            butStopFlow.Size = new Size(88, 27);
+            butStopFlow.TabIndex = 9;
+            butStopFlow.Text = "Stop flow";
+            butStopFlow.UseVisualStyleBackColor = true;
+            butStopFlow.Click += butStopFlow_Click;
+            // 
+            // labPressure2
+            // 
+            labPressure2.AutoSize = true;
+            labPressure2.Location = new Point(339, 246);
+            labPressure2.Name = "labPressure2";
+            labPressure2.Size = new Size(13, 15);
+            labPressure2.TabIndex = 51;
+            labPressure2.Text = "0";
+            // 
+            // butPump1stop
+            // 
+            butPump1stop.Location = new Point(280, 207);
+            butPump1stop.Margin = new Padding(4, 3, 4, 3);
+            butPump1stop.Name = "butPump1stop";
+            butPump1stop.Size = new Size(43, 27);
+            butPump1stop.TabIndex = 18;
+            butPump1stop.Text = "Stop";
+            butPump1stop.UseVisualStyleBackColor = true;
+            butPump1stop.Click += butPump1stop_Click;
+            // 
+            // labPressure1
+            // 
+            labPressure1.AutoSize = true;
+            labPressure1.Location = new Point(339, 212);
+            labPressure1.Name = "labPressure1";
+            labPressure1.Size = new Size(13, 15);
+            labPressure1.TabIndex = 50;
+            labPressure1.Text = "0";
+            // 
+            // butPump2start
+            // 
+            butPump2start.Location = new Point(204, 240);
+            butPump2start.Margin = new Padding(4, 3, 4, 3);
+            butPump2start.Name = "butPump2start";
+            butPump2start.Size = new Size(43, 27);
+            butPump2start.TabIndex = 19;
+            butPump2start.Text = "Start";
+            butPump2start.UseVisualStyleBackColor = true;
+            butPump2start.Click += butPump2start_Click;
+            // 
+            // butPump2stop
+            // 
+            butPump2stop.Location = new Point(280, 240);
+            butPump2stop.Margin = new Padding(4, 3, 4, 3);
+            butPump2stop.Name = "butPump2stop";
+            butPump2stop.Size = new Size(43, 27);
+            butPump2stop.TabIndex = 20;
+            butPump2stop.Text = "Stop";
+            butPump2stop.UseVisualStyleBackColor = true;
+            butPump2stop.Click += butPump2stop_Click;
+            // 
+            // butPumps34Stop
+            // 
+            butPumps34Stop.Location = new Point(255, 273);
+            butPumps34Stop.Margin = new Padding(4, 3, 4, 3);
+            butPumps34Stop.Name = "butPumps34Stop";
+            butPumps34Stop.Size = new Size(23, 60);
+            butPumps34Stop.TabIndex = 48;
+            butPumps34Stop.Text = "X";
+            butPumps34Stop.UseVisualStyleBackColor = true;
+            butPumps34Stop.Click += butPumps34Stop_Click;
+            // 
+            // butBPMeas1
+            // 
+            butBPMeas1.Location = new Point(16, 73);
+            butBPMeas1.Margin = new Padding(4, 3, 4, 3);
+            butBPMeas1.Name = "butBPMeas1";
+            butBPMeas1.Size = new Size(88, 27);
+            butBPMeas1.TabIndex = 23;
+            butBPMeas1.Text = "Start ABP 1";
+            butBPMeas1.UseVisualStyleBackColor = true;
+            butBPMeas1.Click += butBPMeas_Click;
+            // 
+            // butPumps34Start
+            // 
+            butPumps34Start.Location = new Point(181, 273);
+            butPumps34Start.Margin = new Padding(4, 3, 4, 3);
+            butPumps34Start.Name = "butPumps34Start";
+            butPumps34Start.Size = new Size(23, 60);
+            butPumps34Start.TabIndex = 47;
+            butPumps34Start.Text = ">";
+            butPumps34Start.UseVisualStyleBackColor = true;
+            butPumps34Start.Click += butPumps34Start_Click;
+            // 
+            // butBPabort1
+            // 
+            butBPabort1.Location = new Point(116, 73);
+            butBPabort1.Margin = new Padding(4, 3, 4, 3);
+            butBPabort1.Name = "butBPabort1";
+            butBPabort1.Size = new Size(88, 27);
+            butBPabort1.TabIndex = 24;
+            butBPabort1.Text = "Abort ABP";
+            butBPabort1.UseVisualStyleBackColor = true;
+            butBPabort1.Click += butBPabort_Click;
+            // 
+            // butPump4stop
+            // 
+            butPump4stop.Location = new Point(280, 306);
+            butPump4stop.Margin = new Padding(4, 3, 4, 3);
+            butPump4stop.Name = "butPump4stop";
+            butPump4stop.Size = new Size(43, 27);
+            butPump4stop.TabIndex = 46;
+            butPump4stop.Text = "Stop";
+            butPump4stop.UseVisualStyleBackColor = true;
+            butPump4stop.Click += butPump4stop_Click;
+            // 
+            // butBPmeas2
+            // 
+            butBPmeas2.Location = new Point(16, 107);
+            butBPmeas2.Margin = new Padding(4, 3, 4, 3);
+            butBPmeas2.Name = "butBPmeas2";
+            butBPmeas2.Size = new Size(88, 27);
+            butBPmeas2.TabIndex = 26;
+            butBPmeas2.Text = "Start ABP 2";
+            butBPmeas2.UseVisualStyleBackColor = true;
+            butBPmeas2.Click += butBPmeas2_Click;
+            // 
+            // butPump4start
+            // 
+            butPump4start.Location = new Point(204, 306);
+            butPump4start.Margin = new Padding(4, 3, 4, 3);
+            butPump4start.Name = "butPump4start";
+            butPump4start.Size = new Size(43, 27);
+            butPump4start.TabIndex = 45;
+            butPump4start.Text = "Start";
+            butPump4start.UseVisualStyleBackColor = true;
+            butPump4start.Click += butPump4start_Click;
+            // 
+            // labBP1
+            // 
+            labBP1.AutoSize = true;
+            labBP1.Location = new Point(225, 79);
+            labBP1.Margin = new Padding(4, 0, 4, 0);
+            labBP1.Name = "labBP1";
+            labBP1.Size = new Size(38, 15);
+            labBP1.TabIndex = 28;
+            labBP1.Text = "ABP 1";
+            // 
+            // butPump3stop
+            // 
+            butPump3stop.Location = new Point(280, 273);
+            butPump3stop.Margin = new Padding(4, 3, 4, 3);
+            butPump3stop.Name = "butPump3stop";
+            butPump3stop.Size = new Size(43, 27);
+            butPump3stop.TabIndex = 44;
+            butPump3stop.Text = "Stop";
+            butPump3stop.UseVisualStyleBackColor = true;
+            butPump3stop.Click += butPump3stop_Click;
+            // 
+            // labBP2
+            // 
+            labBP2.AutoSize = true;
+            labBP2.Location = new Point(225, 113);
+            labBP2.Margin = new Padding(4, 0, 4, 0);
+            labBP2.Name = "labBP2";
+            labBP2.Size = new Size(38, 15);
+            labBP2.TabIndex = 29;
+            labBP2.Text = "ABP 2";
+            // 
+            // butPump3start
+            // 
+            butPump3start.Location = new Point(204, 273);
+            butPump3start.Margin = new Padding(4, 3, 4, 3);
+            butPump3start.Name = "butPump3start";
+            butPump3start.Size = new Size(43, 27);
+            butPump3start.TabIndex = 43;
+            butPump3start.Text = "Start";
+            butPump3start.UseVisualStyleBackColor = true;
+            butPump3start.Click += butPump3start_Click;
+            // 
+            // butPumps12Start
+            // 
+            butPumps12Start.Location = new Point(181, 207);
+            butPumps12Start.Margin = new Padding(4, 3, 4, 3);
+            butPumps12Start.Name = "butPumps12Start";
+            butPumps12Start.Size = new Size(23, 60);
+            butPumps12Start.TabIndex = 30;
+            butPumps12Start.Text = ">";
+            butPumps12Start.UseVisualStyleBackColor = true;
+            butPumps12Start.Click += butPumps12Start_Click;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(14, 312);
+            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(87, 15);
+            label4.TabIndex = 42;
+            label4.Text = "Pressure level 4";
+            // 
+            // butPumps12Stop
+            // 
+            butPumps12Stop.Location = new Point(255, 207);
+            butPumps12Stop.Margin = new Padding(4, 3, 4, 3);
+            butPumps12Stop.Name = "butPumps12Stop";
+            butPumps12Stop.Size = new Size(23, 60);
+            butPumps12Stop.TabIndex = 31;
+            butPumps12Stop.Text = "X";
+            butPumps12Stop.UseVisualStyleBackColor = true;
+            butPumps12Stop.Click += butPumps12Stop_Click;
+            // 
+            // numUDplevel4
+            // 
+            numUDplevel4.Location = new Point(118, 310);
+            numUDplevel4.Margin = new Padding(4, 3, 4, 3);
+            numUDplevel4.Name = "numUDplevel4";
+            numUDplevel4.Size = new Size(56, 23);
+            numUDplevel4.TabIndex = 41;
+            numUDplevel4.ValueChanged += numUDplevel4_ValueChanged;
+            // 
+            // butBPmeas3
+            // 
+            butBPmeas3.Location = new Point(16, 140);
+            butBPmeas3.Margin = new Padding(4, 3, 4, 3);
+            butBPmeas3.Name = "butBPmeas3";
+            butBPmeas3.Size = new Size(88, 27);
+            butBPmeas3.TabIndex = 33;
+            butBPmeas3.Text = "Start ABP 3";
+            butBPmeas3.UseVisualStyleBackColor = true;
+            butBPmeas3.Click += butBPmeas3_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(14, 279);
+            label5.Margin = new Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(87, 15);
+            label5.TabIndex = 40;
+            label5.Text = "Pressure level 3";
+            // 
+            // butBPabort3
+            // 
+            butBPabort3.Location = new Point(116, 140);
+            butBPabort3.Margin = new Padding(4, 3, 4, 3);
+            butBPabort3.Name = "butBPabort3";
+            butBPabort3.Size = new Size(88, 27);
+            butBPabort3.TabIndex = 34;
+            butBPabort3.Text = "Abort ABP";
+            butBPabort3.UseVisualStyleBackColor = true;
+            butBPabort3.Click += butBPabort3_Click;
+            // 
+            // numUDplevel3
+            // 
+            numUDplevel3.Location = new Point(118, 276);
+            numUDplevel3.Margin = new Padding(4, 3, 4, 3);
+            numUDplevel3.Name = "numUDplevel3";
+            numUDplevel3.Size = new Size(56, 23);
+            numUDplevel3.TabIndex = 39;
+            numUDplevel3.ValueChanged += numUDplevel3_ValueChanged;
+            // 
+            // butBPmeas4
+            // 
+            butBPmeas4.Location = new Point(16, 174);
+            butBPmeas4.Margin = new Padding(4, 3, 4, 3);
+            butBPmeas4.Name = "butBPmeas4";
+            butBPmeas4.Size = new Size(88, 27);
+            butBPmeas4.TabIndex = 35;
+            butBPmeas4.Text = "Start ABP 2";
+            butBPmeas4.UseVisualStyleBackColor = true;
+            butBPmeas4.Click += butBPmeas4_Click;
+            // 
+            // labBP4
+            // 
+            labBP4.AutoSize = true;
+            labBP4.Location = new Point(225, 180);
+            labBP4.Margin = new Padding(4, 0, 4, 0);
+            labBP4.Name = "labBP4";
+            labBP4.Size = new Size(38, 15);
+            labBP4.TabIndex = 38;
+            labBP4.Text = "ABP 4";
+            // 
+            // butBPabort4
+            // 
+            butBPabort4.Location = new Point(116, 174);
+            butBPabort4.Margin = new Padding(4, 3, 4, 3);
+            butBPabort4.Name = "butBPabort4";
+            butBPabort4.Size = new Size(88, 27);
+            butBPabort4.TabIndex = 36;
+            butBPabort4.Text = "Abort ABP";
+            butBPabort4.UseVisualStyleBackColor = true;
+            butBPabort4.Click += butBPabort4_Click;
+            // 
+            // labBP3
+            // 
+            labBP3.AutoSize = true;
+            labBP3.Location = new Point(225, 146);
+            labBP3.Margin = new Padding(4, 0, 4, 0);
+            labBP3.Name = "labBP3";
+            labBP3.Size = new Size(38, 15);
+            labBP3.TabIndex = 37;
+            labBP3.Text = "ABP 3";
             // 
             // butImitatorOn
             // 
@@ -259,413 +706,6 @@
             label1.TabIndex = 54;
             label1.Text = "label1";
             // 
-            // labPressure4
-            // 
-            labPressure4.AutoSize = true;
-            labPressure4.Location = new Point(337, 354);
-            labPressure4.Name = "labPressure4";
-            labPressure4.Size = new Size(13, 15);
-            labPressure4.TabIndex = 53;
-            labPressure4.Text = "0";
-            // 
-            // labPressure3
-            // 
-            labPressure3.AutoSize = true;
-            labPressure3.Location = new Point(337, 321);
-            labPressure3.Name = "labPressure3";
-            labPressure3.Size = new Size(13, 15);
-            labPressure3.TabIndex = 52;
-            labPressure3.Text = "0";
-            // 
-            // labPressure2
-            // 
-            labPressure2.AutoSize = true;
-            labPressure2.Location = new Point(337, 288);
-            labPressure2.Name = "labPressure2";
-            labPressure2.Size = new Size(13, 15);
-            labPressure2.TabIndex = 51;
-            labPressure2.Text = "0";
-            // 
-            // labPressure1
-            // 
-            labPressure1.AutoSize = true;
-            labPressure1.Location = new Point(337, 254);
-            labPressure1.Name = "labPressure1";
-            labPressure1.Size = new Size(13, 15);
-            labPressure1.TabIndex = 50;
-            labPressure1.Text = "0";
-            // 
-            // butStartFlow
-            // 
-            butStartFlow.Location = new Point(15, 49);
-            butStartFlow.Margin = new Padding(4, 3, 4, 3);
-            butStartFlow.Name = "butStartFlow";
-            butStartFlow.Size = new Size(88, 27);
-            butStartFlow.TabIndex = 49;
-            butStartFlow.Text = "Start flow";
-            butStartFlow.UseVisualStyleBackColor = true;
-            butStartFlow.Click += butStartFlow_Click;
-            // 
-            // butPumps34Stop
-            // 
-            butPumps34Stop.Location = new Point(253, 315);
-            butPumps34Stop.Margin = new Padding(4, 3, 4, 3);
-            butPumps34Stop.Name = "butPumps34Stop";
-            butPumps34Stop.Size = new Size(23, 60);
-            butPumps34Stop.TabIndex = 48;
-            butPumps34Stop.Text = "X";
-            butPumps34Stop.UseVisualStyleBackColor = true;
-            butPumps34Stop.Click += butPumps34Stop_Click;
-            // 
-            // butPumps34Start
-            // 
-            butPumps34Start.Location = new Point(179, 315);
-            butPumps34Start.Margin = new Padding(4, 3, 4, 3);
-            butPumps34Start.Name = "butPumps34Start";
-            butPumps34Start.Size = new Size(23, 60);
-            butPumps34Start.TabIndex = 47;
-            butPumps34Start.Text = ">";
-            butPumps34Start.UseVisualStyleBackColor = true;
-            butPumps34Start.Click += butPumps34Start_Click;
-            // 
-            // butPump4stop
-            // 
-            butPump4stop.Location = new Point(278, 348);
-            butPump4stop.Margin = new Padding(4, 3, 4, 3);
-            butPump4stop.Name = "butPump4stop";
-            butPump4stop.Size = new Size(43, 27);
-            butPump4stop.TabIndex = 46;
-            butPump4stop.Text = "Stop";
-            butPump4stop.UseVisualStyleBackColor = true;
-            butPump4stop.Click += butPump4stop_Click;
-            // 
-            // butPump4start
-            // 
-            butPump4start.Location = new Point(202, 348);
-            butPump4start.Margin = new Padding(4, 3, 4, 3);
-            butPump4start.Name = "butPump4start";
-            butPump4start.Size = new Size(43, 27);
-            butPump4start.TabIndex = 45;
-            butPump4start.Text = "Start";
-            butPump4start.UseVisualStyleBackColor = true;
-            butPump4start.Click += butPump4start_Click;
-            // 
-            // butPump3stop
-            // 
-            butPump3stop.Location = new Point(278, 315);
-            butPump3stop.Margin = new Padding(4, 3, 4, 3);
-            butPump3stop.Name = "butPump3stop";
-            butPump3stop.Size = new Size(43, 27);
-            butPump3stop.TabIndex = 44;
-            butPump3stop.Text = "Stop";
-            butPump3stop.UseVisualStyleBackColor = true;
-            butPump3stop.Click += butPump3stop_Click;
-            // 
-            // butPump3start
-            // 
-            butPump3start.Location = new Point(202, 315);
-            butPump3start.Margin = new Padding(4, 3, 4, 3);
-            butPump3start.Name = "butPump3start";
-            butPump3start.Size = new Size(43, 27);
-            butPump3start.TabIndex = 43;
-            butPump3start.Text = "Start";
-            butPump3start.UseVisualStyleBackColor = true;
-            butPump3start.Click += butPump3start_Click;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(12, 354);
-            label4.Margin = new Padding(4, 0, 4, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(87, 15);
-            label4.TabIndex = 42;
-            label4.Text = "Pressure level 4";
-            // 
-            // numUDplevel4
-            // 
-            numUDplevel4.Location = new Point(116, 352);
-            numUDplevel4.Margin = new Padding(4, 3, 4, 3);
-            numUDplevel4.Name = "numUDplevel4";
-            numUDplevel4.Size = new Size(56, 23);
-            numUDplevel4.TabIndex = 41;
-            numUDplevel4.ValueChanged += numUDplevel4_ValueChanged;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(12, 321);
-            label5.Margin = new Padding(4, 0, 4, 0);
-            label5.Name = "label5";
-            label5.Size = new Size(87, 15);
-            label5.TabIndex = 40;
-            label5.Text = "Pressure level 3";
-            // 
-            // numUDplevel3
-            // 
-            numUDplevel3.Location = new Point(116, 318);
-            numUDplevel3.Margin = new Padding(4, 3, 4, 3);
-            numUDplevel3.Name = "numUDplevel3";
-            numUDplevel3.Size = new Size(56, 23);
-            numUDplevel3.TabIndex = 39;
-            numUDplevel3.ValueChanged += numUDplevel3_ValueChanged;
-            // 
-            // labBP4
-            // 
-            labBP4.AutoSize = true;
-            labBP4.Location = new Point(223, 222);
-            labBP4.Margin = new Padding(4, 0, 4, 0);
-            labBP4.Name = "labBP4";
-            labBP4.Size = new Size(38, 15);
-            labBP4.TabIndex = 38;
-            labBP4.Text = "ABP 4";
-            // 
-            // labBP3
-            // 
-            labBP3.AutoSize = true;
-            labBP3.Location = new Point(223, 188);
-            labBP3.Margin = new Padding(4, 0, 4, 0);
-            labBP3.Name = "labBP3";
-            labBP3.Size = new Size(38, 15);
-            labBP3.TabIndex = 37;
-            labBP3.Text = "ABP 3";
-            // 
-            // butBPabort4
-            // 
-            butBPabort4.Enabled = false;
-            butBPabort4.Location = new Point(114, 216);
-            butBPabort4.Margin = new Padding(4, 3, 4, 3);
-            butBPabort4.Name = "butBPabort4";
-            butBPabort4.Size = new Size(88, 27);
-            butBPabort4.TabIndex = 36;
-            butBPabort4.Text = "Abort ABP";
-            butBPabort4.UseVisualStyleBackColor = true;
-            butBPabort4.Click += butBPabort4_Click;
-            // 
-            // butBPmeas4
-            // 
-            butBPmeas4.Location = new Point(14, 216);
-            butBPmeas4.Margin = new Padding(4, 3, 4, 3);
-            butBPmeas4.Name = "butBPmeas4";
-            butBPmeas4.Size = new Size(88, 27);
-            butBPmeas4.TabIndex = 35;
-            butBPmeas4.Text = "Start ABP 2";
-            butBPmeas4.UseVisualStyleBackColor = true;
-            butBPmeas4.Click += butBPmeas4_Click;
-            // 
-            // butBPabort3
-            // 
-            butBPabort3.Enabled = false;
-            butBPabort3.Location = new Point(114, 182);
-            butBPabort3.Margin = new Padding(4, 3, 4, 3);
-            butBPabort3.Name = "butBPabort3";
-            butBPabort3.Size = new Size(88, 27);
-            butBPabort3.TabIndex = 34;
-            butBPabort3.Text = "Abort ABP";
-            butBPabort3.UseVisualStyleBackColor = true;
-            butBPabort3.Click += butBPabort3_Click;
-            // 
-            // butBPmeas3
-            // 
-            butBPmeas3.Location = new Point(14, 182);
-            butBPmeas3.Margin = new Padding(4, 3, 4, 3);
-            butBPmeas3.Name = "butBPmeas3";
-            butBPmeas3.Size = new Size(88, 27);
-            butBPmeas3.TabIndex = 33;
-            butBPmeas3.Text = "Start ABP 3";
-            butBPmeas3.UseVisualStyleBackColor = true;
-            butBPmeas3.Click += butBPmeas3_Click;
-            // 
-            // butPumps12Stop
-            // 
-            butPumps12Stop.Location = new Point(253, 249);
-            butPumps12Stop.Margin = new Padding(4, 3, 4, 3);
-            butPumps12Stop.Name = "butPumps12Stop";
-            butPumps12Stop.Size = new Size(23, 60);
-            butPumps12Stop.TabIndex = 31;
-            butPumps12Stop.Text = "X";
-            butPumps12Stop.UseVisualStyleBackColor = true;
-            butPumps12Stop.Click += butPumps12Stop_Click;
-            // 
-            // butPumps12Start
-            // 
-            butPumps12Start.Location = new Point(179, 249);
-            butPumps12Start.Margin = new Padding(4, 3, 4, 3);
-            butPumps12Start.Name = "butPumps12Start";
-            butPumps12Start.Size = new Size(23, 60);
-            butPumps12Start.TabIndex = 30;
-            butPumps12Start.Text = ">";
-            butPumps12Start.UseVisualStyleBackColor = true;
-            butPumps12Start.Click += butPumps12Start_Click;
-            // 
-            // labBP2
-            // 
-            labBP2.AutoSize = true;
-            labBP2.Location = new Point(223, 155);
-            labBP2.Margin = new Padding(4, 0, 4, 0);
-            labBP2.Name = "labBP2";
-            labBP2.Size = new Size(38, 15);
-            labBP2.TabIndex = 29;
-            labBP2.Text = "ABP 2";
-            // 
-            // labBP1
-            // 
-            labBP1.AutoSize = true;
-            labBP1.Location = new Point(223, 121);
-            labBP1.Margin = new Padding(4, 0, 4, 0);
-            labBP1.Name = "labBP1";
-            labBP1.Size = new Size(38, 15);
-            labBP1.TabIndex = 28;
-            labBP1.Text = "ABP 1";
-            // 
-            // butBPabort2
-            // 
-            butBPabort2.Enabled = false;
-            butBPabort2.Location = new Point(114, 149);
-            butBPabort2.Margin = new Padding(4, 3, 4, 3);
-            butBPabort2.Name = "butBPabort2";
-            butBPabort2.Size = new Size(88, 27);
-            butBPabort2.TabIndex = 27;
-            butBPabort2.Text = "Abort ABP";
-            butBPabort2.UseVisualStyleBackColor = true;
-            butBPabort2.Click += butBPabort2_Click;
-            // 
-            // butBPmeas2
-            // 
-            butBPmeas2.Location = new Point(14, 149);
-            butBPmeas2.Margin = new Padding(4, 3, 4, 3);
-            butBPmeas2.Name = "butBPmeas2";
-            butBPmeas2.Size = new Size(88, 27);
-            butBPmeas2.TabIndex = 26;
-            butBPmeas2.Text = "Start ABP 2";
-            butBPmeas2.UseVisualStyleBackColor = true;
-            butBPmeas2.Click += butBPmeas2_Click;
-            // 
-            // butBPabort1
-            // 
-            butBPabort1.Enabled = false;
-            butBPabort1.Location = new Point(114, 115);
-            butBPabort1.Margin = new Padding(4, 3, 4, 3);
-            butBPabort1.Name = "butBPabort1";
-            butBPabort1.Size = new Size(88, 27);
-            butBPabort1.TabIndex = 24;
-            butBPabort1.Text = "Abort ABP";
-            butBPabort1.UseVisualStyleBackColor = true;
-            butBPabort1.Click += butBPabort_Click;
-            // 
-            // butBPMeas1
-            // 
-            butBPMeas1.Location = new Point(14, 115);
-            butBPMeas1.Margin = new Padding(4, 3, 4, 3);
-            butBPMeas1.Name = "butBPMeas1";
-            butBPMeas1.Size = new Size(88, 27);
-            butBPMeas1.TabIndex = 23;
-            butBPMeas1.Text = "Start ABP 1";
-            butBPMeas1.UseVisualStyleBackColor = true;
-            butBPMeas1.Click += butBPMeas_Click;
-            // 
-            // butNewRecord
-            // 
-            butNewRecord.Location = new Point(14, 82);
-            butNewRecord.Margin = new Padding(4, 3, 4, 3);
-            butNewRecord.Name = "butNewRecord";
-            butNewRecord.Size = new Size(88, 27);
-            butNewRecord.TabIndex = 22;
-            butNewRecord.Text = "New record";
-            butNewRecord.UseVisualStyleBackColor = true;
-            butNewRecord.Click += butNewRecord_Click;
-            // 
-            // pbRecordProgress
-            // 
-            pbRecordProgress.Location = new Point(111, 414);
-            pbRecordProgress.Margin = new Padding(4, 3, 4, 3);
-            pbRecordProgress.Name = "pbRecordProgress";
-            pbRecordProgress.Size = new Size(210, 27);
-            pbRecordProgress.TabIndex = 21;
-            pbRecordProgress.Visible = false;
-            // 
-            // butPump2stop
-            // 
-            butPump2stop.Location = new Point(278, 282);
-            butPump2stop.Margin = new Padding(4, 3, 4, 3);
-            butPump2stop.Name = "butPump2stop";
-            butPump2stop.Size = new Size(43, 27);
-            butPump2stop.TabIndex = 20;
-            butPump2stop.Text = "Stop";
-            butPump2stop.UseVisualStyleBackColor = true;
-            butPump2stop.Click += butPump2stop_Click;
-            // 
-            // butPump2start
-            // 
-            butPump2start.Location = new Point(202, 282);
-            butPump2start.Margin = new Padding(4, 3, 4, 3);
-            butPump2start.Name = "butPump2start";
-            butPump2start.Size = new Size(43, 27);
-            butPump2start.TabIndex = 19;
-            butPump2start.Text = "Start";
-            butPump2start.UseVisualStyleBackColor = true;
-            butPump2start.Click += butPump2start_Click;
-            // 
-            // butPump1stop
-            // 
-            butPump1stop.Location = new Point(278, 249);
-            butPump1stop.Margin = new Padding(4, 3, 4, 3);
-            butPump1stop.Name = "butPump1stop";
-            butPump1stop.Size = new Size(43, 27);
-            butPump1stop.TabIndex = 18;
-            butPump1stop.Text = "Stop";
-            butPump1stop.UseVisualStyleBackColor = true;
-            butPump1stop.Click += butPump1stop_Click;
-            // 
-            // butPump1start
-            // 
-            butPump1start.Location = new Point(202, 249);
-            butPump1start.Margin = new Padding(4, 3, 4, 3);
-            butPump1start.Name = "butPump1start";
-            butPump1start.Size = new Size(43, 27);
-            butPump1start.TabIndex = 17;
-            butPump1start.Text = "Start";
-            butPump1start.UseVisualStyleBackColor = true;
-            butPump1start.Click += butPump1start_Click;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(12, 288);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(87, 15);
-            label3.TabIndex = 16;
-            label3.Text = "Pressure level 2";
-            // 
-            // numUDplevel2
-            // 
-            numUDplevel2.Location = new Point(116, 286);
-            numUDplevel2.Margin = new Padding(4, 3, 4, 3);
-            numUDplevel2.Name = "numUDplevel2";
-            numUDplevel2.Size = new Size(56, 23);
-            numUDplevel2.TabIndex = 15;
-            numUDplevel2.ValueChanged += numUDplevel2_ValueChanged;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(12, 255);
-            label2.Margin = new Padding(4, 0, 4, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(87, 15);
-            label2.TabIndex = 14;
-            label2.Text = "Pressure level 1";
-            // 
-            // numUDplevel1
-            // 
-            numUDplevel1.Location = new Point(116, 252);
-            numUDplevel1.Margin = new Padding(4, 3, 4, 3);
-            numUDplevel1.Name = "numUDplevel1";
-            numUDplevel1.Size = new Size(56, 23);
-            numUDplevel1.TabIndex = 13;
-            numUDplevel1.ValueChanged += numUDplevel1_ValueChanged;
-            // 
             // butEditRecInfo
             // 
             butEditRecInfo.Location = new Point(11, 663);
@@ -677,20 +717,9 @@
             butEditRecInfo.UseVisualStyleBackColor = true;
             butEditRecInfo.Click += butEditRecInfo_Click;
             // 
-            // butStopFlow
-            // 
-            butStopFlow.Location = new Point(114, 49);
-            butStopFlow.Margin = new Padding(4, 3, 4, 3);
-            butStopFlow.Name = "butStopFlow";
-            butStopFlow.Size = new Size(88, 27);
-            butStopFlow.TabIndex = 9;
-            butStopFlow.Text = "Stop flow";
-            butStopFlow.UseVisualStyleBackColor = true;
-            butStopFlow.Click += butStopFlow_Click;
-            // 
             // butOpenFile
             // 
-            butOpenFile.Location = new Point(237, 82);
+            butOpenFile.Location = new Point(285, 42);
             butOpenFile.Margin = new Padding(4, 3, 4, 3);
             butOpenFile.Name = "butOpenFile";
             butOpenFile.Size = new Size(88, 27);
@@ -702,40 +731,17 @@
             // textBoxRecInfo
             // 
             textBoxRecInfo.BorderStyle = BorderStyle.FixedSingle;
-            textBoxRecInfo.Location = new Point(11, 448);
+            textBoxRecInfo.Location = new Point(11, 474);
             textBoxRecInfo.Margin = new Padding(4, 3, 4, 3);
             textBoxRecInfo.Multiline = true;
             textBoxRecInfo.Name = "textBoxRecInfo";
             textBoxRecInfo.ReadOnly = true;
-            textBoxRecInfo.Size = new Size(310, 209);
+            textBoxRecInfo.Size = new Size(362, 183);
             textBoxRecInfo.TabIndex = 7;
-            // 
-            // labRecordSize
-            // 
-            labRecordSize.AutoSize = true;
-            labRecordSize.Location = new Point(108, 448);
-            labRecordSize.Margin = new Padding(4, 0, 4, 0);
-            labRecordSize.Name = "labRecordSize";
-            labRecordSize.Size = new Size(38, 15);
-            labRecordSize.TabIndex = 6;
-            labRecordSize.Text = "label2";
-            labRecordSize.Visible = false;
-            // 
-            // butStartRecord
-            // 
-            butStartRecord.Enabled = false;
-            butStartRecord.Location = new Point(11, 414);
-            butStartRecord.Margin = new Padding(4, 3, 4, 3);
-            butStartRecord.Name = "butStartRecord";
-            butStartRecord.Size = new Size(88, 27);
-            butStartRecord.TabIndex = 4;
-            butStartRecord.Text = "Start record";
-            butStartRecord.UseVisualStyleBackColor = true;
-            butStartRecord.Click += butStartRecord_Click;
             // 
             // butSettings
             // 
-            butSettings.Location = new Point(237, 48);
+            butSettings.Location = new Point(285, 9);
             butSettings.Margin = new Padding(4, 3, 4, 3);
             butSettings.Name = "butSettings";
             butSettings.Size = new Size(88, 27);
@@ -1157,10 +1163,12 @@
             tableLayoutPanel1.PerformLayout();
             panelButtons.ResumeLayout(false);
             panelButtons.PerformLayout();
+            panelFlow.ResumeLayout(false);
+            panelFlow.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numUDplevel1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numUDplevel2).EndInit();
             ((System.ComponentModel.ISupportInitialize)numUDplevel4).EndInit();
             ((System.ComponentModel.ISupportInitialize)numUDplevel3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numUDplevel2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numUDplevel1).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ResumeLayout(false);
@@ -1261,6 +1269,7 @@
         private Label labSys1;
         private Button butImitatorOn;
         private Button butImitatorOff;
+        private Panel panelFlow;
     }
 }
 

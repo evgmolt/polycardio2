@@ -102,9 +102,9 @@ namespace Polycardio2
         private string[] GetPortsNames()
         {
             const string VCP = "\\Device\\Serial";
-//            const string VCP = "USBSER";
             const string VCP0 = "\\Device\\Serial0";
-    
+//            const string VCP = "USBSER";
+
             RegistryKey r_hklm = Registry.LocalMachine;
             RegistryKey r_hard = r_hklm.OpenSubKey("HARDWARE");
             RegistryKey r_device = r_hard.OpenSubKey("DEVICEMAP");

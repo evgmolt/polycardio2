@@ -620,11 +620,7 @@ namespace Polycardio2
 
         private void onConnectionFailure(Exception obj)
         {
-            string messageText = ApexStrings.txErrorInitPort;
-            string caption = ApexStrings.txError;
-            MessageBoxButtons but = MessageBoxButtons.OK;
-            MessageBoxIcon icon = MessageBoxIcon.Error;
-            MessageBox.Show(messageText, caption, but, icon);
+            Connected = false;
         }
 
         protected override void WndProc(ref Message m)
@@ -704,6 +700,8 @@ namespace Polycardio2
 
         private void timerStatus_Tick(object sender, EventArgs e)
         {
+            panelFlow.Enabled = Connected;
+
             if (USBPort == null)
             {
                 labConnected.Text = "Disconnected";
