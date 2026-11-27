@@ -88,6 +88,7 @@ namespace Polycardio2
                 double handFootIdx = FindSubsamplePulseFoot(handSmooth, cycleStart, cycleEnd);
                 double legFootIdx = FindSubsamplePulseFoot(legSmooth, cycleStart, cycleEnd);
 
+                Array.Clear(data.PPGRArray, 0, data.PPGRArray.Length);
                 if (handFootIdx > cycleStart && legFootIdx > handFootIdx)
                 {
                     double deltaT = (legFootIdx - handFootIdx) / SamplingRateHz;
@@ -96,7 +97,7 @@ namespace Polycardio2
                     if (deltaT >= 0.030 && deltaT <= 0.250)
                     {
                         delaysSeconds.Add(deltaT);
-                        if (data.PPGRArray != null && ppgWriteIdx + 1 < data.PPGRArray.Length)
+                        if (data.PPGRArray != null && ppgWriteIdx < data.PPGRArray.Length)
                         {
                             data.PPGRArray[ppgWriteIdx++] = (int)Math.Round(handFootIdx);
 //                            data.PPGRArray[ppgWriteIdx++] = (int)Math.Round(legFootIdx);
